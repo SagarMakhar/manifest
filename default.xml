@@ -9,8 +9,8 @@
            fetch="https://github.com/" />
 
   <remote  name="aex"
-           fetch="https://github.com/aex-tmp"
-           revision="refs/heads/9.x" />
+           fetch="https://github.com/sagarmakhar"
+           revision="refs/heads/10.x" />
 
   <remote  name="aex-lab"
            fetch="https://gitlab.com/AospExtended"
