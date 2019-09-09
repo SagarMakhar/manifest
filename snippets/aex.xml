@@ -2,8 +2,23 @@
 <manifest>
 
   <project path="manifest" name="manifest" remote="aex" />
-  <project path="device/aosp/sepolicy" name="platform_device_aosp_sepolicy" remote="aex" />
-  <project path="hardware/aosp/interfaces" name="platform_hardware_aosp_interfaces" remote="aex" />
+  <project path="bionic" name="platform_bionic" groups="pdk" remote="aex" />
+  <project path="build/make" name="platform_build" groups="pdk" remote="aex" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/soong" name="platform_build_soong" groups="pdk,tradefed" remote="aex" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+  <project path="external/selinux" name="android_external_selinux" groups="pdk" remote="los" />
+  <project path="system/core" name="platform_system_core" groups="pdk" remote="aex" />
+  <project path="vendor/aosp" name="platform_vendor_aosp" remote="aex" />
 
   <!-- HardWare QCOM -->
   <project path="hardware/qcom/audio-caf/msm8998" name="android_hardware_qcom_audio" groups="qcom,qcom_audio,pdk-qcom" remote="los" revision="lineage-16.0-caf-8998" />
@@ -20,8 +35,6 @@
 
   <!-- Device -->
   <project path="device/qcom/common" name="android_device_qcom_common" remote="los" revision="lineage-15.1" />
-  <project path="device/qcom/sepolicy" name="platform_device_qcom_sepolicy" groups="qcom,pdk-qcom" remote="aex" />
-  <project path="device/qcom/sepolicy-legacy" name="platform_device_qcom_sepolicy-legacy" groups="qcom,pdk-qcom" remote="aex" />
 
   <!-- External -->
   <project path="external/bash" name="android_external_bash" remote="los" />
@@ -52,7 +65,7 @@
   <project path="vendor/nxp/opensource/halimpl" name="android_vendor_nxp_opensource_halimpl" remote="los" />
   <project path="vendor/nxp/opensource/hidlimpl" name="android_vendor_nxp_opensource_hidlimpl" remote="los" />
   <project path="vendor/qcom/opensource/audio" name="android_vendor_qcom_opensource_audio" groups="qcom,pdk-qcom" remote="los" />
-  <project path="vendor/qcom/opensource/cryptfs_hw" name="platform_vendor_qcom_opensource_cryptfs_hw" groups="qcom,pdk-qcom" remote="aex" />
+  <project path="vendor/qcom/opensource/cryptfs_hw" name="platform_vendor_qcom_opensource_cryptfs_hw" groups="qcom,pdk-qcom" remote="los" />
   <project path="vendor/qcom/opensource/dataservices" name="android_vendor_qcom_opensource_dataservices" groups="qcom,pdk-qcom" remote="los" />
   <project path="vendor/qcom/opensource/data-ipa-cfg-mgr" name="android_vendor_qcom_opensource_data-ipa-cfg-mgr" groups="qcom,pdk-qcom" remote="los" />
   <project path="vendor/codeaurora/telephony" name="android_vendor_codeaurora_telephony" remote="los" />
