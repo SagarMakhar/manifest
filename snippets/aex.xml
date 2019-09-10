@@ -20,6 +20,10 @@
   <project path="system/core" name="platform_system_core" groups="pdk" remote="aex" />
   <project path="vendor/aosp" name="platform_vendor_aosp" remote="aex" />
 
+  <project path="prebuilts/r8" name="android_prebuilts_r8" remote="los" clone-depth="1" />
+  <project path="prebuilts/openssl" name="android_prebuilts_openssl" remote="los" clone-depth="1" />
+  <project path="prebuilts/tools-lineage" name="android_prebuilts_tools-lineage" remote="los" clone-depth="1" />
+
   <!-- HardWare QCOM -->
   <project path="hardware/qcom/audio-caf/msm8998" name="android_hardware_qcom_audio" groups="qcom,qcom_audio,pdk-qcom" remote="los" revision="lineage-16.0-caf-8998" />
   <project path="hardware/qcom/display-caf/msm8998" name="android_hardware_qcom_display" groups="pdk-qcom,qcom,qcom_display" remote="los" revision="lineage-16.0-caf-8998" />
