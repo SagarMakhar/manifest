@@ -4,6 +4,8 @@
   <remove-project name="platform/build" />
   <remove-project name="platform/build/soong" />
   <remove-project name="platform/external/selinux" />
+  <remove-project name="platform/frameworks/av" />
+  <remove-project name="platform/hardware/qcom/power" />
   <remove-project name="platform/system/core" />
   <remove-project name="platform/prebuilts/clang/host/darwin-x86" />
   <remove-project name="platform/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9" />
