@@ -128,6 +128,18 @@ jobs:
         ArtifactName: vcpi_android_parameterserver
 
     - task: PublishBuildArtifacts@1
+      displayName: Publish ParameterServer Android service
+      inputs:
+        PathtoPublish: $(Pipeline.Workspace)/android_sources/out/target/product/lemonade/system/app/ParameterServerService/ParameterServerService.apk
+        ArtifactName: vcpi_android_parameterserver_service
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ParameterServer Android service JNI library
+      inputs:
+        PathtoPublish: $(Pipeline.Workspace)/android_sources/out/target/product/lemonade/system/lib64/libparameterserver_service_jni.so
+        ArtifactName: vcpi_android_parameterserver_service_jni_library
+
+    - task: PublishBuildArtifacts@1
       enabled: false # Disabled because the image holds more than 1 GB
       displayName: Publish VCPI Android image
       inputs:
