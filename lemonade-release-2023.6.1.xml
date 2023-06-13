@@ -180,7 +180,6 @@
   <project name="LineageOS/android_packages_apps_ThemePicker" path="packages/apps/ThemePicker" revision="13e7289f03b4de7cc315dd61c3d107284149e283" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk-fs"/>
   <project name="LineageOS/android_packages_apps_Trebuchet" path="packages/apps/Trebuchet" revision="5f84630f06436c5597631642a0bb27b5ca3d792c" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk-fs"/>
   <project name="LineageOS/android_packages_apps_TvSettings" path="packages/apps/TvSettings" revision="76aa05f9baec5f69061ea28eb25308353bd57ffc" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk-fs"/>
-  <project name="LineageOS/android_packages_apps_Updater" path="packages/apps/Updater" revision="e83f74ace7ec3a307cf407a63f56652b8f0ea1b2" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0"/>
   <project name="LineageOS/android_packages_apps_WallpaperPicker2" path="packages/apps/WallpaperPicker2" revision="fa1a3ff79b921f8a90447538438d5fdb9a818db0" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk-fs"/>
   <project name="LineageOS/android_packages_inputmethods_LatinIME" path="packages/inputmethods/LatinIME" revision="cf804089463411a19b2aedcdb799230e4a7af66e" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk-fs"/>
   <project name="LineageOS/android_packages_inputmethods_LeanbackIME" path="packages/inputmethods/LeanbackIME" revision="945d4dc0f957bd3538a286b41babd93002d93d5c" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk-fs"/>
@@ -278,7 +277,9 @@
   <project name="VCPI.android.external.poco" path="external/poco" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,device"/>
   <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
   <project name="VCPI.android.kernel.oneplus.sm8350" path="kernel/oneplus/sm8350" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,device"/>
+  <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing"/>
   <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk-cw-fs,pdk-fs"/>
+  <project name="VCPI.android.platform.system.ca-certificates" path="system/ca-certificates" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
   <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
   <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
   <project name="VCPI.android.vendor.oneplus.lemonade" path="vendor/oneplus/lemonade" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,device"/>
@@ -1192,7 +1193,6 @@
   <project name="platform/sdk" path="sdk" remote="aosp" revision="7368b312e99de0f2809afde1ea5a1b21d44019b0" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/system/bpf" path="system/bpf" remote="aosp" revision="52121cd0ee9eb6a5624665d3cf8922f7244ef1cd" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk"/>
   <project name="platform/system/bpfprogs" path="system/bpfprogs" remote="aosp" revision="9f98f4c7cd2dca329bdb840f5d801756926b4bf9" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk"/>
-  <project name="platform/system/ca-certificates" path="system/ca-certificates" remote="aosp" revision="473c5c91c26e48f68ba88e97ad7e5cc759e0b39b" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk"/>
   <project name="platform/system/chre" path="system/chre" remote="aosp" revision="2eea892635e517943e1a9a7bd4552c44d3d80104" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk"/>
   <project name="platform/system/connectivity/wificond" path="system/connectivity/wificond" remote="aosp" revision="9127db3fa789e2d805ed98f806d39b9767ee3308" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk"/>
   <project name="platform/system/dmesgd" path="system/dmesgd" remote="aosp" revision="45b6106898f6bca88d66639354b536d770d1c53c" upstream="refs/tags/android-13.0.0_r41" dest-branch="refs/tags/android-13.0.0_r41" groups="pdk"/>
