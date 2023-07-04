@@ -7,6 +7,9 @@
   
   <default remote="aosp" revision="refs/tags/android-13.0.0_r54" sync-j="4"/>
   
+  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="dd2895c17f5823fbf0ac2a08ef69d73a7f4bd79e" upstream="refs/heads/main" dest-branch="refs/heads/main"  groups="softing">
+    <linkfile src="softing-build.sh" dest="softing-build.sh"/>
+  </project>
   <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="682618addb4df467d1f19d796dcaa7bab7d359cd" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main"  groups="softing"/>
   <project name="VCPI.android.vendor.google.lynx" path="vendor/google_devices/lynx" remote="host" revision="af776ba47235e6d8fd04fd6414f89b17496ce32b" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main"  groups="softing"/>
   <project name="device/amlogic/yukawa" revision="abb7e979e99badb433565d6583769c4686ad187a" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,yukawa,pdk"/>
