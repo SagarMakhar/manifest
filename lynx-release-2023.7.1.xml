@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <remote name="aosp" fetch="https://android.googlesource.com"  review="https://android-review.googlesource.com/" />
+  <remote name="aosp" fetch="https://android.googlesource.com" review="https://android-review.googlesource.com/"/>
+  <remote name="github" fetch="https://github.com"/>
   <remote name="host" fetch="."/>
   <remote name="private" fetch="ssh://git@github.com"/>
-  <remote name="github" fetch="https://github.com" />
   
   <default remote="aosp" revision="refs/tags/android-13.0.0_r54" sync-j="4"/>
   
-  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="dd2895c17f5823fbf0ac2a08ef69d73a7f4bd79e" upstream="refs/heads/main" dest-branch="refs/heads/main"  groups="softing">
+  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="288b81214c2e2412d342da2e2394165cf1b743f5" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
-  <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="682618addb4df467d1f19d796dcaa7bab7d359cd" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main"  groups="softing"/>
-  <project name="VCPI.android.vendor.google.lynx" path="vendor/google_devices/lynx" remote="host" revision="af776ba47235e6d8fd04fd6414f89b17496ce32b" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main"  groups="softing"/>
+  <project name="VCPI.android.device.google.lynx" path="device/google/lynx" remote="host" revision="b63fa3acb562672d126004dde9ad30d14f769570" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="device,lynx,softing"/>
+  <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="9b3ec9f0ce4f54925f97db6a757c010848de53a3" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing"/>
+  <project name="VCPI.android.vendor.google.lynx" path="vendor/google_devices/lynx" remote="host" revision="f8934da68d1fc74af153bec8d68b9b7043c35185" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing"/>
   <project name="device/amlogic/yukawa" revision="abb7e979e99badb433565d6583769c4686ad187a" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,yukawa,pdk"/>
   <project name="device/amlogic/yukawa-kernel" revision="2c9df7bbb43fcecb50e62b8d6d9587f1822187b7" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,yukawa,pdk" clone-depth="2"/>
   <project name="device/common" revision="a9757e7e42dcdc40776b9961ec092095ad96e973" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk-cw-fs,pdk"/>
@@ -52,7 +53,6 @@
   <project name="device/google/gs101-sepolicy" revision="9c753084b3007cc0036ff78a4f4ed990ff33a042" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,slider,bluejay,pdk-gs-arm"/>
   <project name="device/google/gs201" revision="4927a4740adc78f38e2d185ad91ed61c99fedf9b" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,cloudripper"/>
   <project name="device/google/gs201-sepolicy" revision="76792f80b459c58e53097858473281a0ed89a41e" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,cloudripper"/>
-  <project name="VCPI.android.device.google.lynx" path="device/google/lynx" revision="b63fa3acb562672d126004dde9ad30d14f769570" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="device,lynx,softing" remote="host" />
   <project name="device/google/lynx-kernel" revision="44b5dae42fc34d297e4fddfb15b65776c7242c54" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,lynx" clone-depth="1"/>
   <project name="device/google/lynx-sepolicy" revision="54123efd1c27938f473c6397542b64971c9cd2aa" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,lynx"/>
   <project name="device/google/pantah" revision="0921066302e55cb9cd6ca66565c6d5ca32005142" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="device,cloudripper"/>
@@ -1136,7 +1136,7 @@
   <project name="platform/system/tools/sysprop" path="system/tools/sysprop" revision="b74896c4f8b27cd7cd9c644ee13f73829c131b74" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk"/>
   <project name="platform/system/tools/xsdc" path="system/tools/xsdc" revision="eb4c6d5ed9a91cec73c2f90199c8552bd8924628" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk"/>
   <project name="platform/system/unwinding" path="system/unwinding" revision="ccff6ed95a00daf470bf14ef7461499685042361" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk"/>
-  <project name="LineageOS/android_system_update_engine" path="system/update_engine" revision="e096c52322ef05fe11095b0b28bbb44b9375f6a5" upstream="refs/heads/lineage-20.0" dest-branch="refs/heads/lineage-20.0" groups="pdk,softing" remote="github"/>
+  <project name="platform/system/update_engine" path="system/update_engine" revision="c64ba1ee743893065d2c30799b06216e9565c3b7" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk,softing"/>
   <project name="platform/system/vold" path="system/vold" revision="cff5efa2106c322f6fb674b38c2fbdfff839a467" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk"/>
   <project name="platform/test/app_compat/csuite" path="test/app_compat/csuite" revision="f786af1508844bd516faeaf3270723c2695627f3" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54" groups="pdk"/>
   <project name="platform/test/catbox" path="test/catbox" revision="cb2a526f8f913c5525cdca516b92d8b949303044" upstream="refs/tags/android-13.0.0_r54" dest-branch="refs/tags/android-13.0.0_r54"/>
