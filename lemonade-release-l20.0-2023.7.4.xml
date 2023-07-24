@@ -258,7 +258,7 @@
   <project name="LineageOS/scripts" path="lineage/scripts" revision="cc6f2a96226563db83410954b02dbde250cc70e6" upstream="master" dest-branch="master" groups="tools"/>
   <project name="LineageOS/www" path="lineage/website" revision="829460eb5ab0f47febee997dc552fb79ca44333e" upstream="master" dest-branch="master" groups="infra"/>
   <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="80d1b865b009fb72cedeedf2bf2975a1640837c4" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing"/>
-  <project name="VCPI.android.build" path="build/make" remote="host" revision="270c485642fc917b0c7c09e8d9e02fc575363444" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk">
+  <project name="VCPI.android.build" path="build/make" remote="host" revision="9b321094567f10217884e8c2acb9fbeb759bbba0" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk">
     <copyfile src="core/root.mk" dest="Makefile"/>
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
