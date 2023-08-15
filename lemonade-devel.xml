@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="aosp" fetch="https://android.googlesource.com" review="android-review.googlesource.com" revision="refs/tags/android-13.0.0_r41"/>
+  <remote name="github" fetch="http://github.com" review="review.lineageos.org"/>
+  <remote name="host" fetch="."/>
+  <remote name="private" fetch="ssh://git@github.com"/>
+  
+  <default remote="github" revision="refs/heads/lineage-20.0" sync-j="4" sync-c="true"/>
+  
+  <include name="softing-all.xml" />
+  <include name="lemonade-default-fixed.xml" />
+
+  <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk">
+    <copyfile src="core/root.mk" dest="Makefile"/>
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
+    <linkfile src="core" dest="build/core"/>
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
+    <linkfile src="target" dest="build/target"/>
+    <linkfile src="tools" dest="build/tools"/>
+    <linkfile src="softing-build.sh" dest="softing-build.sh"/>
+  </project>
+  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,tradefed">
+    <linkfile src="root.bp" dest="Android.bp"/>
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
+  </project>
+  <project name="VCPI.android.device.oneplus.lemonade" path="device/oneplus/lemonade" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,device"/>
+  <project name="VCPI.android.device.oneplus.sm8350-common" path="device/oneplus/sm8350-common" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,device"/>
+  <project name="VCPI.android.external.openssh" path="external/openssh" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="pdk,softing"/>
+  <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
+  <project name="VCPI.android.kernel.oneplus.sm8350" path="kernel/oneplus/sm8350" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,device"/>
+  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk-cw-fs,pdk-fs"/>
+  <project name="VCPI.android.platform.system.ca-certificates" path="system/ca-certificates" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
+  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
+  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk"/>
+  <project name="VCPI.android.vendor.oneplus.lemonade" path="vendor/oneplus/lemonade" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,device"/>
+  <project name="VCPI.android.vendor.oneplus.sm8350-common" path="vendor/oneplus/sm8350-common" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,device"/>
+</manifest>
