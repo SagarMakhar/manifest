@@ -1,0 +1,147 @@
+trigger: none
+
+schedules:
+- cron: '1 1 * * 1-5'
+  displayName: Daily build at midnight (Monday-Friday)
+  branches:
+    include:
+    - main
+
+resources:
+  repositories:
+  - repository: BuildEnvironment
+    type: git
+    name: Automotive/VCPI.android.buildenvironment.feso
+    ref: main
+
+jobs:
+- job: docker_build_images
+  displayName: Build docker images
+  timeoutInMinutes: 360
+  pool:
+    name: SzeklersburgPool
+    demands:
+      - bmw
+      - docker
+      - android
+  steps:
+    - checkout: self
+      displayName: Checkout current repository
+      enabled: false # The current repository should not be cloned because it is part of the android image source
+
+    - checkout: BuildEnvironment
+      displayName: Checkout build environment
+      path: build_environment
+
+    - task: Bash@3
+      displayName: Create working directory
+      env:
+        REPO_WORK_DIR: $(Pipeline.Workspace)/android_sources
+      inputs:
+        targetType: inline
+        script: |
+          #!/bin/bash
+
+          set -e
+
+          mkdir -p ${REPO_WORK_DIR}
+
+    - task: Bash@3
+      displayName: Update android repositories
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+      inputs:
+        targetType: inline
+        script: |
+          #!/bin/bash
+
+          set -e
+
+          repo init -u https://${SYSTEM_ACCESSTOKEN}@dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/VCPI.android.lineageos.android -b lineage-19.1
+
+          repo forall -c git reset --hard
+
+          repo sync --force-sync
+
+          repo forall -c git lfs pull
+
+          mkdir -p .repo/local_manifests
+
+          cp build/make/softing-ext.xml .repo/local_manifests
+
+          repo sync --force-sync
+
+        workingDirectory: $(Pipeline.Workspace)/android_sources
+
+    - task: Bash@3
+      displayName: Update VCPI projects to the current state
+      env:
+        VCPI_COMMIT_ID: $(Build.SourceVersion)
+      inputs:
+        targetType: inline
+        script: |
+          #!/bin/bash
+
+          set -e
+
+          git fetch -p softing
+
+          git reset --hard ${VCPI_COMMIT_ID}
+
+        workingDirectory: $(Pipeline.Workspace)/android_sources/packages/apps/VCPI.BMW.VCPI-device
+
+    - task: Bash@3
+      displayName: Prepare builder docker image
+      inputs:
+        targetType: inline
+        script: |
+          #!/bin/bash
+
+          set -e
+
+          make build
+
+        workingDirectory: $(Pipeline.Workspace)/build_environment
+
+    - task: Bash@3
+      displayName: Build android image
+      env:
+          BUILD_ENVIRONMENT_PATH: $(Pipeline.Workspace)/build_environment
+      inputs:
+        targetType: inline
+        script: |
+          #!/bin/bash
+
+          set -e
+
+          rm -rf ./out
+          rm -rf ./internal--vcpi--release--*
+
+          make ARGS="./softing-build.sh -b" -C ${BUILD_ENVIRONMENT_PATH} run
+
+        workingDirectory: $(Pipeline.Workspace)/android_sources
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ParameterServer Android binary
+      inputs:
+        PathtoPublish: $(Pipeline.Workspace)/android_sources/out/target/product/lemonade/system/bin/parameterserver
+        ArtifactName: vcpi_android_parameterserver
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ParameterServer Android service
+      inputs:
+        PathtoPublish: $(Pipeline.Workspace)/android_sources/out/target/product/lemonade/system/app/ParameterServerService/ParameterServerService.apk
+        ArtifactName: vcpi_android_parameterserver_service
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ParameterServer Android service JNI library
+      inputs:
+        PathtoPublish: $(Pipeline.Workspace)/android_sources/out/target/product/lemonade/system/lib64/libparameterserver_service_jni.so
+        ArtifactName: vcpi_android_parameterserver_service_jni_library
+
+    - task: PublishBuildArtifacts@1
+      enabled: false # Disabled because the image holds more than 1 GB
+      displayName: Publish VCPI Android image
+      inputs:
+        PathtoPublish: $(Pipeline.Workspace)/android_sources/out/target/product/lemonade/lineage_lemonade-ota-eng.agent.zip
+        ArtifactName: vcpi_android_image
