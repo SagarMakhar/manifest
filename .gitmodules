@@ -1,0 +1,12 @@
+[submodule "phone-tree/general-gki"]
+	path = phone-tree/general-gki
+	url = https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/VCPI.android.lineageos.android
+	branch = vcpi-aosp-13-main
+[submodule "phone-tree/aosp-13-lynx"]
+	path = phone-tree/aosp-13-lynx
+	url = https://android.googlesource.com/platform/manifest
+	branch = main
+[submodule "phone-tree/lineage-20-lemonade"]
+	path = phone-tree/lineage-20-lemonade
+	url = https://github.com/LineageOS/android.git
+	branch = lineage-20.0
