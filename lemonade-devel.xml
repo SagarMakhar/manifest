@@ -18,7 +18,6 @@
     <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
     <linkfile src="target" dest="build/target"/>
     <linkfile src="tools" dest="build/tools"/>
-    <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
   <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-lineage-20.0-main" upstream="refs/heads/vcpi-lineage-20.0-main" dest-branch="refs/heads/vcpi-lineage-20.0-main" groups="softing,pdk,tradefed">
     <linkfile src="root.bp" dest="Android.bp"/>
