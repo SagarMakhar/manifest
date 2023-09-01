@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="aosp" fetch="https://android.googlesource.com/"/>
+  <remote name="host" fetch="."/>
+  
+  <default remote="aosp" revision="android-gs-lynx-5.10-android13-d4" sync-j="4"/>
+  
+  <project name="VCPI.android.gki.aosp" path="aosp" remote="host" revision="bbb806273011fc220636849ea399a67be39fe07e" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner"/>
+  <project name="VCPI.android.gki.kernel.build" path="build/kernel" remote="host" revision="b767b689de59d68fabc5c1ebe50481a91ee77120" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner">
+    <linkfile src="kleaf/bazel.sh" dest="tools/bazel"/>
+    <linkfile src="kleaf/bazel.WORKSPACE" dest="WORKSPACE"/>
+    <linkfile src="build.sh" dest="build/build.sh"/>
+    <linkfile src="build_abi.sh" dest="build/build_abi.sh"/>
+    <linkfile src="build_test.sh" dest="build/build_test.sh"/>
+    <linkfile src="build_utils.sh" dest="build/build_utils.sh"/>
+    <linkfile src="BUILD.bazel" dest="build/BUILD.bazel"/>
+    <linkfile src="build-tools/path" dest="build/build-tools/path"/>
+    <linkfile src="config.sh" dest="build/config.sh"/>
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
+    <linkfile src="_setup_env.sh" dest="build/_setup_env.sh"/>
+    <linkfile src="multi-switcher.sh" dest="build/multi-switcher.sh"/>
+    <linkfile src="kleaf" dest="build/kleaf"/>
+    <linkfile src="abi" dest="build/abi"/>
+    <linkfile src="static_analysis" dest="build/static_analysis"/>
+  </project>
+  <project name="VCPI.android.gki.vcpi" path="vcpi" remote="host" revision="cbac1475a3e2dcd3dc5e5e0be19dc66864934c36" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner"/>
+  <project name="kernel/common-modules/virtual-device" path="common-modules/virtual-device" revision="aaae95d2735a690d700b1b8238cd70a5c18cc23c" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4"/>
+  <project name="kernel/configs" revision="b3cc2bc03dab303c54a9ce1f709f8ee315eb311d" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4"/>
+  <project name="kernel/devices/google/lynx" path="private/devices/google/lynx" revision="657eaa7d5586758e12cb098531dcb0dbb5946a6d" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner,lynx">
+    <linkfile src="build_lynx.sh" dest="build_lynx.sh"/>
+    <linkfile src="update_symbol_list_lynx-aosp.sh" dest="update_symbol_list_lynx-aosp.sh"/>
+    <linkfile src="update_symbol_list_lynx-staging.sh" dest="update_symbol_list_lynx-staging.sh"/>
+    <linkfile src="dts" dest="private/gs-google/arch/arm64/boot/dts/google/devices/lynx"/>
+  </project>
+  <project name="kernel/google-modules/amplifiers" path="private/google-modules/amplifiers" revision="35d385c24c28edeeab94483ee9beb423b5eee3c1" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/aoc" path="private/google-modules/aoc" revision="b9f9d5cdef1e524c9eb45efac077fc1fb4308040" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/aoc-ipc" path="private/google-modules/aoc_ipc" revision="4a2a575528dde1de0fbfb8e53480257982e77a25" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/bluetooth/qcom" path="private/google-modules/bluetooth/qcom" revision="1ad11a6b83f97229ef34e527e21e3ef096df3875" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/bms" path="private/google-modules/bms" revision="30331496a4942d9a4e81942e170dc2bab91cd9a0" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/display" path="private/google-modules/display" revision="c020237b1cc28243b4d80ffe4565c51b6a2b037d" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/edgetpu/abrolhos" path="private/google-modules/edgetpu/abrolhos" revision="64dff03f321d3f5186ee2c275a15478375d166b7" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/edgetpu/janeiro" path="private/google-modules/edgetpu/janeiro" revision="e218f92492bdd7c1e47004709f19995d879f8f94" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/gpu" path="private/google-modules/gpu" revision="22894bf60a8f65837e60889dadbb4a904c843773" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/gxp/gs201" path="private/google-modules/gxp/gs201" revision="09c58ad0bf693bc971ce8182c039597f9e21d064" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/lwis" path="private/google-modules/lwis" revision="5d7da208424a7e0d8f58467c6f6734e830e79238" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/misc" path="private/google-modules/misc" revision="34b23ad5680d2ec49c5d8dd5aaaacf75d0a19a6c" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/nfc" path="private/google-modules/nfc" revision="9f506bb9c8f365708df29ffac4164c1b6e30f340" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/power/reset" path="private/google-modules/power/reset" revision="b5249887d83f3a0a3376cb7ef0a449532db63719" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/touch/common" path="private/google-modules/touch/common" revision="375dd515e33f4cf55ec032d2686ba98327af31fa" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/touch/focaltech_touch" path="private/google-modules/touch/focaltech" revision="eb0519a7447c6b19c400acb24924e0db3df1269b" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/touch/goodix_touch" path="private/google-modules/touch/goodix" revision="dc811f843ab22953e6913399bebaa44ed3be390e" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/uwb" path="private/google-modules/uwb" revision="dc4cc2d95005ffde0de389e76890f1c8c66788a8" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="uwb"/>
+  <project name="kernel/google-modules/uwb-diags" path="private/google-modules/uwb-diags" revision="1ce8cd233f5bdc6dc4b13aa0a77b8faad1ea8935" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="uwb"/>
+  <project name="kernel/google-modules/video/gchips" path="private/google-modules/video/gchips" revision="7de143a697adb5152051896454a4ec36a9bf63e5" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/wlan/qcom/wcn6740/cnss2" path="private/google-modules/wlan/wcn6740/cnss2" revision="0e17d79054bcae7f858c2165c78fea0d04c168d6" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/google-modules/wlan/qcom/wcn6740/wlan" path="private/google-modules/wlan/wcn6740/wlan" revision="0ba25124d845d7a4f9df993e75f8335cc77bdc1c" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="kernel/gs" path="private/gs-google" revision="76455cbc1aa6533e12d9d9068ee2fe5892584900" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner">
+    <linkfile src="build.config.slider" dest="build.config"/>
+    <linkfile src="build_slider.sh" dest="build_slider.sh"/>
+    <linkfile src="build_mixed.sh" dest="build_mixed.sh"/>
+    <linkfile src="build_cloudripper.sh" dest="build_cloudripper.sh"/>
+    <linkfile src="download_hlos_boot_images_and_repack_kernel_boot_images.sh" dest="download_hlos_boot_images_and_repack_kernel_boot_images.sh"/>
+    <linkfile src="repack_kernel_boot_images.sh" dest="repack_kernel_boot_images.sh"/>
+    <linkfile src="update_symbol_list.sh" dest="update_symbol_list.sh"/>
+    <linkfile src="update_symbol_list_cloudripper-aosp.sh" dest="update_symbol_list_cloudripper-aosp.sh"/>
+    <linkfile src="update_symbol_list_cloudripper-staging.sh" dest="update_symbol_list_cloudripper-staging.sh"/>
+    <linkfile src="update_symbol_list_slider-aosp.sh" dest="update_symbol_list_slider-aosp.sh"/>
+    <linkfile src="update_symbol_list_slider-staging.sh" dest="update_symbol_list_slider-staging.sh"/>
+    <linkfile src="." dest=".source_date_epoch_dir"/>
+  </project>
+  <project name="kernel/prebuilts/build-tools" path="prebuilts/kernel-build-tools" revision="67705de48752ea5c9d7d679c737f6ebbc8ba7348" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner">
+    <linkfile src="." dest="build/prebuilts/kernel-build-tools"/>
+  </project>
+  <project name="platform/build/bazel_common_rules" path="build/bazel_common_rules" revision="ddd2d82d10e21fb4137d2db3c1b848d6f1832acc" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/external/bazel-skylib" path="external/bazel-skylib" revision="f1fb8167b4ed64feb494fd1ea6a8a619bbb549de" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/external/stardoc" path="external/stardoc" revision="b6ef2c6b6e39087f7396aaeb13c83464dfce4a19" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/prebuilts/bazel/linux-x86_64" path="prebuilts/bazel/linux-x86_64" revision="6162318e6458db65f94eed6671e302c3e894b1ac" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/prebuilts/boot-artifacts" path="prebuilts/boot-artifacts" revision="8a2dbc1358ef56e51a2e4012422fbefdfb11bdbb" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/prebuilts/build-tools" path="prebuilts/build-tools" revision="f6813860e16b2fa1461a15e7b8a3127dfdee021a" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner">
+    <linkfile src="." dest="build/prebuilts/build-tools"/>
+  </project>
+  <project name="platform/prebuilts/clang/host/linux-x86" path="prebuilts/clang/host/linux-x86" revision="4bb6424cb1615af408ae80871131f4da8c4ddadf" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/prebuilts/gas/linux-x86" path="prebuilts/gas/linux-x86" revision="592150fc8ae9f48f2e73f390961f32ca6f5f6a9f" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4"/>
+  <project name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8" path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8" revision="007101a451907c5369db5002ddf7b14dcefb7864" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/prebuilts/jdk/jdk11" path="prebuilts/jdk/jdk11" revision="aee26c8cd89b9abb428f676caba168699cd8662f" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/prebuilts/misc" path="prebuilts/misc" revision="c43649e7548e1054a4f999bfe4aab34ec2fbc8ee" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+  <project name="platform/system/tools/mkbootimg" path="tools/mkbootimg" revision="2208a03d874255af1e4eaf6cf7c156fe1dc98943" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
+</manifest>
