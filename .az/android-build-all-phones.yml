@@ -18,7 +18,7 @@ pool:
 variables:
   - group: VCPI-GitHub
   - name: tokengithub
-    value: https://silvio:$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
+    value: https://$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
   - name: tokenl4b
     value: https://$(LINUX4BIZ_USERNAME):$(LINUX4BIZ)@ext-git.l4b-software.com
   - name: deploymentfolder
