@@ -1,0 +1,177 @@
+---
+trigger: none
+
+schedules:
+- cron: '0 1 * * mon-fri'
+  displayName: Daily build at midnight (Monday-Friday)
+  branches:
+    include:
+    - main
+  always: true
+
+pool:
+  name: FirmwareTestpool
+  demands:
+    - android
+    - distrobuilder
+
+variables:
+  - group: VCPI-GitHub
+  - name: tokengithub
+    value: https://$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
+  - name: tokenl4b
+    value: https://$(LINUX4BIZ_USERNAME):$(LINUX4BIZ)@ext-git.l4b-software.com
+  - name: deploymentfolder
+    value: /media/filer.releases.vcpi/
+
+parameters:
+  - name: phonelemonade
+    displayName: Build for lemonade
+    type: boolean
+    default: true
+  - name: phonelynx
+    displayName: Build for lynx
+    type: boolean
+    default: true
+  - name: cleanbuild
+    displayName: Clean Build
+    type: boolean
+    default: false
+  - name: pool
+    displayName: Which pool
+    type: string
+    default: FirmwareTestpool
+    values:
+      - FirmwareTestpool
+      - SzeklersburgPool
+
+resources:
+  repositories:
+    - repository: Repo.buildsupport
+      type: github
+      endpoint: Githup-SoftingAE-VCPI
+      name: SoftingAE-VCPI/VCPI.android.build.buildsupport
+      ref: main
+
+jobs:
+  - job: phone_build
+    pool:
+      name: ${{parameters.pool}}
+      demands:
+        android
+    displayName: Phone Build Pipeline
+    variables:
+      - name: sorcesokay
+        value: 'no'
+    timeoutInMinutes: 600
+    cancelTimeoutInMinutes: 600
+
+    strategy:
+      matrix:
+
+        ${{ if eq(parameters.phonelemonade, True) }}:
+          lemonade:
+            phonename: 'lemonade'
+            phoneconfigstring: -p lemonade -P lineage -f eng
+            removefolders: ${PIPELINE_WORKSPACE}/android/lemonade/aosp
+
+        ${{ if eq(parameters.phonelynx, True) }}:
+          lynx:
+            phonename: 'lynx'
+            phoneconfigstring: -p lynx -P aosp -f eng
+            removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
+
+      maxParallel: 2
+
+    steps:
+      - checkout: self
+        enabled: false
+      - bash: |
+          # I consider a living build folder as a hint for a full source tree!
+          if [ -e "${PIPELINE_WORKSPACE}/android/$(phonename)/aosp/build" ]; then
+            echo "I assume the sources are fully installed"
+            echo "##vso[task.setvariable variable=sorcesokay]yes"
+          else
+            echo "I assume the sources are NOT fully installed"
+          fi
+        workingDirectory: $(Pipeline.Workspace)
+        displayName: Check sourcen are fully available
+
+      - checkout: Repo.buildsupport
+        displayName: Prepare rampup initial sources
+        fetchTags: false
+        path: android/VCPI.android.build.buildsupport
+        condition: eq(variables['sorcesokay'], 'no')
+
+      - bash: |
+          mkdir -p android/$(phonename)
+          cd android/$(phonename)
+
+          cat <<-EOF > buildconfig.env
+          export PRECOMMAND="prun"
+          EOF
+        workingDirectory: $(Pipeline.Workspace)
+        displayName: Generate a buildconfig.env
+
+      - bash: |
+          mkdir -p android/$(phonename)
+          cd android/$(phonename)
+          ln -sf ../VCPI.android.build.buildsupport/softing-build.sh
+
+          echo ":: remove $(removefolders) to ensure cleanliness"
+          rm -rf $(removefolders)
+
+          cd ${PIPELINE_WORKSPACE}/android/$(phonename)
+          ./softing-build.sh $(phoneconfigstring) -S
+        condition: eq(variables['sorcesokay'], 'no')
+        workingDirectory: $(Pipeline.Workspace)
+        displayName: Sourcen not fully available rampup new sources tree
+        env:
+          DOCKER_AUTH0: $(tokengithub)
+          DOCKER_AUTH1: $(tokenl4b)
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
+
+      - bash: |
+          ./softing-build.sh $(phoneconfigstring) -u
+        workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
+        displayName: Update sources
+        env:
+          DOCKER_AUTH0: $(tokengithub)
+          DOCKER_AUTH1: $(tokenl4b)
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
+
+      - bash: |
+          [ -e changes-since-last-repo-sync.txt ] && {
+            cat changes-since-last-repo-sync.txt
+            rm changes-since-last-repo-sync.txt
+          }
+        displayName: Changes since the last update
+        workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
+
+      - bash: |
+          cleanbuildstr="-d sources"
+          ${{parameters.cleanbuild}} && {
+            echo ":: doing a clean build"
+            cleanbuildstr="${cleanbuildstr} -d out"
+          }
+
+          ./softing-build.sh $(phoneconfigstring) ${cleanbuildstr} -b
+        displayName: Build image
+        workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
+        env:
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
+
+      - bash: |
+          if [ -f $(deploymentfolder)/_check-for-ci.md ]; then
+            # We can store the outcome to the ci folder
+            echo ":: Moving official builds"
+            find . -maxdepth 1 -mindepth 1 -iname 'vcpi--release-*' -not -name '*.dist' -exec mv -v {} $(deploymentfolder)/ \;
+            echo ":: Moving inofficial builds"
+            find . -maxdepth 1 -mindepth 1 -iname 'internal--vcpi-release-*' -not -name '*.dist' -exec mv -v {} $(deploymentfolder)/ \;
+            echo ":: removing dist folders"
+            find . -maxdepth 1 -mindepth 1 -iname '*.dist' -exec rm -rf {} \;
+          else
+            echo ":: No move of output folder, ci folder not mounted!"
+          fi
+        displayName: Move output to ci folder
+        workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
