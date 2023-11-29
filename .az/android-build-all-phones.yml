@@ -180,7 +180,7 @@ jobs:
 
       - bash: |
           cleanbuildstr="-d sources"
-          ${{parameters.cleanbuild}} && {
+          [ "${{parameters.cleanbuild}}" == "True" ] && {
             echo ":: doing a clean build"
             cleanbuildstr="${cleanbuildstr} -d out"
           }
