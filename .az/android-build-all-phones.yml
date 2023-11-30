@@ -21,8 +21,12 @@ variables:
     value: https://$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
   - name: tokenl4b
     value: https://$(LINUX4BIZ_USERNAME):$(LINUX4BIZ)@ext-git.l4b-software.com
+  - name: tokenazure
+    value: https://$(AZUREDEVOPS_READONLY)@dev.azure.com
   - name: deploymentfolder
     value: /media/filer.releases.vcpi/
+  - name: localmanifest
+    value: .repo/local_manifests/developer.xml
 
 parameters:
   - name: phonelemonade
@@ -44,6 +48,10 @@ parameters:
     values:
       - FirmwareTestpool
       - SzeklersburgPool
+  - name: branchname_vcpi_bmw_vcpi_device
+    type: string
+    displayName: VCPI.BMW.VCPI-device Branch
+    default: main
 
 resources:
   repositories:
@@ -129,15 +137,37 @@ jobs:
         env:
           DOCKER_AUTH0: $(tokengithub)
           DOCKER_AUTH1: $(tokenl4b)
+          DOCKER_AUTH2: $(tokenazure)
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
 
+      - ${{ if ne('${{parameters.branchname_vcpi_bmw_vcpi_device}}', 'main') }}:
+        - bash: |
+            mkdir -p .repo/local_manifests
+            cat <<-EOF > $(localmanifest)
+            <?xml version="1.0" encoding="UTF-8"?>
+            <manifest>
+              <remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>
+              <extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>
+            </manifest>
+            EOF
+            echo ":: installed a local_manifest. Content:"
+            cat $(localmanifest)
+          workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
+          displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
+
       - bash: |
+          [ "${{parameters.branchname_vcpi_bmw_vcpi_device}}" == "main" ] \
+          && [ -e "$(localmanifest)" ] && {
+            echo ":: removing $(localmanifest)"
+            rm "$(localmanifest)"
+          }
           ./softing-build.sh $(phoneconfigstring) -u
         workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
         displayName: Update sources
         env:
           DOCKER_AUTH0: $(tokengithub)
           DOCKER_AUTH1: $(tokenl4b)
+          DOCKER_AUTH2: $(tokenazure)
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
 
       - bash: |
@@ -150,9 +180,14 @@ jobs:
 
       - bash: |
           cleanbuildstr="-d sources"
-          ${{parameters.cleanbuild}} && {
+          [ "${{parameters.cleanbuild}}" == "True" ] && {
             echo ":: doing a clean build"
             cleanbuildstr="${cleanbuildstr} -d out"
+          }
+
+          [ -e "$(localmanifest)" ] && {
+            echo ":: building with $(localmanifest)!"
+            cat "$(localmanifest)"
           }
 
           ./softing-build.sh $(phoneconfigstring) ${cleanbuildstr} -b
