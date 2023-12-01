@@ -52,6 +52,10 @@ parameters:
     displayName: Clean sources + out folder (Clean build)
     type: boolean
     default: false
+  - name: resetbuildtree
+    displayName: Restart whole buildprocess with checkout
+    type: boolean
+    default: false
 
 resources:
   repositories:
@@ -94,6 +98,15 @@ jobs:
     steps:
       - checkout: self
         enabled: false
+
+      - ${{ if eq( parameters.resetbuildtree , True) }}:
+        - bash: |
+            echo ":: remove ALL sources for $(phonename)"
+            echo "   This will take a long time ..."
+            rm -rf "${PIPELINE_WORKSPACE}/android/$(phonename)" || true
+          workingDirectory: $(Pipeline.Workspace)
+          displayName: Delete whole source foldertree for $(phonename)
+
       - bash: |
           # I consider a living build folder as a hint for a full source tree!
           if [ -e "${PIPELINE_WORKSPACE}/android/$(phonename)/aosp/build" ]; then
