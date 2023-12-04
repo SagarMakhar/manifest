@@ -122,7 +122,7 @@ jobs:
         displayName: Prepare rampup initial sources
         fetchTags: false
         path: android/VCPI.android.build.buildsupport
-        condition: eq(variables['sorcesokay'], 'no')
+        condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
 
       - bash: |
           mkdir -p android/$(phonename)
@@ -144,7 +144,7 @@ jobs:
 
           cd ${PIPELINE_WORKSPACE}/android/$(phonename)
           ./softing-build.sh $(phoneconfigstring) -S
-        condition: eq(variables['sorcesokay'], 'no')
+        condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
         workingDirectory: $(Pipeline.Workspace)
         displayName: Sourcen not fully available rampup new sources tree
         env:
