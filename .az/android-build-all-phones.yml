@@ -108,6 +108,16 @@ jobs:
           displayName: Delete whole source foldertree for $(phonename)
 
       - bash: |
+          mkdir -p android/$(phonename)
+          cd android/$(phonename)
+
+          cat <<-EOF > buildconfig.env
+          export PRECOMMAND="prun"
+          EOF
+        workingDirectory: $(Pipeline.Workspace)
+        displayName: Generate a buildconfig.env
+
+      - bash: |
           # I consider a living build folder as a hint for a full source tree!
           if [ -e "${PIPELINE_WORKSPACE}/android/$(phonename)/aosp/build" ]; then
             echo "I assume the sources are fully installed"
@@ -123,16 +133,6 @@ jobs:
         fetchTags: false
         path: android/VCPI.android.build.buildsupport
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
-
-      - bash: |
-          mkdir -p android/$(phonename)
-          cd android/$(phonename)
-
-          cat <<-EOF > buildconfig.env
-          export PRECOMMAND="prun"
-          EOF
-        workingDirectory: $(Pipeline.Workspace)
-        displayName: Generate a buildconfig.env
 
       - bash: |
           mkdir -p android/$(phonename)
