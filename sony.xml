@@ -137,7 +137,7 @@
   <project name="platform/bootable/libbootloader" path="bootable/libbootloader" revision="6e3710f107248dfbefbf79aaf81caca73a742cab" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="vts,pdk"/>
   <project name="platform/bootable/recovery" path="bootable/recovery" revision="d55d600b1b720ee4cc1fd79d5246f167c4efe46e" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
 
-  <project name="VCPI.android.build" path="build/make" remote="host" revision="0f99c8c5dcdaf2aa516121932c2bf8c4fc74ee77" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk">
+  <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
     <linkfile src="core" dest="build/core"/>
@@ -155,7 +155,7 @@
   <project name="platform/build/blueprint" path="build/blueprint" revision="ca8f0e8e3571c866d69d34cbd47b3989abe8e8cd" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk,tradefed"/>
   <project name="platform/build/pesto" path="build/pesto" revision="d554620e6f7ad178b71ebb8c4269830cbd24ad8c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   
-  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="6fd3d9683cc7de50a7dbff45ed983ac4163e00f0" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk,tradefed">
+  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk,tradefed">
     <linkfile src="root.bp" dest="Android.bp"/>
     <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
   </project>
@@ -819,14 +819,14 @@
   <project name="platform/frameworks/libs/modules-utils" path="frameworks/libs/modules-utils" revision="58f1c8522e6df9e4f33c019084231d1012f3630c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/libs/native_bridge_support" path="frameworks/libs/native_bridge_support" revision="a63ff9d7c6992dc244e7f548d8a9175493220262" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   
-  <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="66330d317ca821874422b4af9afc2dbb21ddbcef" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="refs/heads/vcpi-sony" groups="pdk-cw-fs,pdk-fs,softing"/>
 
   <project name="platform/frameworks/libs/service_entitlement" path="frameworks/libs/service_entitlement" revision="f6a7aebbc2e0eda2335d36d9043f5c5a246cfc81" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/frameworks/libs/systemui" path="frameworks/libs/systemui" revision="313ca2b3cbaef97cb4665b24412eccf3d4cdcae3" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/minikin" path="frameworks/minikin" revision="1d6a2a889a76cec9001f9c6db332726f6514582f" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/multidex" path="frameworks/multidex" revision="3014a156b84a468e606d45479c584e622b4f1009" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   
-  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk"/>
+  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk"/>
 
   <project name="platform/frameworks/opt/bitmap" path="frameworks/opt/bitmap" revision="958affd2e0b70e659f5e5a32157e0ba3b7b558c1" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-fs"/>
   <project name="platform/frameworks/opt/calendar" path="frameworks/opt/calendar" revision="c522b14186560a2faa5e846371cb97a038a0de13" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
@@ -952,7 +952,7 @@
   <project name="platform/packages/modules/CaptivePortalLogin" path="packages/modules/CaptivePortalLogin" revision="1c4915e0f233b0f2ed7883bbb193df3980a72fc5" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/packages/modules/CellBroadcastService" path="packages/modules/CellBroadcastService" revision="c81aaf66e92035525de25a35db57d7b9e6ade951" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   
-  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="b0058df57f282464d42155ada6605ec182e44a13" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-sony" groups="pdk-cw-fs,pdk-fs,softing"/>
 
   <project name="platform/packages/modules/DnsResolver" path="packages/modules/DnsResolver" revision="6aba7b15c388b6e63b916464816612d6e51ba5db" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/packages/modules/ExtServices" path="packages/modules/ExtServices" revision="8773e5ecb7873afd0b9cd015744179b1dc165abe" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
@@ -1066,7 +1066,7 @@
   <project name="platform/system/chre" path="system/chre" revision="0aa5a0b934e84d6ffd162a24bb3ce78b49b60437" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/connectivity/wificond" path="system/connectivity/wificond" revision="d9c99fa71ce203759eb0b293c8ef77589fd5f866" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   
-  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="d8096c55454eded58ada5b5fc84b06873d197062" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
 
   <project name="platform/system/dmesgd" path="system/dmesgd" revision="45b6106898f6bca88d66639354b536d770d1c53c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/extras" path="system/extras" revision="01a547cf045676a0dc8099ddd14f1809385a49ab" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
@@ -1098,7 +1098,7 @@
   <project name="platform/system/memory/libmemunreachable" path="system/memory/libmemunreachable" revision="9be8268bfec3bb61100ef16da40d3189564f775a" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/memory/lmkd" path="system/memory/lmkd" revision="84fca1085ae09bb970d953e4a6063af8d9dd3027" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   
-  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="c987956fcde9f0a3706a72facc79407665a36290" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
 
   <project name="platform/system/nfc" path="system/nfc" revision="99dcb4312dbe28fb7f102344c707dab82e8bf9cb" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/nvram" path="system/nvram" revision="02029bfe8da6fe8131ac170f113aa60ea420e398" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>

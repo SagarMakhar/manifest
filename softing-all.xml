@@ -4,7 +4,7 @@
   <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
-  <project name="VCPI.android.external.lxc" path="external/lxc-vcpi" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,pdk,device"/>
+  <project name="VCPI.android.external.lxc" path="external/lxc-vcpi" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk,device"/>
   <project name="VCPI.android.external.openssh" path="external/openssh" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="pdk,softing"/>
   <project name="VCPI.android.external.poco" path="external/poco" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,pdk,device"/>
   <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing"/>
