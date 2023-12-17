@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="NXP" fetch="https://github.com/NXP/"/>
+  <remote name="aosp" fetch="https://android.googlesource.com/"/>
+  <remote name="host" fetch="."/>
+  <remote name="l4bextgit" fetch="https://ext-git.l4b-software.com/SoftingAE-VCPI/"/>
+  <remote name="sony" fetch="https://github.com/sonyxperiadev/"/>
+  
+  <default remote="aosp" revision="refs/tags/android-13.0.0_r75" sync-j="4"/>
+  
+  <include name="softing-all.xml" />
+  <include name="pdx223-default-fixed.xml" />
+
+  <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="softing,pdk">
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
+    <linkfile src="core" dest="build/core"/>
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
+    <linkfile src="target" dest="build/target"/>
+    <linkfile src="tools" dest="build/tools"/>
+  </project>
+  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="softing,pdk,tradefed">
+    <linkfile src="root.bp" dest="Android.bp"/>
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
+  </project>
+  <project name="VCPI.android.device.sony.common" path="device/sony/common" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="device,local::devices,softing"/>
+  <project name="VCPI.android.device.sony.nagara" path="device/sony/nagara" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="device,local::devices,softing"/>
+  <project name="VCPI.android.device.sony.pdx223" path="device/sony/pdx223" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="device,local::devices,softing"/>
+  <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="softing,pdk"/>
+  <project name="VCPI.android.kernel.sony.common-kernel" path="kernel/sony/msm-5.10/common-kernel" remote="host" revision="refs/heads/vcpi-sony" upstream="vcpi-sony" dest-branch="vcpi-sony" groups="device,local::K.P.1.0.r1,softing" clone-depth="1"/>
+  <project name="VCPI.android.kernel.sony.drivers.wlan-qc" path="kernel/sony/msm-5.10/kernel/drivers/staging/wlan-qc/qcacld-3.0" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.kernel" path="kernel/sony/msm-5.10/kernel" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.platform.bionic" path="bionic" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.hardware.interfaces" path="hardware/interfaces" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-sony" upstream="refs/heads/vcpi-sony" dest-branch="refs/heads/vcpi-sony" groups="pdk,softing"/>
+  <project name="VCPI.android.vendor.sony.pdx223.git" path="vendor/sony/pdx223" remote="l4bextgit" revision="refs/heads/vcpi-sony" upstream="vcpi-sony" dest-branch="vcpi-sony" groups="device,softing"/>
+  <project name="VCPI.sony.timekeep" path="vendor/oss/timekeep" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss,softing"/>
+</manifest>
