@@ -122,7 +122,6 @@
   <project name="kernel/prebuilts/mainline/x86-64" path="kernel/prebuilts/mainline/x86_64" revision="71bf770c97cd6e3dadbfd49a90b983685daf3e41" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk" clone-depth="1"/>
   <project name="macaddrsetup" path="vendor/oss/macaddrsetup" remote="sony" revision="d2871b2041790f6d291e207bec8b0ef34029ef59" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="nfc-NXPNFCC_FW" path="vendor/nxp/NXPNFCC_FW" remote="NXP" revision="9aed6acfa7e13a305a1ea2d38f9499d18223fca3" upstream="master" dest-branch="master" groups="device,local::nxp"/>
-  <project name="packages_apps_ExtendedSettings" path="packages/apps/ExtendedSettings" remote="sony" revision="b3b89a5651844a5a352cf26782e957dc18e1a851" upstream="t-mr1" dest-branch="t-mr1" groups="device,local::oss"/>
   <project name="platform/art" path="art" revision="aeeafbd459298788c7760f35d04e7c0568d192b5" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="VCPI.android.platform.bionic" path="bionic" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
   <project name="platform/bootable/libbootloader" path="bootable/libbootloader" revision="6e3710f107248dfbefbf79aaf81caca73a742cab" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="vts,pdk"/>
@@ -1215,6 +1214,8 @@
   <project name="VCPI.android.kernel.sony.techpack.video" path="kernel/sony/msm-5.10/kernel/techpack/video" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
 
   <project name="VCPI.android.kernel.sony.common-headers" path="kernel/sony/msm-5.10/common-headers" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+
+  <project name="VCPI.android.sony.packages.apps.ExtendedSettings" path="packages/apps/ExtendedSettings" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss"/>
 
   <superproject name="platform/superproject" revision="android-13.0.0_r75"/>
 
