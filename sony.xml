@@ -5,11 +5,11 @@
   <remote name="sony" fetch="https://github.com/sonyxperiadev/"/>
   <remote name="l4bextgit" fetch="https://ext-git.l4b-software.com/SoftingAE-VCPI/"/>
   <remote name="host" fetch="."/>
-  
+
   <default remote="aosp" revision="refs/tags/android-13.0.0_r75" sync-j="4"/>
 
   <include name="softing-all.xml" />
-  
+
   <project name="QcRilAm" path="vendor/oss/qcrilam" remote="sony" revision="ef51ec65f5609e0fe9180ec3d2d054b72c0b8bee" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="SonyOpenTelephony" path="vendor/oss/opentelephony" remote="sony" revision="fd623d15210545b6de101a84e5b749e1f148792b" upstream="s-mr1" dest-branch="s-mr1" groups="device,local::oss"/>
   <project name="camera" path="vendor/qcom/opensource/camera" remote="sony" revision="0d5f6d1f01828de2c96b059f075689aece9fb70a" upstream="aosp/LA.UM.8.11.r1" dest-branch="aosp/LA.UM.8.11.r1" groups="device,local::qcom-legacy"/>
@@ -72,7 +72,7 @@
 
   <project name="VCPI.android.kernel.sony.kernel" path="kernel/sony/msm-5.10/kernel" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
 
-  <project name="kernel" path="kernel/sony/msm-5.15/kernel" remote="sony" revision="ea2f773ccea2f369a1a5bd87069935e4ae54e58f" upstream="aosp/K.P.2.0.r1" dest-branch="aosp/K.P.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel" path="kernel/sony/msm-5.15/kernel" remote="sony" revision="c1c72bf0a614c3aaad6856246c089c76e6134d8a" upstream="aosp/K.P.2.0.r1" dest-branch="aosp/K.P.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel" path="kernel/sony/msm-4.19/kernel" remote="sony" revision="df366ca25db51ab445a5a00b4574ab313d526505" upstream="aosp/LA.UM.9.12.r1" dest-branch="aosp/LA.UM.9.12.r1" groups="device,local::LA.UM.9.12.r1"/>
   <project name="kernel" path="kernel/sony/msm-5.4/kernel" remote="sony" revision="7d3c6b3ffafdc471c7d0614212ef94853863ab00" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
   <project name="kernel-defconfig" path="kernel/sony/msm-5.10/kernel/arch/arm64/configs/sony" remote="sony" revision="755edb2866839457fd25d6e3c51ff0ed01f04e23" upstream="aosp/K.P.1.0.r1" dest-branch="aosp/K.P.1.0.r1" groups="device,local::K.P.1.0.r1"/>
@@ -84,41 +84,32 @@
 
   <project name="VCPI.android.kernel.sony.common-kernel" path="kernel/sony/msm-5.10/common-kernel" remote="host" revision="vcpi-sony" groups="device,local::K.P.1.0.r1,softing" clone-depth="1"/>
 
-  <project name="kernel-sony-msm-5.10-headers" path="kernel/sony/msm-5.10/common-headers" remote="sony" revision="3ec239021367bb7e851944cc1a97c65ceef751c6" upstream="aosp/K.P.1.0.r1" dest-branch="aosp/K.P.1.0.r1" groups="device,local::K.P.1.0.r1"/>
   <project name="kernel-sony-msm-5.15-common" path="kernel/sony/msm-5.15/common-kernel" remote="sony" revision="b9d7ba67b369a3dcfebe49ff8dafd42c86eba6fa" upstream="aosp/K.P.2.0.r1" dest-branch="aosp/K.P.2.0.r1" groups="device,local::K.P.2.0.r1" clone-depth="1"/>
   <project name="kernel-sony-msm-5.15-headers" path="kernel/sony/msm-5.15/common-headers" remote="sony" revision="fddfdead6e2c55869fd07455b3681f38f746a8bf" upstream="aosp/K.P.2.0.r1" dest-branch="aosp/K.P.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-sony-msm-5.4-common" path="kernel/sony/msm-5.4/common-kernel" remote="sony" revision="2e270ac5e15d1e5b8073fdf043ce4eef2269c73d" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1" clone-depth="1"/>
   <project name="kernel-sony-msm-5.4-headers" path="kernel/sony/msm-5.4/common-headers" remote="sony" revision="e08bc4ee52517b3110267b32adfdfd4f981fa055" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
-  <project name="kernel-techpack-audio" path="kernel/sony/msm-5.10/kernel/techpack/audio" remote="sony" revision="15ceadb7f615fd418cbc317de96832e73e2fc89f" upstream="aosp/LA.VENDOR.1.0.r1" dest-branch="aosp/LA.VENDOR.1.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-audio" path="kernel/sony/msm-5.15/kernel/techpack/audio" remote="sony" revision="6cd20682eaa985e9778d7505820ba3f2faf35415" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-audio" path="kernel/sony/msm-5.15/kernel/techpack/audio" remote="sony" revision="acde60f1872ecbbaab6eacfbb974a4a384911b3f" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-techpack-audio" path="kernel/sony/msm-4.19/kernel/techpack/audio" remote="sony" revision="e9d383b0a0198794e3f47e07fd27b658bc8d728a" upstream="aosp/LA.UM.9.12.r1" dest-branch="aosp/LA.UM.9.12.r1" groups="device,local::LA.UM.9.12.r1"/>
   <project name="kernel-techpack-audio" path="kernel/sony/msm-5.4/kernel/techpack/audio" remote="sony" revision="1e8382c62809c5ab22318ddac989cc7cb807050c" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
-  <project name="kernel-techpack-bt-kernel" path="kernel/sony/msm-5.15/kernel/techpack/bt-kernel" remote="sony" revision="865cbd58075f8809af6328f4aa5e5b55967c4671" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-camera" path="kernel/sony/msm-5.10/kernel/techpack/camera" remote="sony" revision="f836659c1f57b145bdaeb9bd6e1c38eb5154c6c3" upstream="aosp/CAMERA.LA.2.0.r1" dest-branch="aosp/CAMERA.LA.2.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-camera" path="kernel/sony/msm-5.15/kernel/techpack/camera" remote="sony" revision="50ca680463042332fb5b691b991ba7991762388b" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-bt-kernel" path="kernel/sony/msm-5.15/kernel/techpack/bt-kernel" remote="sony" revision="c8f269cff8d49cfec4c347e5d91833aabea30750" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-camera" path="kernel/sony/msm-5.15/kernel/techpack/camera" remote="sony" revision="85e19bd9beabe4d342443a9df5991d23b49db1c9" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-techpack-camera" path="kernel/sony/msm-4.19/kernel/techpack/camera" remote="sony" revision="acad3e1b7ab2a568ee03c2c6163c5c213bec2c71" upstream="aosp/LA.UM.9.12.r1" dest-branch="aosp/LA.UM.9.12.r1" groups="device,local::LA.UM.9.12.r1"/>
   <project name="kernel-techpack-camera" path="kernel/sony/msm-5.4/kernel/techpack/camera" remote="sony" revision="f00982fa7cb80cea747ba01a681bca680f4ee150" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
   <project name="kernel-techpack-data-kernel" path="kernel/sony/msm-4.19/kernel/techpack/data-kernel" remote="sony" revision="4f428ba13997df3fa4f935caa63f838469c2f1fe" upstream="aosp/LA.UM.9.12.r1" dest-branch="aosp/LA.UM.9.12.r1" groups="device,local::LA.UM.9.12.r1"/>
-  <project name="kernel-techpack-dataipa" path="kernel/sony/msm-5.10/kernel/techpack/dataipa" remote="sony" revision="a040eab1a8a25567e5606c15d189017e054751b2" upstream="aosp/LA.VENDOR.1.0.r1" dest-branch="aosp/LA.VENDOR.1.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-dataipa" path="kernel/sony/msm-5.15/kernel/techpack/dataipa" remote="sony" revision="57658b1eed1f9935caa4a9687a82f52346d53408" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-dataipa" path="kernel/sony/msm-5.15/kernel/techpack/dataipa" remote="sony" revision="7a397c6b9b454230befc7156047f4c953499a31c" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-techpack-dataipa" path="kernel/sony/msm-5.4/kernel/techpack/dataipa" remote="sony" revision="6a3fad7862864263974a430dc292ae486f331a31" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
-  <project name="kernel-techpack-datarmnet" path="kernel/sony/msm-5.10/kernel/techpack/datarmnet" remote="sony" revision="7938830b699857ad23ae2235a05276768ee394d1" upstream="aosp/LA.VENDOR.1.0.r1" dest-branch="aosp/LA.VENDOR.1.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-datarmnet" path="kernel/sony/msm-5.15/kernel/techpack/datarmnet" remote="sony" revision="b8b9ddaab559bd509d1bb708f43b9df10be9e638" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-datarmnet-ext" path="kernel/sony/msm-5.10/kernel/techpack/datarmnet-ext" remote="sony" revision="87f87ee74931110fcead32d739b6213c76446573" upstream="aosp/LA.VENDOR.1.0.r1" dest-branch="aosp/LA.VENDOR.1.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-datarmnet-ext" path="kernel/sony/msm-5.15/kernel/techpack/datarmnet-ext" remote="sony" revision="d230098eb0e1b9ad1d1fe5df335b8e67a5f941d5" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-display" path="kernel/sony/msm-5.15/kernel/techpack/display" remote="sony" revision="3e888af380454182ec8d2a9c765066cb4ceccd41" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-display-driver" path="kernel/sony/msm-5.10/kernel/techpack/display" remote="sony" revision="7b4c6914ca2675a0c0b42aead32693a2e78a55bd" upstream="aosp/DISPLAY.LA.2.0.r1" dest-branch="aosp/DISPLAY.LA.2.0.r1" groups="device,local::K.P.1.0.r1"/>
+  <project name="kernel-techpack-datarmnet" path="kernel/sony/msm-5.15/kernel/techpack/datarmnet" remote="sony" revision="582cc5a67d1762fbc2811b8a63b041a7d87aa22f" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-datarmnet-ext" path="kernel/sony/msm-5.15/kernel/techpack/datarmnet-ext" remote="sony" revision="f97143a79c098b0de85d254fbe59e328b805e722" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-display" path="kernel/sony/msm-5.15/kernel/techpack/display" remote="sony" revision="e4eb499639a7fc1dbd3d051f33c74a48f315be9d" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-techpack-display-driver" path="kernel/sony/msm-4.19/kernel/techpack/display" remote="sony" revision="517f9d97822a0851a303196ea819756d392c0fc1" upstream="aosp/LA.UM.9.12.r1" dest-branch="aosp/LA.UM.9.12.r1" groups="device,local::LA.UM.9.12.r1"/>
   <project name="kernel-techpack-display-driver" path="kernel/sony/msm-5.4/kernel/techpack/display" remote="sony" revision="b317b3b9f3da9b467528193fe4fa7cca7427b7f5" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
-  <project name="kernel-techpack-eva" path="kernel/sony/msm-5.10/kernel/techpack/eva" remote="sony" revision="7775e515920b6ec7b8898debe3aee54f5f9a721a" upstream="aosp/LA.VENDOR.1.0.r1" dest-branch="aosp/LA.VENDOR.1.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-eva" path="kernel/sony/msm-5.15/kernel/techpack/eva" remote="sony" revision="5edcf5c843cde58a2f961addeb3e111dce9ecb75" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-graphics-kernel" path="kernel/sony/msm-5.15/kernel/techpack/graphics" remote="sony" revision="4848180028cfb305aa07f37e9c5478c4e1515707" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-mm-drivers" path="kernel/sony/msm-5.15/kernel/techpack/mm" remote="sony" revision="0435913e9acb02ce91e9d38a48dae6a9f3e4d3a0" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-eva" path="kernel/sony/msm-5.15/kernel/techpack/eva" remote="sony" revision="f344d13bd69a952ddb84ce5dbe04b5010f8b3427" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-graphics-kernel" path="kernel/sony/msm-5.15/kernel/techpack/graphics" remote="sony" revision="b8b0689fad6421e4955560d94e8c03867baecfde" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-mm-drivers" path="kernel/sony/msm-5.15/kernel/techpack/mm" remote="sony" revision="bbc3198e1e9d7a8ecb3a17405969f2603c622774" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-techpack-mmrm" path="kernel/sony/msm-5.10/kernel/techpack/mmrm" remote="sony" revision="24afc2f265f0e5780d7d39e5de73575d6ce37a83" upstream="aosp/VIDEO.LA.2.0.r1" dest-branch="aosp/VIDEO.LA.2.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-mmrm" path="kernel/sony/msm-5.15/kernel/techpack/mmrm" remote="sony" revision="3cd1f404687b8b779188088ab7ea81a59165d75f" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-securemsm-kernel" path="kernel/sony/msm-5.15/kernel/techpack/securemsm" remote="sony" revision="94ce06bcf9d01d6a2ac57fe3cd8f71fcf50d92ec" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
-  <project name="kernel-techpack-video" path="kernel/sony/msm-5.10/kernel/techpack/video" remote="sony" revision="e33803befde5b62f982f75dc38e7a60f517999db" upstream="aosp/VIDEO.LA.2.0.r1" dest-branch="aosp/VIDEO.LA.2.0.r1" groups="device,local::K.P.1.0.r1"/>
-  <project name="kernel-techpack-video" path="kernel/sony/msm-5.15/kernel/techpack/video" remote="sony" revision="2a8b81c63ae1e99bda006898c0ca5ca30398bc11" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-mmrm" path="kernel/sony/msm-5.15/kernel/techpack/mmrm" remote="sony" revision="fdb99de7c056a527648afa8b92036e94ef480bbd" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-securemsm-kernel" path="kernel/sony/msm-5.15/kernel/techpack/securemsm" remote="sony" revision="8016bb15d2d815ab45ff6fd680417be9c7db0718" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
+  <project name="kernel-techpack-video" path="kernel/sony/msm-5.15/kernel/techpack/video" remote="sony" revision="174f49eb54ce468cc8f16456de76c5689ad4e119" upstream="aosp/LA.VENDOR.13.2.0.r1" dest-branch="aosp/LA.VENDOR.13.2.0.r1" groups="device,local::K.P.2.0.r1"/>
   <project name="kernel-techpack-video" path="kernel/sony/msm-4.19/kernel/techpack/video" remote="sony" revision="d9fc5998882845766d7d37bef1ba5f497b43a212" upstream="aosp/LA.UM.9.12.r1" dest-branch="aosp/LA.UM.9.12.r1" groups="device,local::LA.UM.9.12.r1"/>
   <project name="kernel-techpack-video" path="kernel/sony/msm-5.4/kernel/techpack/video" remote="sony" revision="b514d822811528146b2a89ca15f65c9eb21318f5" upstream="aosp/LA.UM.9.16.r1" dest-branch="aosp/LA.UM.9.16.r1" groups="device,local::LA.UM.9.16.r1"/>
   <project name="kernel/configs" revision="c590ab063f72cac8214aba7724ad2abe74aa9dd3" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="vts,pdk"/>
@@ -131,7 +122,6 @@
   <project name="kernel/prebuilts/mainline/x86-64" path="kernel/prebuilts/mainline/x86_64" revision="71bf770c97cd6e3dadbfd49a90b983685daf3e41" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk" clone-depth="1"/>
   <project name="macaddrsetup" path="vendor/oss/macaddrsetup" remote="sony" revision="d2871b2041790f6d291e207bec8b0ef34029ef59" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="nfc-NXPNFCC_FW" path="vendor/nxp/NXPNFCC_FW" remote="NXP" revision="9aed6acfa7e13a305a1ea2d38f9499d18223fca3" upstream="master" dest-branch="master" groups="device,local::nxp"/>
-  <project name="packages_apps_ExtendedSettings" path="packages/apps/ExtendedSettings" remote="sony" revision="b3b89a5651844a5a352cf26782e957dc18e1a851" upstream="t-mr1" dest-branch="t-mr1" groups="device,local::oss"/>
   <project name="platform/art" path="art" revision="aeeafbd459298788c7760f35d04e7c0568d192b5" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="VCPI.android.platform.bionic" path="bionic" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
   <project name="platform/bootable/libbootloader" path="bootable/libbootloader" revision="6e3710f107248dfbefbf79aaf81caca73a742cab" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="vts,pdk"/>
@@ -154,7 +144,7 @@
   <project name="platform/build/bazel_common_rules" path="build/bazel_common_rules" revision="f6cf03f7d0ba2e7cb05c0109a5cd57aae07dc6e8" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/build/blueprint" path="build/blueprint" revision="ca8f0e8e3571c866d69d34cbd47b3989abe8e8cd" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk,tradefed"/>
   <project name="platform/build/pesto" path="build/pesto" revision="d554620e6f7ad178b71ebb8c4269830cbd24ad8c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
-  
+
   <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk,tradefed">
     <linkfile src="root.bp" dest="Android.bp"/>
     <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
@@ -818,14 +808,14 @@
   <project name="platform/frameworks/layoutlib" path="frameworks/layoutlib" revision="1ece9cec57c5e76876826e280833d27df6aa4e09" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/libs/modules-utils" path="frameworks/libs/modules-utils" revision="58f1c8522e6df9e4f33c019084231d1012f3630c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/libs/native_bridge_support" path="frameworks/libs/native_bridge_support" revision="a63ff9d7c6992dc244e7f548d8a9175493220262" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
-  
+
   <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="refs/heads/vcpi-sony" groups="pdk-cw-fs,pdk-fs,softing"/>
 
   <project name="platform/frameworks/libs/service_entitlement" path="frameworks/libs/service_entitlement" revision="f6a7aebbc2e0eda2335d36d9043f5c5a246cfc81" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/frameworks/libs/systemui" path="frameworks/libs/systemui" revision="313ca2b3cbaef97cb4665b24412eccf3d4cdcae3" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/minikin" path="frameworks/minikin" revision="1d6a2a889a76cec9001f9c6db332726f6514582f" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/frameworks/multidex" path="frameworks/multidex" revision="3014a156b84a468e606d45479c584e622b4f1009" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
-  
+
   <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk"/>
 
   <project name="platform/frameworks/opt/bitmap" path="frameworks/opt/bitmap" revision="958affd2e0b70e659f5e5a32157e0ba3b7b558c1" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-fs"/>
@@ -951,7 +941,7 @@
   <project name="platform/packages/modules/BootPrebuilt/5.4/arm64" path="packages/modules/BootPrebuilt/5.4/arm64" revision="3130a05a2f71e6c43892db92148956af0b05a406" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk" clone-depth="1"/>
   <project name="platform/packages/modules/CaptivePortalLogin" path="packages/modules/CaptivePortalLogin" revision="1c4915e0f233b0f2ed7883bbb193df3980a72fc5" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
   <project name="platform/packages/modules/CellBroadcastService" path="packages/modules/CellBroadcastService" revision="c81aaf66e92035525de25a35db57d7b9e6ade951" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
-  
+
   <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-sony" groups="pdk-cw-fs,pdk-fs,softing"/>
 
   <project name="platform/packages/modules/DnsResolver" path="packages/modules/DnsResolver" revision="6aba7b15c388b6e63b916464816612d6e51ba5db" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk-cw-fs,pdk-fs"/>
@@ -1065,7 +1055,7 @@
   <project name="platform/system/ca-certificates" path="system/ca-certificates" revision="b19b6762f99338fa515ff8a0fa7a395d5776b453" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/chre" path="system/chre" revision="0aa5a0b934e84d6ffd162a24bb3ce78b49b60437" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/connectivity/wificond" path="system/connectivity/wificond" revision="d9c99fa71ce203759eb0b293c8ef77589fd5f866" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
-  
+
   <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
 
   <project name="platform/system/dmesgd" path="system/dmesgd" revision="45b6106898f6bca88d66639354b536d770d1c53c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
@@ -1097,7 +1087,7 @@
   <project name="platform/system/memory/libmemtrack" path="system/memory/libmemtrack" revision="666bdc38122b525ed607bccec93d28b1a03131e8" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/memory/libmemunreachable" path="system/memory/libmemunreachable" revision="9be8268bfec3bb61100ef16da40d3189564f775a" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/memory/lmkd" path="system/memory/lmkd" revision="84fca1085ae09bb970d953e4a6063af8d9dd3027" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
-  
+
   <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
 
   <project name="platform/system/nfc" path="system/nfc" revision="99dcb4312dbe28fb7f102344c707dab82e8bf9cb" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
@@ -1213,8 +1203,21 @@
   <project name="vendor-sony-oss-cash" path="vendor/oss/cash" remote="sony" revision="82798994c4a24db677e5838e7a767dbc9454719b" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="vendor-sony-oss-fingerprint" path="vendor/oss/fingerprint" remote="sony" revision="89bdcd1fef6ab3f1611852f5754733e339a8095e" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="vendor-sony-oss-simdetect" path="vendor/oss/simdetect" remote="sony" revision="0f40dea301d470510d9a33afe53b4e46c18407a7" upstream="master" dest-branch="master" groups="device,local::oss"/>
-  
+
+  <project name="VCPI.android.kernel.sony.techpack.audio" path="kernel/sony/msm-5.10/kernel/techpack/audio" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.camera" path="kernel/sony/msm-5.10/kernel/techpack/camera" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.dataipa" path="kernel/sony/msm-5.10/kernel/techpack/dataipa" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.datarmnet" path="kernel/sony/msm-5.10/kernel/techpack/datarmnet" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.datarmnet-ext" path="kernel/sony/msm-5.10/kernel/techpack/datarmnet-ext" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.display" path="kernel/sony/msm-5.10/kernel/techpack/display" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.eva" path="kernel/sony/msm-5.10/kernel/techpack/eva" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.video" path="kernel/sony/msm-5.10/kernel/techpack/video" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+
+  <project name="VCPI.android.kernel.sony.common-headers" path="kernel/sony/msm-5.10/common-headers" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
+
+  <project name="VCPI.android.sony.packages.apps.ExtendedSettings" path="packages/apps/ExtendedSettings" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss"/>
+
   <superproject name="platform/superproject" revision="android-13.0.0_r75"/>
-  
+
   <contactinfo bugurl="go/repo-bug"/>
 </manifest>
