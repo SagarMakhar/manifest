@@ -47,5 +47,5 @@
   <project name="VCPI.android.kernel.sony.techpack.eva" path="kernel/sony/msm-5.10/kernel/techpack/eva" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
   <project name="VCPI.android.kernel.sony.techpack.video" path="kernel/sony/msm-5.10/kernel/techpack/video" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
   <project name="VCPI.android.kernel.sony.common-headers" path="kernel/sony/msm-5.10/common-headers" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
-  <project name="VCPI.android.sony.packages.apps.ExtendedSettings" path="packages/apps/ExtendedSettings" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss"/>
+  <project name="VCPI.android.sony.packages.apps.ExtendedSettings" path="packages/apps/ExtendedSettings" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss,softing"/>
 </manifest>
