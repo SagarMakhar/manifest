@@ -60,11 +60,34 @@ create-folder-tree() {
 	mkdir -p "${source_tree}"
 }
 
+check-folder-exists() {
+	local folders=("${@}")
+	local somethingnotfound=false
+
+	[ ${#folders[@]} -eq 0 ] && {
+		warn "No folders to check" \
+		     "Nothing to do..."
+		return 0
+	}
+
+	for folder in "${folders[@]}"; do
+		[ ! -e "${folder}" ] && {
+			error "Folder does not exist: ${folder}"
+			somethingnotfound=true
+		}
+	done
+
+	${somethingnotfound} && return 1
+	return 0
+}
+
 # Set the default values for the environment variables
 buildconfpath=""
 create=false
 delete=false
 force=false
+checkfolderexists=false
+checkfolders=()
 
 help() {
 	cat <<-EOF
@@ -84,6 +107,11 @@ help() {
 	  # Other options
 	  -c, --create  <source_tree>
 	                Create the source tree
+	  --check-folder-exists  <source_tree> ...
+	                Check if the source tree exists. This option can be
+	                used more than once. Only when all folders exist, the
+	                script will exit with 0.
+	                🔁 Can be used more than once.
 	  -d, --delete  <source_tree>
 	                Delete the source tree (can be forced)
 	  -f, --force
@@ -99,6 +127,7 @@ temp=$(getopt \
 	--long build-config: \
 	--long build-config-add: \
 	--long create: \
+	--long check-folder-exists: \
 	--long delete: \
 	--long force \
 	--long help \
@@ -137,6 +166,12 @@ while true; do
 			create=true
 			;;
 
+		--check-folder-exists )
+			checkfolders+=("${2}")
+			shift
+			checkfolderexists=true
+			;;
+
 		-d | --delete )
 			source_tree="${2}"
 			shift
@@ -165,6 +200,16 @@ while true; do
 
 	shift
 done
+
+${checkfolderexists} && {
+	info "Checking if the folders in source tree exists"
+	check-folder-exists  "${checkfolders[@]}" || {
+		error "Some folders do not exist" \
+		      "See message above for details; exiting..."
+		exit 1
+	}
+	okay "All folders exist"
+}
 
 ${delete} && {
 	info "Deleting the source tree: ${source_tree}" \
