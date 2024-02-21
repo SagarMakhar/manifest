@@ -31,6 +31,10 @@ variables:
     value: main
   - name: AZP_AGENT_ALLOW_WORK_DIRECTORY_REPOSITORIES
     value: "true"
+  - name: source_repo
+    value: ../repos/VCPI.android.manifest/
+  - name: cibuildsh
+    value: $(source_repo)/.az/ci-build.sh
 
 parameters:
   - name: phonelynx
@@ -101,7 +105,8 @@ jobs:
 
     steps:
       - checkout: self
-        enabled: false
+        enabled: true
+        path: $(source_repo)
 
       - ${{ if eq( parameters.resetbuildtree , True) }}:
         - bash: |
