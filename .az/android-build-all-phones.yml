@@ -29,6 +29,8 @@ variables:
     value: .repo/local_manifests/developer.xml
   - name: vcpi_bmw_device_default_branchname
     value: main
+  - name: AZP_AGENT_ALLOW_WORK_DIRECTORY_REPOSITORIES
+    value: "true"
 
 parameters:
   - name: phonelynx
