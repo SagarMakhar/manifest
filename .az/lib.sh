@@ -176,3 +176,45 @@ function ptime() {
 	return ${ret}
 }
 
+# checks validity of source tree
+valid-directory-name() {
+	local source_tree="${1}"
+
+	[ -z "${source_tree}" ] && {
+		error "source_tree value is empty"
+		return 1
+	}
+
+	[ "${source_tree}" = "." ] && {
+		error "source_tree is the current directory"
+		return 1
+	}
+
+	[ "${source_tree}" = "/" ] && {
+		error "source_tree is the root directory"
+		return 1
+	}
+
+	[ "${source_tree}" = ".." ] && {
+		error "source_tree is the parent directory"
+		return 1
+	}
+
+	[ "$(readlink -f "${source_tree}")" = "$(pwd)" ] && {
+		error "source_tree is the current directory"
+		return 1
+	}
+
+	[ "$(readlink -f "${source_tree}")" = "$(pwd -L)" ] && {
+		error "source_tree is the current directory"
+		return 1
+	}
+
+	[ "$(readlink -f "${source_tree}")" = "$(pwd -P -L)" ] && {
+		error "source_tree is the current directory"
+		return 1
+	}
+
+	return 0
+}
+
