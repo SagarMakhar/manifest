@@ -30,8 +30,40 @@ delete-folder-tree() {
 	rm -rf "${source_tree}"
 }
 
+create-folder-tree() {
+	local source_tree="${1}"
+	local recreate=${2}
+
+	valid-directory-name "${source_tree}" || {
+		error "Invalid source tree name: ${source_tree}" \
+		      "See message above for details; exiting..."
+		return 1
+	}
+
+	[ -e "${source_tree}" ] &&   {
+		if ${recreate}; then
+			info "Recreating the source tree: ${source_tree}" \
+			     "This may take a while..."
+			ptime delete-folder-tree  "${source_tree}" || {
+				error "Failed to delete the source tree: ${source_tree}" \
+				      "See message above for details; exiting..."
+				return 1
+			}
+		else
+			warn "source_tree does already exist: ${source_tree}" \
+			     "Nothing to do..."
+			return 0
+		fi
+	}
+
+	# create the source tree
+	mkdir -p "${source_tree}"
+}
+
 # Set the default values for the environment variables
+create=false
 delete=false
+force=false
 
 help() {
 	cat <<-EOF
@@ -39,8 +71,12 @@ help() {
 
 	Options:
 	  # Other options
+	  -c, --create  <source_tree>
+	                Create the source tree
 	  -d, --delete  <source_tree>
 	                Delete the source tree (can be forced)
+	  -f, --force
+	                Force some operations
 	  -h, --help
 	                Show this help message and exit
 	EOF
@@ -48,8 +84,10 @@ help() {
 
 # command line parsing with getopt
 temp=$(getopt \
-	-o d:h \
+	-o c:d:fh \
+	--long create: \
 	--long delete: \
+	--long force \
 	--long help \
 	-n "$0" -- "$@")
 # shellcheck disable=SC2181
@@ -59,10 +97,20 @@ unset temp
 
 while true; do
 	case "$1" in
+		-c | --create )
+			source_tree="${2}"
+			shift
+			create=true
+			;;
+
 		-d | --delete )
 			source_tree="${2}"
 			shift
 			delete=true
+			;;
+
+		--force )
+			force=true
 			;;
 
 		-h | --help )
@@ -93,6 +141,16 @@ ${delete} && {
 		exit 1
 	}
 	okay "Deleted the source tree: ${source_tree}"
+}
+
+${create} && {
+	info "Creating the source tree: ${source_tree}"
+	create-folder-tree  "${source_tree}" "${force}" || {
+		error "Failed to create the source tree: ${source_tree}" \
+		      "See message above for details; exiting..."
+		exit 1
+	}
+	okay "done for source tree: ${source_tree}"
 }
 
 exit 0
