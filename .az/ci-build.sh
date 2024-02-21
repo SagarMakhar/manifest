@@ -61,6 +61,7 @@ create-folder-tree() {
 }
 
 # Set the default values for the environment variables
+buildconfpath=""
 create=false
 delete=false
 force=false
@@ -70,6 +71,16 @@ help() {
 	Usage: $0 [options]
 
 	Options:
+	  # Build configuration file creation
+	  -B, --build-config <buildconfig>
+	                Build configuration file creation enabled. You need the
+	                option(s) --add-build-config.
+	  --build-config-add  <buildoption> ...
+	                Add a build option to the build configuration file.
+	                format: "option=value". This is 1 to 1 added to the
+	                build configuration file.
+	                🔁 Can be used more than once.
+
 	  # Other options
 	  -c, --create  <source_tree>
 	                Create the source tree
@@ -84,7 +95,9 @@ help() {
 
 # command line parsing with getopt
 temp=$(getopt \
-	-o c:d:fh \
+	-o B:c:d:fh \
+	--long build-config: \
+	--long build-config-add: \
 	--long create: \
 	--long delete: \
 	--long force \
@@ -97,6 +110,27 @@ unset temp
 
 while true; do
 	case "$1" in
+		-B | --build-config )
+			buildconfpath="${2}"
+			shift
+			info "Preparing the build configuration: ${buildconfpath}"
+			[ -e "${buildconfpath}" ] && {
+				warn "buildconfpath does already exist: ${buildconfpath}, recreating..."
+				rm -f "${buildconfpath}"
+			}
+			touch "${buildconfpath}" || {
+				error "Failed to create the build configuration: ${buildconfpath}" \
+				      "See (possible) message above for details; exiting..."
+				exit 1
+			}
+			;;
+
+		--build-config-add )
+			buildoption="${2}"
+			shift
+			echo "${buildoption}" >> "${buildconfpath}"
+			;;
+
 		-c | --create )
 			source_tree="${2}"
 			shift
