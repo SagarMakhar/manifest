@@ -113,8 +113,11 @@ jobs:
           workingDirectory: $(Pipeline.Workspace)
           displayName: Delete whole source foldertree for $(phonename)
 
+      - bash: $(cibuildsh) --create android/$(phonename)
+        workingDirectory: $(Pipeline.Workspace)
+        displayName: Create source folder for $(phonename)
+
       - bash: |
-          mkdir -p android/$(phonename)
           cd android/$(phonename)
 
           cat <<-EOF > buildconfig.env
