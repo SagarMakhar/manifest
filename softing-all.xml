@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Purpose of the "forallvcpis" group: to group all repositories that are common to all VCPIs.
+     Please ungroup "forallvcpis" when you move a repository outside of this xml file. -->
 <manifest>
-  <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing"/>
-  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing">
+  <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis"/>
+  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
-  <project name="VCPI.android.external.lxc" path="external/lxc-vcpi" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,pdk,device"/>
-  <project name="VCPI.android.external.openssh" path="external/openssh" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="pdk,softing"/>
-  <project name="VCPI.android.external.poco" path="external/poco" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,pdk,device"/>
-  <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing"/>
+  <project name="VCPI.android.external.lxc" path="external/lxc-vcpi" remote="host" revision="refs/heads/softingmain" groups="softing,pdk,device,forallvcpis"/>
+  <project name="VCPI.android.external.openssh" path="external/openssh" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="pdk,softing,forallvcpis"/>
+  <project name="VCPI.android.external.poco" path="external/poco" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,pdk,device,forallvcpis"/>
+  <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,forallvcpis"/>
 </manifest>
