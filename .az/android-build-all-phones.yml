@@ -39,6 +39,10 @@ parameters:
     displayName: Build for lynx
     type: boolean
     default: true
+  - name: phonepdx223
+    displayName: Build for pdx223
+    type: boolean
+    default: true
   - name: pool
     displayName: Which pool
     type: string
@@ -94,6 +98,12 @@ jobs:
             phonename: 'lynx'
             phoneconfigstring: -p lynx -P aosp -f eng
             removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
+
+        ${{ if eq(parameters.phonepdx223, True) }}:
+          lynx:
+            phonename: 'pdx223'
+            phoneconfigstring: -p pdx223 -P aosp -f eng
+            removefolders: ${PIPELINE_WORKSPACE}/android/pdx223/aosp
 
       maxParallel: 2
 
