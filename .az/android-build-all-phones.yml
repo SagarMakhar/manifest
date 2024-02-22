@@ -100,7 +100,7 @@ jobs:
             removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
 
         ${{ if eq(parameters.phonepdx223, True) }}:
-          lynx:
+          pdx223:
             phonename: 'pdx223'
             phoneconfigstring: -p pdx223 -P aosp -f eng
             removefolders: ${PIPELINE_WORKSPACE}/android/pdx223/aosp
