@@ -117,12 +117,7 @@ jobs:
         workingDirectory: $(Pipeline.Workspace)
         displayName: Create source folder for $(phonename)
 
-      - bash: |
-          cd android/$(phonename)
-
-          cat <<-EOF > buildconfig.env
-          export PRECOMMAND="prun"
-          EOF
+      - bash: $(cibuildsh) --build-config android/$(phonename)/buildconfig.env --build-config-add 'export PRECOMMAND="prun"'
         workingDirectory: $(Pipeline.Workspace)
         displayName: Generate a buildconfig.env
 
