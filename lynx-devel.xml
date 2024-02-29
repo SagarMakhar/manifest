@@ -11,7 +11,7 @@
   <include name="softing-all.xml" />
   <include name="lynx-default-fixed.xml" />
 
-  <project name="VCPI.android.build" path="build/make" remote="host" revision="0f99c8c5dcdaf2aa516121932c2bf8c4fc74ee77" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk">
+  <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
     <linkfile src="core" dest="build/core"/>
@@ -19,19 +19,19 @@
     <linkfile src="target" dest="build/target"/>
     <linkfile src="tools" dest="build/tools"/>
   </project>
-  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="6fd3d9683cc7de50a7dbff45ed983ac4163e00f0" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk,tradefed">
+  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk,tradefed">
     <linkfile src="root.bp" dest="Android.bp"/>
     <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
   </project>
-  <project name="VCPI.android.device.google.gs201" path="device/google/gs201" remote="host" revision="744e4c0f08edf52cbc5604b6c5abd3fd26ea3505" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,device,cloudripper"/>
-  <project name="VCPI.android.device.google.lynx" path="device/google/lynx" remote="host" revision="d5c535592b9d3be5694294324d90134e270c319d" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="device,lynx,softing"/>
-  <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="66330d317ca821874422b4af9afc2dbb21ddbcef" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk-cw-fs,pdk-fs,softing"/>
-  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="c87f8f3817dcd974863badff9920dcd875e3b8f8" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk"/>
-  <project name="VCPI.android.hardware.google.graphics.common" path="hardware/google/graphics/common" remote="host" revision="a7b8bc7d573d1d383be6d574ecc5dc76961db936" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk-lassen,pdk-gs-arm"/>
-  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="b0058df57f282464d42155ada6605ec182e44a13" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk-cw-fs,pdk-fs,softing"/>
-  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="d8096c55454eded58ada5b5fc84b06873d197062" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk,softing"/>
-  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="c987956fcde9f0a3706a72facc79407665a36290" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk,softing"/>
-  <project name="VCPI.android.vendor.google.lynx" path="vendor/google_devices/lynx" remote="l4bextgit" revision="c2110d0ea83768e98ca4a2b4088efe26ce65e3ce" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing"/>
+  <project name="VCPI.android.device.google.gs201" path="device/google/gs201" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,device,cloudripper"/>
+  <project name="VCPI.android.device.google.lynx" path="device/google/lynx" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="device,lynx,softing"/>
+  <project name="VCPI.android.frameworks.libs.net" path="frameworks/libs/net" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk"/>
+  <project name="VCPI.android.hardware.google.graphics.common" path="hardware/google/graphics/common" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk-lassen,pdk-gs-arm"/>
+  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="pdk,softing"/>
+  <project name="VCPI.android.vendor.google.lynx" path="vendor/google_devices/lynx" remote="l4bextgit" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing"/>
 
   <superproject name="platform/superproject" revision="android-13.0.0_r75"/>
   <contactinfo bugurl="go/repo-bug"/>
