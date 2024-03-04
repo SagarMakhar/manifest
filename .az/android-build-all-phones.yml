@@ -141,18 +141,9 @@ jobs:
         path: android/VCPI.android.build.buildsupport
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
 
-      - bash: |
-          mkdir -p android/$(phonename)
-          cd android/$(phonename)
-          ln -sf ../VCPI.android.build.buildsupport/softing-build.sh
-
-          echo ":: remove $(removefolders) to ensure cleanliness"
-          rm -rf $(removefolders)
-
-          cd ${PIPELINE_WORKSPACE}/android/$(phonename)
-          ./softing-build.sh $(phoneconfigstring) -S
+      - bash: $(cibuildsh) --buildtree-buildsupport VCPI.android.build.buildsupport --buildtree-prepare-base $(phonename) --buildtree-perform-checkout -p $(phonename)
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
-        workingDirectory: $(Pipeline.Workspace)
+        workingDirectory: $(Pipeline.Workspace)/android
         displayName: Sourcen not fully available rampup new sources tree
         env:
           DOCKER_AUTH0: $(tokengithub)
