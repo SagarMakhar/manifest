@@ -188,7 +188,7 @@ jobs:
               rm "$(localmanifest)"
             fi
           fi
-          ./softing-build.sh $(phoneconfigstring) -u
+          ./softing-build.sh $(phoneconfigstring) -d sources -u
         workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
         displayName: Update sources
         env:
