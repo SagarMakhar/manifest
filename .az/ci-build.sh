@@ -7,9 +7,11 @@ set -o errexit \
     -o noclobber
 
 PS4='+ ${BASH_SOURCE#"$PWD/"}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): $?} '
+SCRIPTDIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+
 
 # shellcheck disable=SC1091
-source lib.sh
+source ${SCRIPTDIR}/lib.sh
 
 delete-folder-tree() {
 	local source_tree="${1}"
