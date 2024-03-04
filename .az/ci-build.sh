@@ -143,6 +143,29 @@ check-folder-exists() {
 	return 0
 }
 
+lm_setup() {
+	local lmfile="${1}"
+	local lmfolder=$(dirname "${lmfile}")
+
+	[ -z "${lmfile}" ] && {
+		error "No local manifest file given"
+		exit 1
+	}
+
+	[ ! -e "${lmfolder}" ] && mkdir -p "${lmfolder}"
+
+	cat <<-EOF >| "${lmfile}"
+	<?xml version="1.0" encoding="UTF-8"?>
+	<manifest>
+	EOF
+	for entry in "${lmentries[@]}"; do
+		echo "${entry}" >> "${lmfile}"
+	done
+	cat <<-EOF >> "${lmfile}"
+	</manifest>
+	EOF
+}
+
 # Set the default values for the environment variables
 buildconfpath=""
 buildtreesetup=false
@@ -155,6 +178,8 @@ delete=false
 force=false
 checkfolderexists=false
 checkfolders=()
+lmmanipulation=false
+lmentries=()
 phone=false
 phonetarget=""
 
@@ -189,6 +214,18 @@ help() {
 	                ⚠️  This is a long running operation.
 	                Only useable with --buildtree-prepare-base and -p.
 
+	  # Remote information
+	  --lm-file  <file>
+	                Local manifest file to use. The whole path to the
+	                <file> must exists. The file themselves will be
+	                re-created.
+	  --lm-add-entry "<string>"
+	                Add a line with content <string> into a local manifest file.
+	                Example:
+	                  --lm-add-entry '<remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git />'
+	                  --lm-add-entry '<extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="refs/heads/feso/testbranch" />'
+	                🔁 Can be used more than once.
+
 	  # Other options
 	  -c, --create  <source_tree>
 	                Create the source tree
@@ -221,6 +258,8 @@ temp=$(getopt \
 	--long delete: \
 	--long force \
 	--long help \
+	--long lm-add-entry: \
+	--long lm-file: \
 	--long phone: \
 	-n "$0" -- "$@")
 # shellcheck disable=SC2181
@@ -294,6 +333,18 @@ while true; do
 			exit 0
 			;;
 
+		--lm-add-entry )
+			lmentries+=("${2}")
+			shift
+			lmmanipulation=true
+			;;
+
+		--lm-file )
+			lmfile="${2}"
+			shift
+			lmmanipulation=true
+			;;
+
 		-p | --phone )
 			phonetarget="${2}"
 			shift
@@ -351,6 +402,10 @@ ${buildtreesetup} && {
 
 ${buildtreecheckout} && {
 	buildtree_perform_checkout "${phonetarget}" "${buildtreebase}"
+}
+
+${lmmanipulation} && {
+	lm_setup "${lmfile}"
 }
 
 exit 0
