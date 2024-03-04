@@ -31,10 +31,6 @@ variables:
     value: main
 
 parameters:
-  - name: phonelemonade
-    displayName: Build for lemonade
-    type: boolean
-    default: true
   - name: phonelynx
     displayName: Build for lynx
     type: boolean
@@ -86,12 +82,6 @@ jobs:
 
     strategy:
       matrix:
-
-        ${{ if eq(parameters.phonelemonade, True) }}:
-          lemonade:
-            phonename: 'lemonade'
-            phoneconfigstring: -p lemonade
-            removefolders: ${PIPELINE_WORKSPACE}/android/lemonade/aosp
 
         ${{ if eq(parameters.phonelynx, True) }}:
           lynx:
