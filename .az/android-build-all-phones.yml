@@ -90,19 +90,19 @@ jobs:
         ${{ if eq(parameters.phonelemonade, True) }}:
           lemonade:
             phonename: 'lemonade'
-            phoneconfigstring: -p lemonade -P lineage -f eng
+            phoneconfigstring: -p lemonade
             removefolders: ${PIPELINE_WORKSPACE}/android/lemonade/aosp
 
         ${{ if eq(parameters.phonelynx, True) }}:
           lynx:
             phonename: 'lynx'
-            phoneconfigstring: -p lynx -P aosp -f eng
+            phoneconfigstring: -p lynx
             removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
 
         ${{ if eq(parameters.phonepdx223, True) }}:
           pdx223:
             phonename: 'pdx223'
-            phoneconfigstring: -p pdx223 -P aosp -f eng
+            phoneconfigstring: -p pdx223
             removefolders: ${PIPELINE_WORKSPACE}/android/pdx223/aosp
 
       maxParallel: 2
