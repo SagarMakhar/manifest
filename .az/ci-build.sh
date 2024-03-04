@@ -62,6 +62,66 @@ create-folder-tree() {
 	mkdir -p "${source_tree}"
 }
 
+buildtree_setup() {
+	buildtreeproblemfound=false
+	if [ -z "${buildtreesupportpath}" ]; then
+		warn "No build support path given"
+		buildtreeproblemfound=true
+	fi
+
+	if [ ! -e "${buildtreesupportpath}" ]; then
+		warn "build support path does not exist: ${buildtreesupportpath}"
+		buildtreeproblemfound=true
+	fi
+
+	if [ -z "${buildtreebase}" ]; then
+		warn "No build tree base given"
+		buildtreeproblemfound=true
+	fi
+
+	${buildtreeproblemfound} && {
+		error "Problems with the build tree setup found" \
+		      "See message above for details; exiting..."
+		exit 1
+	}
+
+	mkdir -p "${buildtreebase}"
+	buildtreesupportpath="$(realpath --relative-to "${buildtreebase}"  "${buildtreesupportpath}")"
+
+	info "Setting up the build tree base: ${buildtreebase} with support:${buildtreesupportpath}" \
+	     "This may take a while..."
+
+	(
+		cd "${buildtreebase}"  || exit 1
+		ln -sf "${buildtreesupportpath}"/softing-build.sh
+	)
+}
+
+buildtree_perform_checkout() {
+	local phonetarget="${1}"
+	local buildtreecheckoutpath="${2}"
+
+	[ -z "${phonetarget}" ] && {
+		error "Phone target not set, but needed (-p)"
+		exit 1
+	}
+
+	[ -z "${buildtreecheckoutpath}" ] && {
+		error "No build tree checkout path given"
+		exit 1
+	}
+
+	[ ! -d "${buildtreecheckoutpath}" ] && {
+		error "build tree path isn't a directory: ${buildtreecheckoutpath}"
+		exit 1
+	}
+
+	(
+		cd "${buildtreecheckoutpath}" || exit 1
+		./softing-build.sh -p "${phonetarget}" -S
+	)
+}
+
 check-folder-exists() {
 	local folders=("${@}")
 	local somethingnotfound=false
@@ -85,11 +145,18 @@ check-folder-exists() {
 
 # Set the default values for the environment variables
 buildconfpath=""
+buildtreesetup=false
+buildtreesupportpath=""
+buildtreebase=""
+buildtreecheckout=false
+buildtreecheckoutpath=""
 create=false
 delete=false
 force=false
 checkfolderexists=false
 checkfolders=()
+phone=false
+phonetarget=""
 
 help() {
 	cat <<-EOF
@@ -106,6 +173,22 @@ help() {
 	                build configuration file.
 	                🔁 Can be used more than once.
 
+	  # Build tree setup
+	  # All options must be used at least once.
+	  --buildtree-buildsupport  <path>
+	                Path to the build support scripts. This is the path to
+	                the folder where the build support scripts are located
+	                which are used to setup a whole build infrastrukture.
+	  --buildtree-prepare-base  <tree>
+	                Prepare the build tree base in folder <tree>. <tree> is
+	                the root of the build tree, eg. '/path/to/tree/lynx'.
+	                ⚠️  Currently only useable with the
+	                --buildtree-buildsupport option.
+	  -S, --buildtree-performe-checkout
+	                Perform the checkout of the source tree.
+	                ⚠️  This is a long running operation.
+	                Only useable with --buildtree-prepare-base and -p.
+
 	  # Other options
 	  -c, --create  <source_tree>
 	                Create the source tree
@@ -120,19 +203,25 @@ help() {
 	                Force some operations
 	  -h, --help
 	                Show this help message and exit
+	  -p, --phone   <phone>
+	                Set target phone.
 	EOF
 }
 
 # command line parsing with getopt
 temp=$(getopt \
-	-o B:c:d:fh \
+	-o B:c:d:fhp:S: \
 	--long build-config: \
 	--long build-config-add: \
+	--long buildtree-buildsupport: \
+	--long buildtree-prepare-base: \
+	--long buildtree-perform-checkout \
 	--long create: \
 	--long check-folder-exists: \
 	--long delete: \
 	--long force \
 	--long help \
+	--long phone: \
 	-n "$0" -- "$@")
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then echo "Terminating..." >&2; exit 1; fi
@@ -162,6 +251,22 @@ while true; do
 			echo "${buildoption}" >> "${buildconfpath}"
 			;;
 
+		--buildtree-buildsupport )
+			buildtreesupportpath="${2}"
+			shift
+			buildtreesetup=true
+			;;
+
+		--buildtree-prepare-base )
+			buildtreebase="${2}"
+			shift
+			buildtreesetup=true
+			;;
+
+		-S | --buildtree-perform-checkout )
+			buildtreecheckout=true
+			;;
+
 		-c | --create )
 			source_tree="${2}"
 			shift
@@ -187,6 +292,12 @@ while true; do
 		-h | --help )
 			help
 			exit 0
+			;;
+
+		-p | --phone )
+			phonetarget="${2}"
+			shift
+			phone=true
 			;;
 
 		-- )
@@ -232,6 +343,14 @@ ${create} && {
 		exit 1
 	}
 	okay "done for source tree: ${source_tree}"
+}
+
+${buildtreesetup} && {
+	buildtree_setup
+}
+
+${buildtreecheckout} && {
+	buildtree_perform_checkout "${phonetarget}" "${buildtreebase}"
 }
 
 exit 0
