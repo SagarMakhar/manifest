@@ -153,14 +153,9 @@ jobs:
 
       - ${{ if ne( parameters.branchname_vcpi_bmw_vcpi_device, variables['vcpi_bmw_device_default_branchname']) }}:
         - bash: |
-            mkdir -p .repo/local_manifests
-            cat <<-EOF > $(localmanifest)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <manifest>
-              <remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>
-              <extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>
-            </manifest>
-            EOF
+            $(cibuildsh) --lm-file $(localmanifest) \
+              --lm-add-entry '<remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>' \
+              --lm-add-entry '<extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>'
             echo ":: installed a local_manifest. Content:"
             cat $(localmanifest)
           workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
