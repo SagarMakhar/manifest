@@ -218,3 +218,21 @@ valid-directory-name() {
 	return 0
 }
 
+make-string-to-boolean() {
+	local value="${1}"
+	local echovalue
+
+	case "${value}" in
+		"TRUE" | "True" | "true" | "yes" | "on" | "1")
+			echovalue=true
+			;;
+		"FALSE" | "False" | "false" | "no" | "off" | "0")
+			echovalue=false
+			;;
+		*)
+			echovalue=false
+			;;
+	esac
+
+	echo "${echovalue}"
+}

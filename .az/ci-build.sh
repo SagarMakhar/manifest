@@ -62,6 +62,28 @@ create-folder-tree() {
 	mkdir -p "${source_tree}"
 }
 
+build-do() {
+	local phone="${1}"
+	local buildcleanout=${2}
+	local buildcleansources=${3}
+	local cleanstring=""
+
+	[ -z "${phone}" ] && {
+		error "Phone target not set, but needed (-p)"
+		exit 1
+	}
+
+	${buildcleanout} && {
+		cleanstring="${cleanstring} -d out"
+	}
+
+	${buildcleansources} && {
+		cleanstring="${cleanstring} -d sources"
+	}
+
+	./softing-build.sh ${cleanstring} -p ${phone} -b
+}
+
 buildtree_setup() {
 	buildtreeproblemfound=false
 	if [ -z "${buildtreesupportpath}" ]; then
@@ -167,6 +189,9 @@ lm_setup() {
 }
 
 # Set the default values for the environment variables
+build=false
+buildcleanout=false
+buildcleansources=false
 buildconfpath=""
 buildtreesetup=false
 buildtreesupportpath=""
@@ -197,6 +222,18 @@ help() {
 	                format: "option=value". This is 1 to 1 added to the
 	                build configuration file.
 	                🔁 Can be used more than once.
+
+	  # Build configuration
+	  --build
+	                Build the sources.
+	                ⚠️  You have to set the phone via -p.
+	  --build-clean-sources  <bool>
+	                Clean the sources before build. Default: false
+	                Usefull only with --build.
+	  --build-clean-out  <bool>
+	                Clean the output before build. Default: false
+	                Means removing of out folder / clean build.
+	                Usefull only with --build.
 
 	  # Build tree setup
 	  # All options must be used at least once.
@@ -248,6 +285,9 @@ help() {
 # command line parsing with getopt
 temp=$(getopt \
 	-o B:c:d:fhp:S: \
+	--long build \
+	--long build-clean-sources: \
+	--long build-clean-out: \
 	--long build-config: \
 	--long build-config-add: \
 	--long buildtree-buildsupport: \
@@ -269,6 +309,20 @@ unset temp
 
 while true; do
 	case "$1" in
+		--build )
+			build=true
+			;;
+
+		--build-clean-sources )
+			buildcleansources=$(make-string-to-boolean "${2}")
+			shift
+			;;
+
+		--build-clean-out )
+			buildcleanout=$(make-string-to-boolean "${2}")
+			shift
+			;;
+
 		-B | --build-config )
 			buildconfpath="${2}"
 			shift
@@ -406,6 +460,10 @@ ${buildtreecheckout} && {
 
 ${lmmanipulation} && {
 	lm_setup "${lmfile}"
+}
+
+${build} && {
+	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}"
 }
 
 exit 0
