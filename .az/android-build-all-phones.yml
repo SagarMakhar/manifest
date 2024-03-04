@@ -189,18 +189,12 @@ jobs:
         workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
 
       - bash: |
-          cleanbuildstr="-d sources"
-          [ "${{parameters.cleanbuild}}" == "True" ] && {
-            echo ":: doing a clean build"
-            cleanbuildstr="${cleanbuildstr} -d out"
-          }
-
           [ -e "$(localmanifest)" ] && {
             echo ":: building with $(localmanifest)!"
             cat "$(localmanifest)"
           }
 
-          ./softing-build.sh $(phoneconfigstring) ${cleanbuildstr} -b
+          $(cibuildsh) --build-clean-sources "True" --build-clean-out "${{parameters.cleanbuild}}" $(phoneconfigstring) --build
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
         env:
