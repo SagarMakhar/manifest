@@ -32,7 +32,7 @@ variables:
   - name: AZP_AGENT_ALLOW_WORK_DIRECTORY_REPOSITORIES
     value: "true"
   - name: source_repo
-    value: ../repos/VCPI.android.manifest/
+    value: ${AGENT_WORKFOLDER}/repos/VCPI.android.manifest
   - name: cibuildsh
     value: $(source_repo)/.az/ci-build.sh
 
@@ -106,7 +106,8 @@ jobs:
     steps:
       - checkout: self
         enabled: true
-        path: $(source_repo)
+        # This needs to be in line with source_repo environment variable
+        path: ../repos/VCPI.android.manifest/
 
       - ${{ if eq( parameters.resetbuildtree , True) }}:
         - bash: $(cibuildsh) --delete ${PIPELINE_WORKSPACE}/android/$(phonename) || true
