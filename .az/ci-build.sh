@@ -53,7 +53,7 @@ create-folder-tree() {
 		if ${recreate}; then
 			info "Recreating the source tree: ${source_tree}" \
 			     "This may take a while..."
-			ptime delete-folder-tree  "${source_tree}" || {
+			delete-folder-tree  "${source_tree}" || {
 				error "Failed to delete the source tree: ${source_tree}" \
 				      "See message above for details; exiting..."
 				return 1
