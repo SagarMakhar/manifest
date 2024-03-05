@@ -12,6 +12,7 @@ SCRIPTDIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 # shellcheck disable=SC1091
 source ${SCRIPTDIR}/lib.sh
+LIB_MM=">"
 
 used_tools=()
 used_tools+=("ln" "realpath" "readlink" "tr")
