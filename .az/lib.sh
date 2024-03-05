@@ -236,3 +236,12 @@ make-string-to-boolean() {
 
 	echo "${echovalue}"
 }
+
+check-tool-exists () {
+	local tool="${1}"
+
+	command -v "${tool}" &>/dev/null || {
+		error "The command '${tool}' is not available. Please install it and run the script again."
+		exit 1
+	}
+}

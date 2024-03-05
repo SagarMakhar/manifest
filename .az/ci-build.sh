@@ -13,6 +13,13 @@ SCRIPTDIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 # shellcheck disable=SC1091
 source ${SCRIPTDIR}/lib.sh
 
+used_tools=()
+used_tools+=("ln" "realpath" "readlink" "tr")
+
+for tool in "${used_tools[@]}"; do
+	check-tool-exists "${tool}"
+done
+
 delete-folder-tree() {
 	local source_tree="${1}"
 
