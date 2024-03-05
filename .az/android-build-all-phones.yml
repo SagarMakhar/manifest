@@ -162,6 +162,15 @@ jobs:
           workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
           displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
 
+      - bash: $(cibuildsh) --update-component "build/buildsupport"
+        workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
+        displayName: Update buildsupport to be up to date for the time being
+        env:
+          DOCKER_AUTH0: $(tokengithub)
+          DOCKER_AUTH1: $(tokenl4b)
+          DOCKER_AUTH2: $(tokenazure)
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
+
       - bash: |
           set -x
           if [ "${{parameters.branchname_vcpi_bmw_vcpi_device}}" == "$(vcpi_bmw_device_default_branchname)" ]; then

@@ -481,7 +481,7 @@ ${buildtreecheckout} && {
 
 ${updatecomponent} && {
 	info "Updating the components: ${updatecomponentnames[@]}"
-	./softing-build.sh -p "${phonetarget}" -c "repo sync ${updatecomponentnames[@]}"
+	./softing-build.sh -p "${phonetarget}" -c "repo sync --no-repo-verify -v ${updatecomponentnames[*]}"
 }
 
 ${lmmanipulation} && {
