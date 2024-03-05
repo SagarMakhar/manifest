@@ -214,6 +214,8 @@ lmmanipulation=false
 lmentries=()
 phone=false
 phonetarget=""
+updatecomponent=false
+updatecomponentnames=("")
 
 help() {
 	cat <<-EOF
@@ -286,6 +288,11 @@ help() {
 	                Show this help message and exit
 	  -p, --phone   <phone>
 	                Set target phone.
+	  --update-component  <component> ...
+	                Update the component <component> in the source tree.
+	                This could a long running operation. The sources has to
+	                be checkout already.
+	                🔁 Can be used more than once.
 	EOF
 }
 
@@ -308,6 +315,7 @@ temp=$(getopt \
 	--long lm-add-entry: \
 	--long lm-file: \
 	--long phone: \
+	--long update-component: \
 	-n "$0" -- "$@")
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then echo "Terminating..." >&2; exit 1; fi
@@ -412,6 +420,12 @@ while true; do
 			phone=true
 			;;
 
+		--update-component )
+			updatecomponentnames+=("${2}")
+			shift
+			updatecomponent=true
+			;;
+
 		-- )
 			break
 			;;
@@ -463,6 +477,11 @@ ${buildtreesetup} && {
 
 ${buildtreecheckout} && {
 	buildtree_perform_checkout "${phonetarget}" "${buildtreebase}"
+}
+
+${updatecomponent} && {
+	info "Updating the components: ${updatecomponentnames[@]}"
+	./softing-build.sh -p "${phonetarget}" -c "repo sync ${updatecomponentnames[@]}"
 }
 
 ${lmmanipulation} && {
