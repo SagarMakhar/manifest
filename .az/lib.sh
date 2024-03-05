@@ -19,6 +19,7 @@ __generate_line() {
 	printf "${chars}%.0s" $(seq 1 "${count}")
 }
 
+LIB_MM=":"
 # prints messages
 # example: message -er -sr -g -h Testmessage
 # ::
@@ -81,7 +82,7 @@ message () {
 	for m in "${@}"; do
 		spaces="   "
 		${intro} && {
-			spaces="${startcolor}::${txtres} "
+			spaces="${startcolor}${LIB_MM}${LIB_MM}${txtres} "
 			# just first line has intromarker
 			intro=false
 		}
@@ -93,10 +94,10 @@ message () {
 			line="$(__generate_line ${mlength} ":")"
 
 			${gap} && {
-				startline="${startcolor}::${txtres}\n"
-				endline="\n${startcolor}::${txtres}"
+				startline="${startcolor}${LIB_MM}${LIB_MM}${txtres}\n"
+				endline="\n${startcolor}${LIB_MM}${LIB_MM}${txtres}"
 			}
-			printf -v m "${startline}${startcolor}::${txtres} %s %s" "${m}" "${endcolor}${line}${txtres}${endline}"
+			printf -v m "${startline}${startcolor}${LIB_MM}${LIB_MM}${txtres} %s %s" "${m}" "${endcolor}${line}${txtres}${endline}"
 
 			# just first line is a header line
 			header=false
