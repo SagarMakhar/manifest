@@ -29,6 +29,12 @@ variables:
     value: .repo/local_manifests/developer.xml
   - name: vcpi_bmw_device_default_branchname
     value: main
+  - name: AZP_AGENT_ALLOW_WORK_DIRECTORY_REPOSITORIES
+    value: "true"
+  - name: source_repo
+    value: ${AGENT_WORKFOLDER}/repos/VCPI.android.manifest
+  - name: cibuildsh
+    value: $(source_repo)/.az/ci-build.sh
 
 parameters:
   - name: phonelynx
@@ -99,29 +105,29 @@ jobs:
 
     steps:
       - checkout: self
-        enabled: false
+        enabled: true
+        # This needs to be in line with source_repo environment variable
+        path: ../repos/VCPI.android.manifest/
 
       - ${{ if eq( parameters.resetbuildtree , True) }}:
-        - bash: |
-            echo ":: remove ALL sources for $(phonename)"
-            echo "   This will take a long time ..."
-            rm -rf "${PIPELINE_WORKSPACE}/android/$(phonename)" || true
+        - bash: $(cibuildsh) --delete ${PIPELINE_WORKSPACE}/android/$(phonename) || true
           workingDirectory: $(Pipeline.Workspace)
           displayName: Delete whole source foldertree for $(phonename)
 
-      - bash: |
-          mkdir -p android/$(phonename)
-          cd android/$(phonename)
+      - bash: $(cibuildsh) --create android/$(phonename)
+        workingDirectory: $(Pipeline.Workspace)
+        displayName: Create source folder for $(phonename)
 
-          cat <<-EOF > buildconfig.env
-          export PRECOMMAND="prun"
-          EOF
+      - bash: $(cibuildsh) --build-config android/$(phonename)/buildconfig.env --build-config-add 'export PRECOMMAND="prun"'
         workingDirectory: $(Pipeline.Workspace)
         displayName: Generate a buildconfig.env
 
+      # A small test to check that all folders are in place.
+      # TODO: Make the test a little more comprehensive. The Option
+      #       `--check-folder-exists` can be used more than once.
       - bash: |
           # I consider a living build folder as a hint for a full source tree!
-          if [ -e "${PIPELINE_WORKSPACE}/android/$(phonename)/aosp/build" ]; then
+          if $(cibuildsh) --check-folder-exists "${PIPELINE_WORKSPACE}/android/$(phonename)/aosp/build"; then
             echo "I assume the sources are fully installed"
             echo "##vso[task.setvariable variable=sorcesokay]yes"
           else
@@ -136,18 +142,9 @@ jobs:
         path: android/VCPI.android.build.buildsupport
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
 
-      - bash: |
-          mkdir -p android/$(phonename)
-          cd android/$(phonename)
-          ln -sf ../VCPI.android.build.buildsupport/softing-build.sh
-
-          echo ":: remove $(removefolders) to ensure cleanliness"
-          rm -rf $(removefolders)
-
-          cd ${PIPELINE_WORKSPACE}/android/$(phonename)
-          ./softing-build.sh $(phoneconfigstring) -S
+      - bash: $(cibuildsh) --buildtree-buildsupport VCPI.android.build.buildsupport --buildtree-prepare-base $(phonename) --buildtree-perform-checkout -p $(phonename)
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
-        workingDirectory: $(Pipeline.Workspace)
+        workingDirectory: $(Pipeline.Workspace)/android
         displayName: Sourcen not fully available rampup new sources tree
         env:
           DOCKER_AUTH0: $(tokengithub)
@@ -157,18 +154,22 @@ jobs:
 
       - ${{ if ne( parameters.branchname_vcpi_bmw_vcpi_device, variables['vcpi_bmw_device_default_branchname']) }}:
         - bash: |
-            mkdir -p .repo/local_manifests
-            cat <<-EOF > $(localmanifest)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <manifest>
-              <remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>
-              <extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>
-            </manifest>
-            EOF
+            $(cibuildsh) --lm-file $(localmanifest) \
+              --lm-add-entry '<remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>' \
+              --lm-add-entry '<extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>'
             echo ":: installed a local_manifest. Content:"
             cat $(localmanifest)
           workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
           displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
+
+      - bash: $(cibuildsh) --update-component "build/buildsupport"
+        workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
+        displayName: Update buildsupport to be up to date for the time being
+        env:
+          DOCKER_AUTH0: $(tokengithub)
+          DOCKER_AUTH1: $(tokenl4b)
+          DOCKER_AUTH2: $(tokenazure)
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/$(phonename)/buildconfig.env
 
       - bash: |
           set -x
@@ -198,18 +199,12 @@ jobs:
         workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
 
       - bash: |
-          cleanbuildstr="-d sources"
-          [ "${{parameters.cleanbuild}}" == "True" ] && {
-            echo ":: doing a clean build"
-            cleanbuildstr="${cleanbuildstr} -d out"
-          }
-
           [ -e "$(localmanifest)" ] && {
             echo ":: building with $(localmanifest)!"
             cat "$(localmanifest)"
           }
 
-          ./softing-build.sh $(phoneconfigstring) ${cleanbuildstr} -b
+          $(cibuildsh) --build-clean-sources "True" --build-clean-out "${{parameters.cleanbuild}}" $(phoneconfigstring) --build
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/$(phonename)/aosp
         env:
