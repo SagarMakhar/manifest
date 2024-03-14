@@ -78,6 +78,7 @@ jobs:
     - template: template-phone-build.yaml
       parameters:
         # phone depend parameters
+        demands: cap_runtime_android_build_for_lynx
         phoneconfigstring: -p lynx
         phonename: 'lynx'
         removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
@@ -99,6 +100,7 @@ jobs:
     - template: template-phone-build.yaml
       parameters:
         # phone depend parameters
+        demands: cap_runtime_android_build_for_pdx223
         phoneconfigstring: -p pdx223
         phonename: 'pdx223'
         removefolders: ${PIPELINE_WORKSPACE}/android/pdx223/aosp

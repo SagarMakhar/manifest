@@ -1,5 +1,6 @@
 parameters:
   # phone depend parameters
+  demands: []
   phoneconfigstring: ''
   phonename: ''
   removefolders: ''
@@ -21,8 +22,7 @@ jobs:
   - job: phone_build_${{parameters.phonename}}
     pool:
       name: ${{parameters.pool}}
-      demands:
-        android
+      demands: ${{parameters.demands}}
     displayName: Phone Build Pipeline ${{parameters.phonename}}
     variables:
       - name: sorcesokay
