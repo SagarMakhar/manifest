@@ -118,6 +118,11 @@ jobs:
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
 
       - bash: |
+          ./softing-build.sh ${{parameters.phoneconfigstring}} -d sources
+          workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+          displayName: clean sources
+
+      - bash: |
           set -x
           if [ "${{parameters.branchname_vcpi_bmw_vcpi_device}}" == "$(vcpi_bmw_device_default_branchname)" ]; then
             if [ -e "${{parameters.localmanifest}}" ]; then
@@ -125,7 +130,7 @@ jobs:
               rm "${{parameters.localmanifest}}"
             fi
           fi
-          ./softing-build.sh ${{parameters.phoneconfigstring}} -d sources -u
+          ./softing-build.sh ${{parameters.phoneconfigstring}} -u
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Update sources
         env:
@@ -150,7 +155,7 @@ jobs:
             cat "${{parameters.localmanifest}}"
           }
 
-          ${{parameters.cibuildsh}} --build-clean-sources "True" --build-clean-out "${{parameters.cleanbuild}}" ${{parameters.phoneconfigstring}} --build
+          ${{parameters.cibuildsh}} --build-clean-out "${{parameters.cleanbuild}}" ${{parameters.phoneconfigstring}} --build
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         env:
