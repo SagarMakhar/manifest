@@ -37,7 +37,7 @@ jobs:
           echo "phonename: ......................... ${{parameters.phonename}}"
           echo "removefolders: ..................... ${{parameters.removefolders}}"
           echo "# build depend parameters:"
-          echo "branchname_vcpi_bmw_vcpi_device: ... ${{parameters.branchname_vcpi_bmw_vcpi_device}}"
+          echo "branchname_vcpi_bmw_vcpi_device: ... ${{parameters.branchname_vcpi_bmw_vcpi_device}} ≟ ${{parameters.branchname_default_vcpi_bmw_vcpi_device}}"
           echo "cibuildsh: ......................... ${{parameters.cibuildsh}}"
           echo "cleanbuild: ........................ ${{parameters.cleanbuild}}"
           echo "deploymentfolder: .................. ${{parameters.deploymentfolder}}"
@@ -108,7 +108,8 @@ jobs:
           workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
           displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
 
-      - bash: ${{parameters.cibuildsh}} --update-component "build/buildsupport"
+      - bash: |
+          ${{parameters.cibuildsh}} --update-component "build/buildsupport" --update-component "packages/apps/VCPI.BMW.VCPI-device"
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Update buildsupport to be up to date for the time being
         env:
@@ -119,8 +120,8 @@ jobs:
 
       - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -d sources
-          workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-          displayName: clean sources
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: clean sources
 
       - bash: |
           set -x
