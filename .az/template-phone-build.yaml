@@ -108,7 +108,8 @@ jobs:
           workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
           displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
 
-      - bash: ${{parameters.cibuildsh}} --update-component "build/buildsupport"
+      - bash: |
+          ${{parameters.cibuildsh}} --update-component "build/buildsupport" --update-component "packages/apps/VCPI.BMW.VCPI-device"
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Update buildsupport to be up to date for the time being
         env:
