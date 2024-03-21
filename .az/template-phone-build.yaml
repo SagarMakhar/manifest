@@ -119,8 +119,8 @@ jobs:
 
       - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -d sources
-          workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-          displayName: clean sources
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: clean sources
 
       - bash: |
           set -x
