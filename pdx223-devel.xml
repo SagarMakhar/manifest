@@ -4,9 +4,9 @@
   <remote name="aosp" fetch="https://android.googlesource.com/"/>
   <remote name="host" fetch="."/>
   <remote name="sony" fetch="https://github.com/sonyxperiadev/"/>
-  
+
   <default remote="aosp" revision="refs/tags/android-13.0.0_r75" sync-j="4"/>
-  
+
   <include name="softing-all.xml" />
   <include name="pdx223-default-fixed.xml" />
 
@@ -47,4 +47,5 @@
   <project name="VCPI.android.kernel.sony.techpack.video" path="kernel/sony/msm-5.10/kernel/techpack/video" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
   <project name="VCPI.android.kernel.sony.common-headers" path="kernel/sony/msm-5.10/common-headers" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>
   <project name="VCPI.android.sony.packages.apps.ExtendedSettings" path="packages/apps/ExtendedSettings" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss,softing"/>
+  <project name="VCPI.android.vendor.qcom.opensource.healthd-ext" path="vendor/qcom/opensource/healthd-ext" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss,softing"/>
 </manifest>
