@@ -37,7 +37,7 @@ jobs:
           echo "phonename: ......................... ${{parameters.phonename}}"
           echo "removefolders: ..................... ${{parameters.removefolders}}"
           echo "# build depend parameters:"
-          echo "branchname_vcpi_bmw_vcpi_device: ... ${{parameters.branchname_vcpi_bmw_vcpi_device}}"
+          echo "branchname_vcpi_bmw_vcpi_device: ... ${{parameters.branchname_vcpi_bmw_vcpi_device}} ≟ ${{parameters.branchname_default_vcpi_bmw_vcpi_device}}"
           echo "cibuildsh: ......................... ${{parameters.cibuildsh}}"
           echo "cleanbuild: ........................ ${{parameters.cleanbuild}}"
           echo "deploymentfolder: .................. ${{parameters.deploymentfolder}}"
