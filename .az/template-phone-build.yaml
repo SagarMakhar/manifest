@@ -7,6 +7,7 @@ parameters:
   # build depend parameters
   branchname_default_vcpi_bmw_vcpi_device: ''
   branchname_vcpi_bmw_vcpi_device: ''
+  buildidentifier: 'develop'
   cibuildsh: ''
   cleanbuild: False
   deploymentfolder: ''
@@ -38,6 +39,7 @@ jobs:
           echo "removefolders: ..................... ${{parameters.removefolders}}"
           echo "# build depend parameters:"
           echo "branchname_vcpi_bmw_vcpi_device: ... ${{parameters.branchname_vcpi_bmw_vcpi_device}} ≟ ${{parameters.branchname_default_vcpi_bmw_vcpi_device}}"
+          echo "buildidentifier .................... ${{parameters.buildidentifier}}"
           echo "cibuildsh: ......................... ${{parameters.cibuildsh}}"
           echo "cleanbuild: ........................ ${{parameters.cleanbuild}}"
           echo "deploymentfolder: .................. ${{parameters.deploymentfolder}}"
@@ -156,7 +158,7 @@ jobs:
             cat "${{parameters.localmanifest}}"
           }
 
-          ${{parameters.cibuildsh}} --build-clean-out "${{parameters.cleanbuild}}" ${{parameters.phoneconfigstring}} --build
+          ${{parameters.cibuildsh}} --build-clean-out "${{parameters.cleanbuild}}" ${{parameters.phoneconfigstring}} --build --build-identifier="${{parameters.buildidentifier}}"
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         env:

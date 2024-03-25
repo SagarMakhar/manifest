@@ -89,7 +89,7 @@ build-do() {
 		cleanstring="${cleanstring} -d sources"
 	}
 
-	./softing-build.sh ${cleanstring} -p ${phone} -b
+	./softing-build.sh ${cleanstring} -p ${phone} -b -n "${buildidentifier}"
 }
 
 buildtree_setup() {
@@ -201,6 +201,7 @@ build=false
 buildcleanout=false
 buildcleansources=false
 buildconfpath=""
+buildidentifier="develop"
 buildtreesetup=false
 buildtreesupportpath=""
 buildtreebase=""
@@ -244,6 +245,9 @@ help() {
 	                Clean the output before build. Default: false
 	                Means removing of out folder / clean build.
 	                Usefull only with --build.
+	  --build-identifier <string>
+	                Identifier for the build. This is used to identify the
+	                build in the build system. Default: develop
 
 	  # Build tree setup
 	  # All options must be used at least once.
@@ -305,6 +309,7 @@ temp=$(getopt \
 	--long build-clean-out: \
 	--long build-config: \
 	--long build-config-add: \
+	--long build-identifier: \
 	--long buildtree-buildsupport: \
 	--long buildtree-prepare-base: \
 	--long buildtree-perform-checkout \
@@ -358,6 +363,11 @@ while true; do
 			buildoption="${2}"
 			shift
 			echo "${buildoption}" >> "${buildconfpath}"
+			;;
+
+		--build-identifier )
+			buildidentifier="${2}"
+			shift
 			;;
 
 		--buildtree-buildsupport )
