@@ -45,6 +45,10 @@ parameters:
     displayName: Build for pdx223
     type: boolean
     default: true
+  - name: officialbuild
+    displayName: Official Build (Don't use when you are not in a 'official' role.)
+    type: boolean
+    default: false
   - name: pool
     displayName: Which pool
     type: string
@@ -58,7 +62,7 @@ parameters:
     default: main
   - name: buildidentifier
     type: string
-    displayName: develop in the name or this as identifier
+    displayName: identify your build (not used when an official build)
     default: develop
   - name: cleanbuild
     displayName: Clean sources + out folder (Clean build)
@@ -97,6 +101,7 @@ stages:
           cleanbuild: ${{parameters.cleanbuild}}
           deploymentfolder: $(deploymentfolder)
           localmanifest: $(localmanifest)
+          officialbuild: ${{parameters.officialbuild}}
           pool: ${{parameters.pool}}
           resetbuildtree: ${{parameters.resetbuildtree}}
           source_repo: $(source_repo)
@@ -120,6 +125,7 @@ stages:
           cleanbuild: ${{parameters.cleanbuild}}
           deploymentfolder: $(deploymentfolder)
           localmanifest: $(localmanifest)
+          officialbuild: ${{parameters.officialbuild}}
           pool: ${{parameters.pool}}
           resetbuildtree: ${{parameters.resetbuildtree}}
           source_repo: $(source_repo)
