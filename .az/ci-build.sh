@@ -7,11 +7,12 @@ set -o errexit \
     -o noclobber
 
 PS4='+ ${BASH_SOURCE#"$PWD/"}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): $?} '
-SCRIPTDIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+SCRIPTDIR="$(readlink -f "${PWD}")/build/buildsupport"
+SCRIPTDIRCI="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 
 # shellcheck disable=SC1091
-source ${SCRIPTDIR}/lib.sh
+source ${SCRIPTDIRCI}/lib.sh
 LIB_MM=">"
 
 used_tools=()
