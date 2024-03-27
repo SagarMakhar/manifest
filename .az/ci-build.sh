@@ -214,6 +214,7 @@ checkfolderexists=false
 checkfolders=()
 lmmanipulation=false
 lmentries=()
+official=false
 phone=false
 phonetarget=""
 updateall=false
@@ -249,6 +250,8 @@ help() {
 	  --build-identifier <string>
 	                Identifier for the build. This is used to identify the
 	                build in the build system. Default: develop
+	  --official <boolean>
+	                It is a official build. Default: false
 
 	  # Build tree setup
 	  # All options must be used at least once.
@@ -324,6 +327,7 @@ temp=$(getopt \
 	--long help \
 	--long lm-add-entry: \
 	--long lm-file: \
+	--long official: \
 	--long phone: \
 	--long update \
 	--long update-component: \
@@ -372,6 +376,11 @@ while true; do
 
 		--build-identifier )
 			buildidentifier="${2}"
+			shift
+			;;
+
+		--official )
+			official=$(make-string-to-boolean "${2}")
 			shift
 			;;
 
