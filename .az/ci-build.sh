@@ -515,7 +515,48 @@ ${updatecomponent} && {
 
 ${updateall} && {
 	info "Updating the source tree"
-	./softing-build.sh -p "${phonetarget}" -u
+	if ${official}; then
+		rerun=true
+		counter=0
+		maxcounter=3
+		stablefound=false
+
+		rm -f test1.xml* test2.xml* &>/dev/null || true
+		while ${rerun}; do
+			[ ${counter} -ge ${maxcounter} ] && {
+				rerun=false
+				warn "Max counter reached (${maxcounter}) for updating the source tree"
+				continue
+			}
+
+			info "Updating the source tree: ${counter}"
+			./softing-build.sh -p "${phonetarget}" -u -z test1.xml
+			./softing-build.sh -p "${phonetarget}" -u -z test2.xml
+
+			if cmp --quiet test1.xml test2.xml; then
+				rerun=false
+				stablefound=true
+			else
+				warn "Source tree is not stable" \
+				     $(diff -Naur test1.xml test2.xml)
+			fi
+
+			rm -f test1.xml* test2.xml* &>/dev/null || true
+			counter=$((counter+1))
+		done
+
+		if ! ${stablefound}; then
+			error "After ${maxcounter} runs the source tree is not stable" \
+			      "Stopping build process..."
+			exit 1
+		else
+			okay "Source tree is stable"
+		fi
+	else
+		./softing-build.sh -p "${phonetarget}" -u
+	fi
+
+	true
 }
 
 ${lmmanipulation} && {
