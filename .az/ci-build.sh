@@ -76,11 +76,6 @@ build-do() {
 	local buildcleansources=${3}
 	local cleanstring=""
 
-	[ -z "${phone}" ] && {
-		error "Phone target not set, but needed (-p)"
-		exit 1
-	}
-
 	${buildcleanout} && {
 		cleanstring="${cleanstring} -d out"
 	}
@@ -89,7 +84,7 @@ build-do() {
 		cleanstring="${cleanstring} -d sources"
 	}
 
-	./softing-build.sh ${cleanstring} -p ${phone} -b -n "${buildidentifier}"
+	./softing-build.sh ${cleanstring} -b -n "${buildidentifier}"
 }
 
 buildtree_setup() {
@@ -468,6 +463,17 @@ while true; do
 
 	shift
 done
+
+${phone} || {
+	if [ -e "${PWD}/phone.device.sh" ]; then
+		source "${PWD}/phone.device.sh"
+		phonetarget="${PHONE_NAME}"
+		phone=true
+	else
+		error "No phone given"
+		exit 1
+	fi
+}
 
 ${checkfolderexists} && {
 	info "Checking if the folders in source tree exists"
