@@ -71,21 +71,28 @@ create-folder-tree() {
 	mkdir -p "${source_tree}"
 }
 
+# chekc if a ${branch} exists in ${repo}.
 build-do() {
 	local phone="${1}"
 	local buildcleanout=${2}
 	local buildcleansources=${3}
-	local cleanstring=""
+	local official=${4}
 
-	${buildcleanout} && {
-		cleanstring="${cleanstring} -d out"
-	}
+	local buildstring=()
 
-	${buildcleansources} && {
-		cleanstring="${cleanstring} -d sources"
-	}
+	${buildcleanout} && buildstring+=("-d out")
+	${buildcleansources} && buildstring+=("-d sources")
 
-	./softing-build.sh ${cleanstring} -b -n "${buildidentifier}"
+	if ${official}; then
+		buildstring+=( \
+			"-T" \
+			"--username=\"${username}\"" \
+			"--usermail=\"${usermail}\"" \
+		)
+	fi
+
+	# shellcheck disable=SC2086
+	./softing-build.sh -b -n "${buildidentifier}" "${buildstring[@]}"
 }
 
 buildtree_setup() {
@@ -528,7 +535,7 @@ ${updateall} && {
 		maxcounter=3
 		stablefound=false
 
-		rm -f test1.xml* test2.xml* &>/dev/null || true
+		rm -f test1* test2* &>/dev/null || true
 		while ${rerun}; do
 			[ ${counter} -ge ${maxcounter} ] && {
 				rerun=false
@@ -537,10 +544,10 @@ ${updateall} && {
 			}
 
 			info "Updating the source tree: ${counter}"
-			./softing-build.sh -p "${phonetarget}" -u -z test1.xml
-			./softing-build.sh -p "${phonetarget}" -u -z test2.xml
+			./softing-build.sh -p "${phonetarget}" -u -z test1
+			./softing-build.sh -p "${phonetarget}" -u -z test2
 
-			if cmp --quiet test1.xml test2.xml; then
+			if cmp --quiet test1.manifest.xml test2.manifest.xml; then
 				rerun=false
 				stablefound=true
 			else
@@ -548,7 +555,7 @@ ${updateall} && {
 				     $(diff -Naur test1.xml test2.xml)
 			fi
 
-			rm -f test1.xml* test2.xml* &>/dev/null || true
+			rm -f test1* test2* &>/dev/null || true
 			counter=$((counter+1))
 		done
 
@@ -571,7 +578,7 @@ ${lmmanipulation} && {
 }
 
 ${build} && {
-	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}"
+	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}" "${official}"
 }
 
 exit 0
