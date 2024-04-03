@@ -525,6 +525,16 @@ ${buildtreecheckout} && {
 ${updatecomponent} && {
 	info "Updating the components: ${updatecomponentnames[@]}"
 	./softing-build.sh -p "${phonetarget}" -c "repo sync --no-repo-verify -v ${updatecomponentnames[*]}"
+
+	info "Source situation:"
+	for repo in ".repo/manifests" "${updatecomponentnames[@]}"; do
+		[ ! -e "${repo}" ] && {
+			warn "Folder does not exist: ${repo}"
+			continue
+		}
+		info "Repository: ${repo}"
+		git -C "${repo}" show --no-patch HEAD
+	done
 }
 
 ${updateall} && {
