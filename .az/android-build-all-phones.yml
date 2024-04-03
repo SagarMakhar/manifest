@@ -35,6 +35,8 @@ variables:
     value: ${AGENT_WORKFOLDER}/repos/VCPI.android.manifest
   - name: cibuildsh
     value: $(source_repo)/.az/ci-build.sh
+  - name: manifestbranchname
+    value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
 
 parameters:
   - name: phonelynx
@@ -101,6 +103,7 @@ stages:
           cleanbuild: ${{parameters.cleanbuild}}
           deploymentfolder: $(deploymentfolder)
           localmanifest: $(localmanifest)
+          manifestbranchname: $(manifestbranchname)
           officialbuild: ${{parameters.officialbuild}}
           pool: ${{parameters.pool}}
           resetbuildtree: ${{parameters.resetbuildtree}}
@@ -125,6 +128,7 @@ stages:
           cleanbuild: ${{parameters.cleanbuild}}
           deploymentfolder: $(deploymentfolder)
           localmanifest: $(localmanifest)
+          manifestbranchname: $(manifestbranchname)
           officialbuild: ${{parameters.officialbuild}}
           pool: ${{parameters.pool}}
           resetbuildtree: ${{parameters.resetbuildtree}}
