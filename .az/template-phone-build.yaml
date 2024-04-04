@@ -62,7 +62,7 @@ jobs:
         path: ../repos/VCPI.android.manifest/
 
       - ${{ if eq( parameters.resetbuildtree , True) }}:
-        - bash: ${{parameters.cibuildsh}} --delete ${PIPELINE_WORKSPACE}/android/${{parameters.phonename}} || true
+        - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --delete ${PIPELINE_WORKSPACE}/android/${{parameters.phonename}} || true
           workingDirectory: $(Pipeline.Workspace)
           displayName: Delete whole source foldertree for ${{parameters.phonename}}
 
