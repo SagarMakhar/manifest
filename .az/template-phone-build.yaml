@@ -114,6 +114,12 @@ jobs:
           workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
           displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
 
+      # Normaly this should not neeedd, but for development purposes I inserted
+      # this step. It doesn't take to much time to run.
+      - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Generate Android docker image I
+
       - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -c 'git -C .repo/manifests remote update --prune'
           ./softing-build.sh ${{parameters.phoneconfigstring}} -c 'repo init -b ${{parameters.manifestbranchname}} -m ${{parameters.phonename}}-devel.xml'
@@ -135,6 +141,10 @@ jobs:
           DOCKER_AUTH1: ${{parameters.tokenl4b}}
           DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
+
+      - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Generate Android docker image II
 
       - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -d sources
@@ -161,6 +171,10 @@ jobs:
           DOCKER_AUTH1: ${{parameters.tokenl4b}}
           DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
+
+      - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Generate Android docker image III
 
       - bash: |
           if [ -e changes-since-last-repo-sync.txt ]; then
