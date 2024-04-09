@@ -186,6 +186,9 @@ jobs:
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         env:
+          DOCKER_AUTH0: ${{parameters.tokengithub}}
+          DOCKER_AUTH1: ${{parameters.tokenl4b}}
+          DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
 
       - bash: |
