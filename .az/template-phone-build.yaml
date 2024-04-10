@@ -120,6 +120,10 @@ jobs:
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Generate Android docker image I
 
+      - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --check-filesystem
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Check for filesystem problems
+
       - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -c 'git -C .repo/manifests remote update --prune'
           ./softing-build.sh ${{parameters.phoneconfigstring}} -c 'repo init -b ${{parameters.manifestbranchname}} -m ${{parameters.phonename}}-devel.xml'
