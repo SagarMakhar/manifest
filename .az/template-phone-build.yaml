@@ -152,7 +152,6 @@ jobs:
         displayName: clean sources
 
       - bash: |
-          set -x
           if [ "${{parameters.branchname_vcpi_bmw_vcpi_device}}" == "$(vcpi_bmw_device_default_branchname)" ]; then
             if [ -e "${{parameters.localmanifest}}" ]; then
               echo ":: removing ${{parameters.localmanifest}}"
