@@ -200,6 +200,8 @@ jobs:
             --build-clean-out "${{parameters.cleanbuild}}" \
             --build \
             --build-identifier="${{parameters.buildidentifier}}" \
+            --username=$(Build.RequestedFor) \
+            --usermail=$(Build.RequestedForEmail) \
             ${offstr}
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
