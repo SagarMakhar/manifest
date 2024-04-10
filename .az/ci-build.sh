@@ -225,6 +225,7 @@ updatecomponent=false
 updatecomponentnames=("")
 username="$(id -un || echo "unknown")"
 usermail="nomail-${username}@softing.com"
+checkfilesystem=false
 
 help() {
 	cat <<-EOF
@@ -298,6 +299,9 @@ help() {
 	                Delete the source tree (can be forced)
 	  -f, --force
 	                Force some operations
+	  --check-filesystem
+	                Check for problems on the filesystem
+	                like shallow.lock files in the repositories
 	  -h, --help
 	                Show this help message and exit
 	  -p, --phone   <phone>
@@ -330,6 +334,7 @@ temp=$(getopt \
 	--long buildtree-prepare-base: \
 	--long buildtree-perform-checkout \
 	--long create: \
+	--long check-filesystem \
 	--long check-folder-exists: \
 	--long delete: \
 	--long force \
@@ -405,6 +410,10 @@ while true; do
 			buildtreebase="${2}"
 			shift
 			buildtreesetup=true
+			;;
+
+		--check-filesystem )
+			checkfilesystem=true
 			;;
 
 		-S | --buildtree-perform-checkout )
@@ -499,6 +508,11 @@ ${phone} || {
 		error "No phone given"
 		exit 1
 	fi
+}
+
+${checkfilesystem} && {
+	info "Checking the filesystem for problems"
+	./softing-build.sh --check-filesystem
 }
 
 ${checkfolderexists} && {
