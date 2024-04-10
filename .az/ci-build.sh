@@ -223,6 +223,8 @@ phonetarget=""
 updateall=false
 updatecomponent=false
 updatecomponentnames=("")
+username="$(id -un || echo "unknown")"
+usermail="nomail-${username}@softing.com"
 
 help() {
 	cat <<-EOF
@@ -308,6 +310,10 @@ help() {
 	                This could a long running operation. The sources has to
 	                be checkout already.
 	                🔁 Can be used more than once.
+	  --username  <username>
+	                Username for the commit in the official build.
+	  --usermail  <usermail>
+	                Usermail for the commit in the official build.
 	EOF
 }
 
@@ -334,6 +340,8 @@ temp=$(getopt \
 	--long phone: \
 	--long update \
 	--long update-component: \
+	--long username: \
+	--long usermail: \
 	-n "$0" -- "$@")
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then echo "Terminating..." >&2; exit 1; fi
@@ -456,6 +464,16 @@ while true; do
 			updatecomponentnames+=("${2}")
 			shift
 			updatecomponent=true
+			;;
+
+		--username )
+			username="${2}"
+			shift
+			;;
+
+		--usermail )
+			usermail="${2}"
+			shift
 			;;
 
 		-- )
