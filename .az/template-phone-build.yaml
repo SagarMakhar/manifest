@@ -196,7 +196,11 @@ jobs:
           if [ "${{parameters.officialbuild}}" == "True" ]; then
             offstr="--official=true"
           fi
-          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --build-clean-out "${{parameters.cleanbuild}}" --build --build-identifier="${{parameters.buildidentifier}}" ${offstr}
+          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} \
+            --build-clean-out "${{parameters.cleanbuild}}" \
+            --build \
+            --build-identifier="${{parameters.buildidentifier}}" \
+            ${offstr}
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         env:
