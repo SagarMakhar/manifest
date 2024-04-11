@@ -77,11 +77,13 @@ build-do() {
 	local buildcleanout=${2}
 	local buildcleansources=${3}
 	local official=${4}
+	local buildnokernel=${5}
 
 	local buildstring=()
 
 	${buildcleanout} && buildstring+=("-d out")
 	${buildcleansources} && buildstring+=("-d sources")
+	${buildnokernel} && buildstring+=("-k")
 
 	if ${official}; then
 		buildstring+=( \
@@ -205,6 +207,7 @@ buildcleanout=false
 buildcleansources=false
 buildconfpath=""
 buildidentifier="develop"
+buildnokernel=false
 buildtreesetup=false
 buildtreesupportpath=""
 buildtreebase=""
@@ -258,6 +261,8 @@ help() {
 	                build in the build system. Default: develop
 	  --official <boolean>
 	                It is a official build. Default: false
+	  --build-no-kernel
+	                Do not build the kernel. Default: false
 
 	  # Build tree setup
 	  # All options must be used at least once.
@@ -330,6 +335,7 @@ temp=$(getopt \
 	--long build-config: \
 	--long build-config-add: \
 	--long build-identifier: \
+	--long build-no-kernel \
 	--long buildtree-buildsupport: \
 	--long buildtree-prepare-base: \
 	--long buildtree-perform-checkout \
@@ -393,6 +399,10 @@ while true; do
 		--build-identifier )
 			buildidentifier="${2}"
 			shift
+			;;
+
+		--build-no-kernel )
+			buildnokernel=true
 			;;
 
 		--official )
@@ -620,7 +630,7 @@ ${lmmanipulation} && {
 }
 
 ${build} && {
-	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}" "${official}"
+	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}" "${official}" "${buildnokernel}"
 }
 
 exit 0
