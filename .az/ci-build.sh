@@ -91,10 +91,14 @@ build-do() {
 			"--username=\"${username}\"" \
 			"--usermail=\"${usermail}\"" \
 		)
+	else
+		buildstring+=( \
+			"-n \"${buildidentifier}\"" \
+		)
 	fi
 
 	# shellcheck disable=SC2086
-	./softing-build.sh -b -n "${buildidentifier}" "${buildstring[@]}"
+	prun ./softing-build.sh -b "${buildstring[@]}"
 }
 
 buildtree_setup() {
