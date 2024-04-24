@@ -96,7 +96,6 @@
   <project name="nfc-NXPNFCC_FW" path="vendor/nxp/NXPNFCC_FW" remote="NXP" revision="9aed6acfa7e13a305a1ea2d38f9499d18223fca3" upstream="master" dest-branch="master" groups="device,local::nxp"/>
   <project name="platform/art" path="art" revision="aeeafbd459298788c7760f35d04e7c0568d192b5" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/bootable/libbootloader" path="bootable/libbootloader" revision="6e3710f107248dfbefbf79aaf81caca73a742cab" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="vts,pdk"/>
-  <project name="platform/bootable/recovery" path="bootable/recovery" revision="d55d600b1b720ee4cc1fd79d5246f167c4efe46e" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/build/bazel" path="build/bazel" revision="9898ac01c9525bf91d23a1c2b83fc401603cb6d3" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk">
     <linkfile src="bazel.WORKSPACE" dest="WORKSPACE"/>
     <linkfile src="bazel.sh" dest="tools/bazel"/>
@@ -1135,8 +1134,8 @@
   <project name="vendor-sony-oss-cash" path="vendor/oss/cash" remote="sony" revision="82798994c4a24db677e5838e7a767dbc9454719b" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="vendor-sony-oss-fingerprint" path="vendor/oss/fingerprint" remote="sony" revision="89bdcd1fef6ab3f1611852f5754733e339a8095e" upstream="master" dest-branch="master" groups="device,local::oss"/>
   <project name="vendor-sony-oss-simdetect" path="vendor/oss/simdetect" remote="sony" revision="0f40dea301d470510d9a33afe53b4e46c18407a7" upstream="master" dest-branch="master" groups="device,local::oss"/>
-  
+
   <superproject name="platform/superproject" revision="android-13.0.0_r75"/>
-  
+
   <contactinfo bugurl="go/repo-bug"/>
 </manifest>

@@ -10,6 +10,7 @@
   <include name="softing-all.xml" />
   <include name="pdx223-default-fixed.xml" />
 
+  <project name="VCPI.android.platform.bootable.recovery" path="bootable/recovery" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk"/>
   <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
