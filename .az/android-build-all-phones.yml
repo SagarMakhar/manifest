@@ -71,7 +71,7 @@ parameters:
     type: boolean
     default: false
   - name: resetbuildtree
-    displayName: Restart whole buildprocess with checkout
+    displayName: Restart whole buildprocess with checkout (remove what is currently on drive before)
     type: boolean
     default: false
 
