@@ -104,15 +104,19 @@ jobs:
           DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
 
-      - ${{ if ne( parameters.branchname_vcpi_bmw_vcpi_device, variables['${{parameters.branchname_default_vcpi_bmw_vcpi_device']) }}:
-        - bash: |
+      - bash: |
+          if [ "${{parameters.branchname_vcpi_bmw_vcpi_device}}" != "${{parameters.branchname_default_vcpi_bmw_vcpi_device}}" ]; then
             ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --lm-file ${{parameters.localmanifest}} \
               --lm-add-entry '<remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>' \
               --lm-add-entry '<extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>'
             echo ":: installed a local_manifest. Content:"
             cat ${{parameters.localmanifest}}
-          workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-          displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
+          else
+            [ -e "${{parameters.localmanifest}}" ] && rm "${{parameters.localmanifest}}"
+            echo ":: use no manifest for building"
+          fi
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Configure local manifest
 
       # Normaly this should not neeedd, but for development purposes I inserted
       # this step. It doesn't take to much time to run.
