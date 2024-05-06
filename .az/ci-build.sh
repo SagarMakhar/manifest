@@ -7,11 +7,12 @@ set -o errexit \
     -o noclobber
 
 PS4='+ ${BASH_SOURCE#"$PWD/"}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): $?} '
-SCRIPTDIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+SCRIPTDIR="$(readlink -f "${PWD}")/build/buildsupport"
+SCRIPTDIRCI="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 
 # shellcheck disable=SC1091
-source ${SCRIPTDIR}/lib.sh
+source ${SCRIPTDIRCI}/lib.sh
 LIB_MM=">"
 
 used_tools=()
@@ -70,26 +71,34 @@ create-folder-tree() {
 	mkdir -p "${source_tree}"
 }
 
+# chekc if a ${branch} exists in ${repo}.
 build-do() {
 	local phone="${1}"
 	local buildcleanout=${2}
 	local buildcleansources=${3}
-	local cleanstring=""
+	local official=${4}
+	local buildnokernel=${5}
 
-	[ -z "${phone}" ] && {
-		error "Phone target not set, but needed (-p)"
-		exit 1
-	}
+	local buildstring=()
 
-	${buildcleanout} && {
-		cleanstring="${cleanstring} -d out"
-	}
+	${buildcleanout} && buildstring+=("-d out")
+	${buildcleansources} && buildstring+=("-d sources")
+	${buildnokernel} && buildstring+=("-k")
 
-	${buildcleansources} && {
-		cleanstring="${cleanstring} -d sources"
-	}
+	if ${official}; then
+		buildstring+=( \
+			"-T" \
+			"--username=\"${username}\"" \
+			"--usermail=\"${usermail}\"" \
+		)
+	else
+		buildstring+=( \
+			"-n \"${buildidentifier}\"" \
+		)
+	fi
 
-	./softing-build.sh ${cleanstring} -p ${phone} -b -n "${buildidentifier}"
+	# shellcheck disable=SC2086
+	prun ./softing-build.sh -b "${buildstring[@]}"
 }
 
 buildtree_setup() {
@@ -202,6 +211,7 @@ buildcleanout=false
 buildcleansources=false
 buildconfpath=""
 buildidentifier="develop"
+buildnokernel=false
 buildtreesetup=false
 buildtreesupportpath=""
 buildtreebase=""
@@ -214,10 +224,15 @@ checkfolderexists=false
 checkfolders=()
 lmmanipulation=false
 lmentries=()
+official=false
 phone=false
 phonetarget=""
+updateall=false
 updatecomponent=false
-updatecomponentnames=("")
+updatecomponentnames=()
+username="$(id -un || echo "unknown")"
+usermail="nomail-${username}@softing.com"
+checkfilesystem=false
 
 help() {
 	cat <<-EOF
@@ -248,6 +263,10 @@ help() {
 	  --build-identifier <string>
 	                Identifier for the build. This is used to identify the
 	                build in the build system. Default: develop
+	  --official <boolean>
+	                It is a official build. Default: false
+	  --build-no-kernel
+	                Do not build the kernel. Default: false
 
 	  # Build tree setup
 	  # All options must be used at least once.
@@ -289,15 +308,25 @@ help() {
 	                Delete the source tree (can be forced)
 	  -f, --force
 	                Force some operations
+	  --check-filesystem
+	                Check for problems on the filesystem
+	                like shallow.lock files in the repositories
 	  -h, --help
 	                Show this help message and exit
 	  -p, --phone   <phone>
 	                Set target phone.
+	  --update
+	                Update the source tree. This is a long running
+	                operation. The sources has to be checkout already.
 	  --update-component  <component> ...
 	                Update the component <component> in the source tree.
 	                This could a long running operation. The sources has to
 	                be checkout already.
 	                🔁 Can be used more than once.
+	  --username  <username>
+	                Username for the commit in the official build.
+	  --usermail  <usermail>
+	                Usermail for the commit in the official build.
 	EOF
 }
 
@@ -310,18 +339,24 @@ temp=$(getopt \
 	--long build-config: \
 	--long build-config-add: \
 	--long build-identifier: \
+	--long build-no-kernel \
 	--long buildtree-buildsupport: \
 	--long buildtree-prepare-base: \
 	--long buildtree-perform-checkout \
 	--long create: \
+	--long check-filesystem \
 	--long check-folder-exists: \
 	--long delete: \
 	--long force \
 	--long help \
 	--long lm-add-entry: \
 	--long lm-file: \
+	--long official: \
 	--long phone: \
+	--long update \
 	--long update-component: \
+	--long username: \
+	--long usermail: \
 	-n "$0" -- "$@")
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then echo "Terminating..." >&2; exit 1; fi
@@ -370,6 +405,15 @@ while true; do
 			shift
 			;;
 
+		--build-no-kernel )
+			buildnokernel=true
+			;;
+
+		--official )
+			official=$(make-string-to-boolean "${2}")
+			shift
+			;;
+
 		--buildtree-buildsupport )
 			buildtreesupportpath="${2}"
 			shift
@@ -380,6 +424,10 @@ while true; do
 			buildtreebase="${2}"
 			shift
 			buildtreesetup=true
+			;;
+
+		--check-filesystem )
+			checkfilesystem=true
 			;;
 
 		-S | --buildtree-perform-checkout )
@@ -431,10 +479,24 @@ while true; do
 			phone=true
 			;;
 
+		--update )
+			updateall=true
+			;;
+
 		--update-component )
 			updatecomponentnames+=("${2}")
 			shift
 			updatecomponent=true
+			;;
+
+		--username )
+			username="${2}"
+			shift
+			;;
+
+		--usermail )
+			usermail="${2}"
+			shift
 			;;
 
 		-- )
@@ -450,6 +512,22 @@ while true; do
 
 	shift
 done
+
+${phone} || {
+	if [ -e "${PWD}/phone.device.sh" ]; then
+		source "${PWD}/phone.device.sh"
+		phonetarget="${PHONE_NAME}"
+		phone=true
+	else
+		error "No phone given"
+		exit 1
+	fi
+}
+
+${checkfilesystem} && {
+	info "Checking the filesystem for problems"
+	./softing-build.sh --check-filesystem
+}
 
 ${checkfolderexists} && {
 	info "Checking if the folders in source tree exists"
@@ -493,6 +571,62 @@ ${buildtreecheckout} && {
 ${updatecomponent} && {
 	info "Updating the components: ${updatecomponentnames[@]}"
 	./softing-build.sh -p "${phonetarget}" -c "repo sync --no-repo-verify -v ${updatecomponentnames[*]}"
+
+	info "Source situation:"
+	for repo in ".repo/manifests" "${updatecomponentnames[@]}"; do
+		[ ! -e "${repo}" ] && {
+			warn "Folder does not exist: ${repo}"
+			continue
+		}
+		info "Repository: ${repo}"
+		git -C "${repo}" show --no-patch HEAD
+	done
+}
+
+${updateall} && {
+	info "Updating the source tree"
+	if ${official}; then
+		rerun=true
+		counter=0
+		maxcounter=3
+		stablefound=false
+
+		rm -f test1* test2* &>/dev/null || true
+		while ${rerun}; do
+			[ ${counter} -ge ${maxcounter} ] && {
+				rerun=false
+				warn "Max counter reached (${maxcounter}) for updating the source tree"
+				continue
+			}
+
+			info "Updating the source tree: ${counter}"
+			./softing-build.sh -p "${phonetarget}" -u -z test1
+			./softing-build.sh -p "${phonetarget}" -u -z test2
+
+			if cmp --quiet test1.manifest.xml test2.manifest.xml; then
+				rerun=false
+				stablefound=true
+			else
+				warn "Source tree is not stable" \
+				     $(diff -Naur test1.xml test2.xml)
+			fi
+
+			rm -f test1* test2* &>/dev/null || true
+			counter=$((counter+1))
+		done
+
+		if ! ${stablefound}; then
+			error "After ${maxcounter} runs the source tree is not stable" \
+			      "Stopping build process..."
+			exit 1
+		else
+			okay "Source tree is stable"
+		fi
+	else
+		./softing-build.sh -p "${phonetarget}" -u
+	fi
+
+	true
 }
 
 ${lmmanipulation} && {
@@ -500,7 +634,7 @@ ${lmmanipulation} && {
 }
 
 ${build} && {
-	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}"
+	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}" "${official}" "${buildnokernel}"
 }
 
 exit 0

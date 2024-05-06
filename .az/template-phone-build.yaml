@@ -7,11 +7,13 @@ parameters:
   # build depend parameters
   branchname_default_vcpi_bmw_vcpi_device: ''
   branchname_vcpi_bmw_vcpi_device: ''
-  buildidentifier: 'develop'
+  buildidentifier: ''
   cibuildsh: ''
   cleanbuild: False
   deploymentfolder: ''
   localmanifest: ''
+  manifestbranchname: 'main'
+  officialbuild: False
   pool: ''
   resetbuildtree: False
   source_repo: ''
@@ -44,6 +46,8 @@ jobs:
           echo "cleanbuild: ........................ ${{parameters.cleanbuild}}"
           echo "deploymentfolder: .................. ${{parameters.deploymentfolder}}"
           echo "localmanifest: ..................... ${{parameters.localmanifest}}"
+          echo "manifestbranchname: ................ ${{parameters.manifestbranchname}}"
+          echo "officialbuild: ..................... ${{parameters.officialbuild}}"
           echo "pool: .............................. ${{parameters.pool}}"
           echo "resetbuildtree: .................... ${{parameters.resetbuildtree}}"
           echo "source_repo: ....................... ${{parameters.source_repo}}"
@@ -58,15 +62,15 @@ jobs:
         path: ../repos/VCPI.android.manifest/
 
       - ${{ if eq( parameters.resetbuildtree , True) }}:
-        - bash: ${{parameters.cibuildsh}} --delete ${PIPELINE_WORKSPACE}/android/${{parameters.phonename}} || true
+        - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --delete ${PIPELINE_WORKSPACE}/android/${{parameters.phonename}} || true
           workingDirectory: $(Pipeline.Workspace)
           displayName: Delete whole source foldertree for ${{parameters.phonename}}
 
-      - bash: ${{parameters.cibuildsh}} --create android/${{parameters.phonename}}
+      - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}}  --create android/${{parameters.phonename}}
         workingDirectory: $(Pipeline.Workspace)
         displayName: Create source folder for ${{parameters.phonename}}
 
-      - bash: ${{parameters.cibuildsh}} --build-config android/${{parameters.phonename}}/buildconfig.env --build-config-add 'export PRECOMMAND="prun"'
+      - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}}  --build-config android/${{parameters.phonename}}/buildconfig.env --build-config-add 'export PRECOMMAND="prun"'
         workingDirectory: $(Pipeline.Workspace)
         displayName: Generate a buildconfig.env
 
@@ -75,7 +79,7 @@ jobs:
       #       `--check-folder-exists` can be used more than once.
       - bash: |
           # I consider a living build folder as a hint for a full source tree!
-          if ${{parameters.cibuildsh}} --check-folder-exists "${PIPELINE_WORKSPACE}/android/${{parameters.phonename}}/aosp/build"; then
+          if ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}}  --check-folder-exists "${PIPELINE_WORKSPACE}/android/${{parameters.phonename}}/aosp/build"; then
             echo "I assume the sources are fully installed"
             echo "##vso[task.setvariable variable=sorcesokay]yes"
           else
@@ -90,7 +94,7 @@ jobs:
         path: android/VCPI.android.build.buildsupport
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
 
-      - bash: ${{parameters.cibuildsh}} --buildtree-buildsupport VCPI.android.build.buildsupport --buildtree-prepare-base ${{parameters.phonename}} --buildtree-perform-checkout -p ${{parameters.phonename}}
+      - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}}  --buildtree-buildsupport VCPI.android.build.buildsupport --buildtree-prepare-base ${{parameters.phonename}} --buildtree-perform-checkout -p ${{parameters.phonename}}
         condition: and(succeeded(), eq(variables['sorcesokay'], 'no'))
         workingDirectory: $(Pipeline.Workspace)/android
         displayName: Sourcen not fully available rampup new sources tree
@@ -102,7 +106,7 @@ jobs:
 
       - ${{ if ne( parameters.branchname_vcpi_bmw_vcpi_device, variables['${{parameters.branchname_default_vcpi_bmw_vcpi_device']) }}:
         - bash: |
-            ${{parameters.cibuildsh}} --lm-file ${{parameters.localmanifest}} \
+            ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --lm-file ${{parameters.localmanifest}} \
               --lm-add-entry '<remote name="softingorigin" fetch="https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_git/"/>' \
               --lm-add-entry '<extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>'
             echo ":: installed a local_manifest. Content:"
@@ -110,15 +114,42 @@ jobs:
           workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
           displayName: Configure ${{parameters.branchname_vcpi_bmw_vcpi_device}} for VCPI.BMW.VCPI-device
 
-      - bash: |
-          ${{parameters.cibuildsh}} --update-component "build/buildsupport" --update-component "packages/apps/VCPI.BMW.VCPI-device"
+      # Normaly this should not neeedd, but for development purposes I inserted
+      # this step. It doesn't take to much time to run.
+      - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-        displayName: Update buildsupport to be up to date for the time being
+        displayName: Generate Android docker image I
+
+      - bash: ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --check-filesystem
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Check for filesystem problems
+
+      - bash: |
+          ./softing-build.sh ${{parameters.phoneconfigstring}} -c 'git -C .repo/manifests remote update --prune'
+          ./softing-build.sh ${{parameters.phoneconfigstring}} -c 'repo init -b ${{parameters.manifestbranchname}} -m ${{parameters.phonename}}-devel.xml'
+          git -C .repo/manifests show --no-patch
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Checkout manifest ${{parameters.manifestbranchname}}
+        env:
+          DOCKER_AUTH0: ${{parameters.tokengithub}}
+          DOCKER_AUTH1: ${{parameters.tokenl4b}}
+          DOCKER_AUTH2: ${{parameters.tokenazure}}
+
+      - bash: |
+          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} \
+            --update-component "build/buildsupport" \
+            --update-component "packages/apps/VCPI.BMW.VCPI-device"
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Update buildsupport, VCPI.BMW.VCPI-device to latest version
         env:
           DOCKER_AUTH0: ${{parameters.tokengithub}}
           DOCKER_AUTH1: ${{parameters.tokenl4b}}
           DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
+
+      - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Generate Android docker image II
 
       - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -d sources
@@ -126,14 +157,17 @@ jobs:
         displayName: clean sources
 
       - bash: |
-          set -x
           if [ "${{parameters.branchname_vcpi_bmw_vcpi_device}}" == "$(vcpi_bmw_device_default_branchname)" ]; then
             if [ -e "${{parameters.localmanifest}}" ]; then
               echo ":: removing ${{parameters.localmanifest}}"
               rm "${{parameters.localmanifest}}"
             fi
           fi
-          ./softing-build.sh ${{parameters.phoneconfigstring}} -u
+          offstr=""
+          if [ "${{parameters.officialbuild}}" == "True" ]; then
+            offstr="--official=true"
+          fi
+          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} --update ${offstr}
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Update sources
         env:
@@ -141,6 +175,10 @@ jobs:
           DOCKER_AUTH1: ${{parameters.tokenl4b}}
           DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
+
+      - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Generate Android docker image III
 
       - bash: |
           if [ -e changes-since-last-repo-sync.txt ]; then
@@ -158,10 +196,23 @@ jobs:
             cat "${{parameters.localmanifest}}"
           }
 
-          ${{parameters.cibuildsh}} --build-clean-out "${{parameters.cleanbuild}}" ${{parameters.phoneconfigstring}} --build --build-identifier="${{parameters.buildidentifier}}"
+          offstr=""
+          if [ "${{parameters.officialbuild}}" == "True" ]; then
+            offstr="--official=true"
+          fi
+          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} \
+            --build-clean-out "${{parameters.cleanbuild}}" \
+            --build \
+            --build-identifier="${{parameters.buildidentifier}}" \
+            --username=$(Build.RequestedFor) \
+            --usermail=$(Build.RequestedForEmail) \
+            ${offstr}
         displayName: Build image
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         env:
+          DOCKER_AUTH0: ${{parameters.tokengithub}}
+          DOCKER_AUTH1: ${{parameters.tokenl4b}}
+          DOCKER_AUTH2: ${{parameters.tokenazure}}
           BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
 
       - bash: |
