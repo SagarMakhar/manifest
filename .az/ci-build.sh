@@ -94,14 +94,14 @@ build-do() {
 		)
 	else
 		buildstring+=( \
-			"-n \"${buildidentifier}\"" \
+			"-n ${buildidentifier}" \
 		)
 	fi
 
 	${otatestimage} && buildstring+=("--otatest-image="${otatestimagepath}"")
 
 	# shellcheck disable=SC2086
-	prun ./softing-build.sh -b "${buildstring[@]}"
+	prun ./softing-build.sh -b ${buildstring[@]} --get-name
 }
 
 buildtree_setup() {
