@@ -78,6 +78,7 @@ build-do() {
 	local buildcleansources=${3}
 	local official=${4}
 	local buildnokernel=${5}
+	local otatestimage=${6}
 
 	local buildstring=()
 
@@ -96,6 +97,8 @@ build-do() {
 			"-n \"${buildidentifier}\"" \
 		)
 	fi
+
+	${otatestimage} && buildstring+=("--otatest-image="${otatestimagepath}"")
 
 	# shellcheck disable=SC2086
 	prun ./softing-build.sh -b "${buildstring[@]}"
@@ -225,6 +228,8 @@ checkfolders=()
 lmmanipulation=false
 lmentries=()
 official=false
+otatestimage=false
+otatestimagepath=""
 phone=false
 phonetarget=""
 updateall=false
@@ -315,6 +320,10 @@ help() {
 	                Show this help message and exit
 	  -p, --phone   <phone>
 	                Set target phone.
+	  --otatest-image=<path>
+	                Path to the folder for the OTA test image. This is the
+	                path to the folder where the OTA test images should be
+	                placed.
 	  --update
 	                Update the source tree. This is a long running
 	                operation. The sources has to be checkout already.
@@ -352,6 +361,7 @@ temp=$(getopt \
 	--long lm-add-entry: \
 	--long lm-file: \
 	--long official: \
+	--long otatest-image: \
 	--long phone: \
 	--long update \
 	--long update-component: \
@@ -471,6 +481,12 @@ while true; do
 			lmfile="${2}"
 			shift
 			lmmanipulation=true
+			;;
+
+		--otatest-image )
+			otatestimagepath="${2}"
+			shift
+			otatestimage=true
 			;;
 
 		-p | --phone )
@@ -634,7 +650,7 @@ ${lmmanipulation} && {
 }
 
 ${build} && {
-	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}" "${official}" "${buildnokernel}"
+	build-do "${phonetarget}" "${buildcleanout}" "${buildcleansources}" "${official}" "${buildnokernel}" "${otatestimage}"
 }
 
 exit 0
