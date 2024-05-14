@@ -586,7 +586,7 @@ ${buildtreecheckout} && {
 
 ${updatecomponent} && {
 	info "Updating the components: ${updatecomponentnames[@]}"
-	./softing-build.sh -p "${phonetarget}" -c "repo sync --no-repo-verify -v ${updatecomponentnames[*]}"
+	./softing-build.sh -p "${phonetarget}" -c -- repo sync --no-repo-verify -v "${updatecomponentnames[@]}"
 
 	info "Source situation:"
 	for repo in ".repo/manifests" "${updatecomponentnames[@]}"; do
