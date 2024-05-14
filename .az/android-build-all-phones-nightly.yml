@@ -1,0 +1,169 @@
+---
+trigger: none
+
+schedules:
+- cron: '0 1 * * mon-fri'
+  displayName: Daily build at midnight (Monday-Friday)
+  branches:
+    include:
+    - main
+  always: true
+
+pool:
+  name: FirmwareTestpool
+  demands:
+    - android
+    - distrobuilder
+
+variables:
+  - group: VCPI-GitHub
+
+  - name: tokengithub
+    value: https://$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
+
+  - name: tokenl4b
+    value: https://$(LINUX4BIZ_USERNAME):$(LINUX4BIZ)@ext-git.l4b-software.com
+
+  - name: tokenazure
+    value: https://$(AZUREDEVOPS_READONLY)@dev.azure.com
+
+  - name: deploymentfolder
+    value: /media/filer.releases.vcpi/
+
+  - name: localmanifest
+    value: .repo/local_manifests/developer.xml
+
+  - name: vcpi_bmw_device_default_branchname
+    value: main
+
+  - name: AZP_AGENT_ALLOW_WORK_DIRECTORY_REPOSITORIES
+    value: "true"
+
+  - name: source_repo
+    value: ${AGENT_WORKFOLDER}/repos/VCPI.android.manifest
+
+  - name: cibuildsh
+    value: $(source_repo)/.az/ci-build.sh
+
+  - name: manifestbranchname
+    value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
+
+parameters:
+  - name: phonelynx
+    displayName: Build for lynx
+    type: boolean
+    default: true
+
+  - name: phonepdx223
+    displayName: Build for pdx223
+    type: boolean
+    default: true
+
+  - name: officialbuild
+    displayName: Official Build (Don't use when you are not in a 'official' role.)
+    type: boolean
+    default: false
+
+  - name: otaimage
+    displayName: Build also an ota update test image?
+    type: boolean
+    default: false
+
+  - name: pool
+    displayName: Which pool
+    type: string
+    default: FirmwareTestpool
+    values:
+      - FirmwareTestpool
+      - SzeklersburgPool
+
+  - name: branchname_vcpi_bmw_vcpi_device
+    type: string
+    displayName: VCPI.BMW.VCPI-device Branch
+    default: main
+
+  - name: buildidentifier
+    type: string
+    displayName: identify your build (not used when an official build)
+    default: develop
+
+  - name: cleanbuild
+    displayName: Clean sources + out folder (Clean build)
+    type: boolean
+    default: false
+
+  - name: resetbuildtree
+    displayName: Restart whole buildprocess with checkout (remove what is currently on drive before)
+    type: boolean
+    default: false
+
+resources:
+  repositories:
+    - repository: Repo.buildsupport
+      type: github
+      endpoint: Githup-SoftingAE-VCPI
+      name: SoftingAE-VCPI/VCPI.android.build.buildsupport
+      ref: main
+
+stages:
+
+
+# ATTENTION:  Please remember: This template is also used in the nightly build,
+# TODO ... :  so if changes are made to the parameters, please also adjust them
+# NOTE ... :  in the nightly yml file.
+
+- stage: build_and_deploy
+  jobs:
+    - ${{ if eq(parameters.phonelynx, True) }}:
+      - template: template-phone-build.yaml
+        parameters:
+          # phone depend parameters
+          demands: cap_runtime_android_build_for_lynx
+          phoneconfigstring: -p lynx
+          phonename: 'lynx'
+          removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
+          # build depend parameters
+          branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
+          branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
+          buildidentifier: "${{parameters.buildidentifier}}"
+          cibuildsh: $(cibuildsh)
+          cleanbuild: ${{parameters.cleanbuild}}
+          deploymentfolder: $(deploymentfolder)
+          localmanifest: $(localmanifest)
+          manifestbranchname: $(manifestbranchname)
+          officialbuild: ${{parameters.officialbuild}}
+          otaimage: ${{parameters.otaimage}}
+          pool: ${{parameters.pool}}
+          resetbuildtree: ${{parameters.resetbuildtree}}
+          source_repo: $(source_repo)
+          tokenazure: $(tokenazure)
+          tokengithub: $(tokengithub)
+          tokenl4b: $(tokenl4b)
+
+    - ${{ if eq(parameters.phonepdx223, True) }}:
+      - template: template-phone-build.yaml
+        parameters:
+          # phone depend parameters
+          demands: cap_runtime_android_build_for_pdx223
+          phoneconfigstring: -p pdx223
+          phonename: 'pdx223'
+          removefolders: ${PIPELINE_WORKSPACE}/android/pdx223/aosp
+          # build depend parameters
+          branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
+          branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
+          buildidentifier: "${{parameters.buildidentifier}}"
+          cibuildsh: $(cibuildsh)
+          cleanbuild: ${{parameters.cleanbuild}}
+          deploymentfolder: $(deploymentfolder)
+          localmanifest: $(localmanifest)
+          manifestbranchname: $(manifestbranchname)
+          officialbuild: ${{parameters.officialbuild}}
+          otaimage: ${{parameters.otaimage}}
+          pool: ${{parameters.pool}}
+          resetbuildtree: ${{parameters.resetbuildtree}}
+          source_repo: $(source_repo)
+          tokenazure: $(tokenazure)
+          tokengithub: $(tokengithub)
+          tokenl4b: $(tokenl4b)
+
+
