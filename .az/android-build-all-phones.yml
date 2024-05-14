@@ -17,24 +17,34 @@ pool:
 
 variables:
   - group: VCPI-GitHub
+
   - name: tokengithub
     value: https://$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
+
   - name: tokenl4b
     value: https://$(LINUX4BIZ_USERNAME):$(LINUX4BIZ)@ext-git.l4b-software.com
+
   - name: tokenazure
     value: https://$(AZUREDEVOPS_READONLY)@dev.azure.com
+
   - name: deploymentfolder
     value: /media/filer.releases.vcpi/
+
   - name: localmanifest
     value: .repo/local_manifests/developer.xml
+
   - name: vcpi_bmw_device_default_branchname
     value: main
+
   - name: AZP_AGENT_ALLOW_WORK_DIRECTORY_REPOSITORIES
     value: "true"
+
   - name: source_repo
     value: ${AGENT_WORKFOLDER}/repos/VCPI.android.manifest
+
   - name: cibuildsh
     value: $(source_repo)/.az/ci-build.sh
+
   - name: manifestbranchname
     value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
 
@@ -43,18 +53,22 @@ parameters:
     displayName: Build for lynx
     type: boolean
     default: true
+
   - name: phonepdx223
     displayName: Build for pdx223
     type: boolean
     default: true
+
   - name: officialbuild
     displayName: Official Build (Don't use when you are not in a 'official' role.)
     type: boolean
     default: false
+
   - name: otaimage
     displayName: Build also an ota update test image?
     type: boolean
     default: false
+
   - name: pool
     displayName: Which pool
     type: string
@@ -62,18 +76,22 @@ parameters:
     values:
       - FirmwareTestpool
       - SzeklersburgPool
+
   - name: branchname_vcpi_bmw_vcpi_device
     type: string
     displayName: VCPI.BMW.VCPI-device Branch
     default: main
+
   - name: buildidentifier
     type: string
     displayName: identify your build (not used when an official build)
     default: develop
+
   - name: cleanbuild
     displayName: Clean sources + out folder (Clean build)
     type: boolean
     default: false
+
   - name: resetbuildtree
     displayName: Restart whole buildprocess with checkout (remove what is currently on drive before)
     type: boolean
