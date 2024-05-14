@@ -14,7 +14,7 @@ parameters:
   - name: patchlevelversion
     displayName: What is the patchlevel?
     type: string
-    default: -99
+    default: -1
 
 jobs:
   - job: resetnumber
