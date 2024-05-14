@@ -14,6 +14,7 @@ parameters:
   localmanifest: ''
   manifestbranchname: 'main'
   officialbuild: False
+  otaimage: False
   pool: ''
   resetbuildtree: False
   source_repo: ''
@@ -48,6 +49,7 @@ jobs:
           echo "localmanifest: ..................... ${{parameters.localmanifest}}"
           echo "manifestbranchname: ................ ${{parameters.manifestbranchname}}"
           echo "officialbuild: ..................... ${{parameters.officialbuild}}"
+          echo "otaimage: .... ..................... ${{parameters.otaimage}}"
           echo "pool: .............................. ${{parameters.pool}}"
           echo "resetbuildtree: .................... ${{parameters.resetbuildtree}}"
           echo "source_repo: ....................... ${{parameters.source_repo}}"
@@ -212,6 +214,37 @@ jobs:
             --usermail=$(Build.RequestedForEmail) \
             ${offstr}
         displayName: Build image
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        env:
+          DOCKER_AUTH0: ${{parameters.tokengithub}}
+          DOCKER_AUTH1: ${{parameters.tokenl4b}}
+          DOCKER_AUTH2: ${{parameters.tokenazure}}
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
+
+      - bash: |
+          if [ ! -e .version.source.env ]; then
+            echo ":: I miss '.version.source.env' file."
+            echo "   no image otaimage build possible ..."
+
+            # Stopping here, because somthing is wrong in the former step.
+            exit 1
+          fi
+
+          source .version.source.env
+          rm .version.source.env
+
+          if [[ "${{parameters.otaimage}}" != "True" ]]; then
+            echo ":: ota image creation not needed"
+            exit 0
+          fi
+
+          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} \
+            --build \
+            --username=$(Build.RequestedFor) \
+            --usermail=$(Build.RequestedForEmail) \
+            --otatest-image=${TAG}
+
+        displayName: Build OTA Tesimage
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         env:
           DOCKER_AUTH0: ${{parameters.tokengithub}}
