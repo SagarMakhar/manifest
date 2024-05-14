@@ -257,8 +257,14 @@ jobs:
             # We can store the outcome to the ci folder
             echo ":: Moving official builds"
             find . -maxdepth 1 -mindepth 1 -iname 'vcpi--release-*' -not -name '*.dist' -exec mv -v {} ${{parameters.deploymentfolder}}/ \;
+            echo ":: remove official builds"
+            find . -maxdepth 1 -mindepth 1 -iname 'vcpi--release-*' -not -name '*.dist' -exec rm -rf {} \;
+
             echo ":: Moving inofficial builds"
             find . -maxdepth 1 -mindepth 1 -iname 'internal--vcpi-release-*' -not -name '*.dist' -exec mv -v {} ${{parameters.deploymentfolder}}/ \;
+            echo ":: remove inofficial builds"
+            find . -maxdepth 1 -mindepth 1 -iname 'internal--vcpi-release-*' -not -name '*.dist' -exec rm -rf {} \;
+
             echo ":: removing dist folders"
             find . -maxdepth 1 -mindepth 1 -iname '*.dist' -exec rm -rf {} \;
           else
