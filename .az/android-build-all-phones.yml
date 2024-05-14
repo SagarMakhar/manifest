@@ -1,14 +1,6 @@
 ---
 trigger: none
 
-schedules:
-- cron: '0 1 * * mon-fri'
-  displayName: Daily build at midnight (Monday-Friday)
-  branches:
-    include:
-    - main
-  always: true
-
 pool:
   name: FirmwareTestpool
   demands:
@@ -106,6 +98,11 @@ resources:
       ref: main
 
 stages:
+
+
+# ATTENTION:  Please remember: This template is also used in the nightly build,
+# TODO ... :  so if changes are made to the parameters, please also adjust them
+# NOTE ... :  in the nightly yml file.
 
 - stage: build_and_deploy
   jobs:
