@@ -14,7 +14,7 @@ parameters:
   - name: patchlevelversion
     displayName: What is the patchlevel?
     type: string
-    default: 0
+    default: -99
 
 jobs:
   - job: resetnumber
@@ -35,7 +35,6 @@ jobs:
 
           cat <<-EOM > version.patchlevel.env
           # This file contains the versionnumber of the last build or was newly generated.
-          VERSION_PATCHLEVEL_FILE_CHANGED="$(date --iso-8601=s)"
           VERSION_PATCHLEVEL_NUMBER="${{parameters.patchlevelversion}}"
           EOM
 
