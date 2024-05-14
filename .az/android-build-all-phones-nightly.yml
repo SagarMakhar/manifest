@@ -46,7 +46,7 @@ variables:
     value: $(source_repo)/.az/ci-build.sh
 
   - name: manifestbranchname
-    value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
+    value: main
 
 parameters:
   - name: phonelynx
@@ -62,12 +62,12 @@ parameters:
   - name: officialbuild
     displayName: Official Build (Don't use when you are not in a 'official' role.)
     type: boolean
-    default: false
+    default: true
 
   - name: otaimage
     displayName: Build also an ota update test image?
     type: boolean
-    default: false
+    default: true
 
   - name: pool
     displayName: Which pool
@@ -85,7 +85,7 @@ parameters:
   - name: buildidentifier
     type: string
     displayName: identify your build (not used when an official build)
-    default: develop
+    default: nightly
 
   - name: cleanbuild
     displayName: Clean sources + out folder (Clean build)
@@ -118,7 +118,7 @@ stages:
       - template: template-phone-build.yaml
         parameters:
           # phone depend parameters
-          demands: cap_runtime_android_build_for_lynx
+          demands: cap_runtime_android_build_for_lynx_nightly
           phoneconfigstring: -p lynx
           phonename: 'lynx'
           removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
@@ -144,7 +144,7 @@ stages:
       - template: template-phone-build.yaml
         parameters:
           # phone depend parameters
-          demands: cap_runtime_android_build_for_pdx223
+          demands: cap_runtime_android_build_for_pdx223_nightly
           phoneconfigstring: -p pdx223
           phonename: 'pdx223'
           removefolders: ${PIPELINE_WORKSPACE}/android/pdx223/aosp
