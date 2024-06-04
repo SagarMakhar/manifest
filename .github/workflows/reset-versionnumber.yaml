@@ -1,25 +1,20 @@
 ---
 on:
   workflow_dispatch:
-
-
-variables:
-  - group: VCPI-GitHub
-  - name: tokengithub
-    value: https://silvio:$(GITHUB_TOKEN_ALL_REPOSITORIES)@github.com
-
-parameters:
-  - name: maintainerversion
-    displayName: What is the new Major.Minor Version?
-    type: string
-  - name: patchlevelversion
-    displayName: What is the patchlevel?
-    type: string
-    default: -1
+    inputs:
+      maintainerversion:
+        description: What is the new Major.Minor Version?
+        required: true
+        type: string
+      patchlevelversion:
+        description: What is the patchlevel?
+        required: true
+        type: string
+        default: "-1"
 
 jobs:
   job-1:
-    name: Reseting Maintainer Number to ${{parameters.maintainerversion}}.${{parameters.patchlevelversion}}
+    name: Reseting Maintainer Number to ${{github.event.inputs.maintainerversion}}.${{github.event.inputs.patchlevelversion}}
     runs-on: ubuntu-latest
 
     steps:
@@ -29,23 +24,23 @@ jobs:
         shell: bash
         run: |
           cat <<-EOM > version.maintainer.env
-          VERSION_ENV="${{parameters.maintainerversion}}"
+          VERSION_ENV="${{github.event.inputs.maintainerversion}}"
           EOM
 
           cat <<-EOM > version.patchlevel.env
           # This file contains the versionnumber of the last build or was newly generated.
-          VERSION_PATCHLEVEL_NUMBER="${{parameters.patchlevelversion}}"
+          VERSION_PATCHLEVEL_NUMBER="${{github.event.inputs.patchlevelversion}}"
           EOM
 
-          SOURCEBRANCH="${BUILD_SOURCEBRANCH#refs/heads/}"
+          SOURCEBRANCH="${GITHUB_REF#refs/heads/}"
 
           echo ":: commit to ${SOURCEBRANCH}"
           git add version.maintainer.env version.patchlevel.env
           git \
-            -c user.name="${BUILD_REQUESTEDFOR}" \
-            -c user.email="${BUILD_REQUESTEDFOREMAIL}" \
+            -c user.name="${{github.actor}}" \
+            -c user.email="${{github.actor_id}}+${{github.actor}}@users.noreply.github.com" \
             commit \
-              -m "version: Update to ${{parameters.maintainerversion}}.${{parameters.patchlevelversion}}"
+              -m "version: Update to ${{github.event.inputs.maintainerversion}}.${{github.event.inputs.patchlevelversion}}"
 
           echo ":: push to ${SOURCEBRANCH}"
           git push origin HEAD:"${SOURCEBRANCH}"
