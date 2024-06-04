@@ -17,18 +17,16 @@ parameters:
     default: -1
 
 jobs:
-  - job: resetnumber
-    displayName: Reseting Maintainer Number to ${{parameters.maintainerversion}}.${{parameters.patchlevelversion}}
-
-    pool:
-      name: FirmwareTestpool
+  job-1:
+    name: Reseting Maintainer Number to ${{parameters.maintainerversion}}.${{parameters.patchlevelversion}}
+    runs-on: ubuntu-latest
 
     steps:
-      - checkout: self
-        enabled: true
-        persistCredentials: true
+      - uses: actions/checkout@v4
 
-      - bash: |
+      - name: Reset the Number
+        shell: bash
+        run: |
           cat <<-EOM > version.maintainer.env
           VERSION_ENV="${{parameters.maintainerversion}}"
           EOM
