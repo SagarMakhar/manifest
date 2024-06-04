@@ -1,5 +1,6 @@
 ---
-trigger: none
+on:
+  workflow_dispatch:
 
 
 variables:
