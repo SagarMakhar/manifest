@@ -30,20 +30,6 @@
   <project name="kernel/google-modules/video/gchips" path="private/google-modules/video/gchips" revision="7de143a697adb5152051896454a4ec36a9bf63e5" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
   <project name="kernel/google-modules/wlan/qcom/wcn6740/cnss2" path="private/google-modules/wlan/wcn6740/cnss2" revision="0e17d79054bcae7f858c2165c78fea0d04c168d6" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
   <project name="kernel/google-modules/wlan/qcom/wcn6740/wlan" path="private/google-modules/wlan/wcn6740/wlan" revision="0ba25124d845d7a4f9df993e75f8335cc77bdc1c" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner"/>
-  <project name="kernel/gs" path="private/gs-google" revision="76455cbc1aa6533e12d9d9068ee2fe5892584900" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner">
-    <linkfile src="build.config.slider" dest="build.config"/>
-    <linkfile src="build_slider.sh" dest="build_slider.sh"/>
-    <linkfile src="build_mixed.sh" dest="build_mixed.sh"/>
-    <linkfile src="build_cloudripper.sh" dest="build_cloudripper.sh"/>
-    <linkfile src="download_hlos_boot_images_and_repack_kernel_boot_images.sh" dest="download_hlos_boot_images_and_repack_kernel_boot_images.sh"/>
-    <linkfile src="repack_kernel_boot_images.sh" dest="repack_kernel_boot_images.sh"/>
-    <linkfile src="update_symbol_list.sh" dest="update_symbol_list.sh"/>
-    <linkfile src="update_symbol_list_cloudripper-aosp.sh" dest="update_symbol_list_cloudripper-aosp.sh"/>
-    <linkfile src="update_symbol_list_cloudripper-staging.sh" dest="update_symbol_list_cloudripper-staging.sh"/>
-    <linkfile src="update_symbol_list_slider-aosp.sh" dest="update_symbol_list_slider-aosp.sh"/>
-    <linkfile src="update_symbol_list_slider-staging.sh" dest="update_symbol_list_slider-staging.sh"/>
-    <linkfile src="." dest=".source_date_epoch_dir"/>
-  </project>
   <project name="kernel/prebuilts/build-tools" path="prebuilts/kernel-build-tools" revision="67705de48752ea5c9d7d679c737f6ebbc8ba7348" upstream="android-gs-lynx-5.10-android13-d4" dest-branch="android-gs-lynx-5.10-android13-d4" groups="partner">
     <linkfile src="." dest="build/prebuilts/kernel-build-tools"/>
   </project>

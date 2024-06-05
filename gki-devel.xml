@@ -26,4 +26,19 @@
     <linkfile src="static_analysis" dest="build/static_analysis"/>
   </project>
   <project name="VCPI.android.gki.vcpi" path="vcpi" remote="host" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner"/>
+  <project name="VCPI.android.gki.private.gs" path="private/gs-google" remote="host" revision="76455cbc1aa6533e12d9d9068ee2fe5892584900" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner">
+    <linkfile src="build.config.slider" dest="build.config"/>
+    <linkfile src="build_slider.sh" dest="build_slider.sh"/>
+    <linkfile src="build_mixed.sh" dest="build_mixed.sh"/>
+    <linkfile src="build_cloudripper.sh" dest="build_cloudripper.sh"/>
+    <linkfile src="download_hlos_boot_images_and_repack_kernel_boot_images.sh" dest="download_hlos_boot_images_and_repack_kernel_boot_images.sh"/>
+    <linkfile src="repack_kernel_boot_images.sh" dest="repack_kernel_boot_images.sh"/>
+    <linkfile src="update_symbol_list.sh" dest="update_symbol_list.sh"/>
+    <linkfile src="update_symbol_list_cloudripper-aosp.sh" dest="update_symbol_list_cloudripper-aosp.sh"/>
+    <linkfile src="update_symbol_list_cloudripper-staging.sh" dest="update_symbol_list_cloudripper-staging.sh"/>
+    <linkfile src="update_symbol_list_slider-aosp.sh" dest="update_symbol_list_slider-aosp.sh"/>
+    <linkfile src="update_symbol_list_slider-staging.sh" dest="update_symbol_list_slider-staging.sh"/>
+    <linkfile src="." dest=".source_date_epoch_dir"/>
+  </project>
+
 </manifest>
