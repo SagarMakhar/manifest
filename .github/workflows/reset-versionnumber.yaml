@@ -34,6 +34,12 @@ jobs:
           echo ":: VERSION_ENV="${{github.event.inputs.maintainerversion}}""
           echo ":: VERSION_PATCHLEVEL_NUMBER="${{github.event.inputs.patchlevelversion}}""
 
+      - name: Fail when branch isn't main and not started by hand.
+        if: github.event_name != 'workflow_dispatch' || github.ref != 'refs/heads/main'
+        run: |
+          echo "This workflow should only be triggered with workflow_dispatch on a branch named main"
+          exit 1
+
       - name: Reset the Number
         shell: bash
         run: |
