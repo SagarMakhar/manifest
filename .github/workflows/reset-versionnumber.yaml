@@ -1,4 +1,6 @@
 ---
+name: 'Maint: reset Version numbers'
+
 on:
   workflow_dispatch:
     inputs:
