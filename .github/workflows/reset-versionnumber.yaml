@@ -20,6 +20,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Show context
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
+
+      - name: Show all variables
+        shell: bash
+        run: |
+          echo ":: GITHUB_HEAD_REF: ${GITHUB_HEAD_REF}"
+          echo ":: GITHUB_REF: ${GITHUB_REF}"
+          echo ":: VERSION_ENV="${{github.event.inputs.maintainerversion}}""
+          echo ":: VERSION_PATCHLEVEL_NUMBER="${{github.event.inputs.patchlevelversion}}""
+
       - name: Reset the Number
         shell: bash
         run: |
