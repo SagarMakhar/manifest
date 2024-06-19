@@ -131,6 +131,18 @@ jobs:
         displayName: Check for filesystem problems
 
       - bash: |
+          ${{parameters.cibuildsh}} ${{parameters.phoneconfigstring}} \
+            --update-component "build/buildsupport" \
+            --update-component "packages/apps/VCPI.BMW.VCPI-device"
+        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
+        displayName: Update I buildsupport, VCPI.BMW.VCPI-device to latest version
+        env:
+          DOCKER_AUTH0: ${{parameters.tokengithub}}
+          DOCKER_AUTH1: ${{parameters.tokenl4b}}
+          DOCKER_AUTH2: ${{parameters.tokenazure}}
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
+
+      - bash: |
           ./softing-build.sh ${{parameters.phoneconfigstring}} -c -- git -C .repo/manifests remote update --prune
           ./softing-build.sh ${{parameters.phoneconfigstring}} --manifest-branch ${{parameters.manifestbranchname}}
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
@@ -145,7 +157,7 @@ jobs:
             --update-component "build/buildsupport" \
             --update-component "packages/apps/VCPI.BMW.VCPI-device"
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-        displayName: Update buildsupport, VCPI.BMW.VCPI-device to latest version
+        displayName: Update II buildsupport, VCPI.BMW.VCPI-device to latest version
         env:
           DOCKER_AUTH0: ${{parameters.tokengithub}}
           DOCKER_AUTH1: ${{parameters.tokenl4b}}
@@ -184,16 +196,6 @@ jobs:
       - bash:  ./softing-build.sh ${{parameters.phoneconfigstring}} --stop-after-generate
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Generate Android docker image III
-
-      - bash: |
-          if [ -e changes-since-last-repo-sync.txt ]; then
-            cat changes-since-last-repo-sync.txt
-            rm changes-since-last-repo-sync.txt
-          else
-            true
-          fi
-        displayName: Changes since the last update
-        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
 
       - bash: |
           [ -e "${{parameters.localmanifest}}" ] && {
