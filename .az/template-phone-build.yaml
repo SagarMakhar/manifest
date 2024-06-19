@@ -186,16 +186,6 @@ jobs:
         displayName: Generate Android docker image III
 
       - bash: |
-          if [ -e changes-since-last-repo-sync.txt ]; then
-            cat changes-since-last-repo-sync.txt
-            rm changes-since-last-repo-sync.txt
-          else
-            true
-          fi
-        displayName: Changes since the last update
-        workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-
-      - bash: |
           [ -e "${{parameters.localmanifest}}" ] && {
             echo ":: building with ${{parameters.localmanifest}}!"
             cat "${{parameters.localmanifest}}"
