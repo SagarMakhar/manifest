@@ -7,9 +7,9 @@
 
   <include name="gki-default-fixed.xml" />
 
-  <project name="VCPI.android.gki.aosp" path="aosp" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing,partner"/>
+  <project name="VCPI.android.gki.aosp" path="aosp" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing,partner" clone-depth="1"/>
   <project name="VCPI.android.gki.vcpi" path="vcpi" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing,partner"/>
-  <project name="VCPI.android.gki.private.gs" path="private/gs-google" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing,partner">
+  <project name="VCPI.android.gki.private.gs" path="private/gs-google" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing,partner" clone-depth="1">
     <linkfile src="build.config.slider" dest="build.config"/>
     <linkfile src="build_slider.sh" dest="build_slider.sh"/>
     <linkfile src="build_mixed.sh" dest="build_mixed.sh"/>
