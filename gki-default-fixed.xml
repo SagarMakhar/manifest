@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="kernel/build" path="build/kernel" revision="3288d7ac659694818a76e0208383f9a78fb74e65" upstream="android-gs-lynx-5.10-android14-qpr3" dest-branch="android-gs-lynx-5.10-android14-qpr3" groups="partner">
-    <linkfile src="kleaf/bazel.sh" dest="tools/bazel"/>
-    <linkfile src="kleaf/bazel.WORKSPACE" dest="WORKSPACE"/>
-    <linkfile src="build.sh" dest="build/build.sh"/>
-    <linkfile src="build_abi.sh" dest="build/build_abi.sh"/>
-    <linkfile src="build_test.sh" dest="build/build_test.sh"/>
-    <linkfile src="build_utils.sh" dest="build/build_utils.sh"/>
-    <linkfile src="BUILD.bazel" dest="build/BUILD.bazel"/>
-    <linkfile src="build-tools/path" dest="build/build-tools/path"/>
-    <linkfile src="config.sh" dest="build/config.sh"/>
-    <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
-    <linkfile src="_setup_env.sh" dest="build/_setup_env.sh"/>
-    <linkfile src="multi-switcher.sh" dest="build/multi-switcher.sh"/>
-    <linkfile src="kleaf" dest="build/kleaf"/>
-    <linkfile src="abi" dest="build/abi"/>
-    <linkfile src="static_analysis" dest="build/static_analysis"/>
-  </project>
   <project name="kernel/common-modules/virtual-device" path="common-modules/virtual-device" revision="f4885d4b5a302d30d7f40c6eb2872fcdc3c9c6f3" upstream="android-gs-lynx-5.10-android14-qpr3" dest-branch="android-gs-lynx-5.10-android14-qpr3" clone-depth="1"/>
   <project name="kernel/configs" revision="b3cc2bc03dab303c54a9ce1f709f8ee315eb311d" upstream="android-gs-lynx-5.10-android14-qpr3" dest-branch="android-gs-lynx-5.10-android14-qpr3"/>
   <project name="kernel/devices/google/bluejay" path="private/devices/google/bluejay" revision="901cc5707c998f27f843e11764ffc06e8ba3c873" upstream="android-gs-lynx-5.10-android14-qpr3" dest-branch="android-gs-lynx-5.10-android14-qpr3" groups="partner,bluejay">
