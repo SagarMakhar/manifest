@@ -647,6 +647,8 @@ ${updateall} && {
 
 ${lmmanipulation} && {
 	lm_setup "${lmfile}"
+	info "Syncing the local manifest files"
+        ./softing-build.sh -p "${phonetarget}" -c -- repo sync --no-repo-verify -v -j12 --force-sync --no-clone-bundle
 }
 
 ${build} && {
