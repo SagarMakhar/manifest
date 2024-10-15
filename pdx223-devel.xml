@@ -37,6 +37,7 @@
   <project name="VCPI.android.platform.hardware.interfaces" path="hardware/interfaces" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
   <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
   <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-sony" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.ca-certificates" path="system/ca-certificates" remote="host" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing"/>
   <project name="VCPI.android.vendor.sony.pdx223.git" path="vendor/sony/pdx223" remote="host" revision="refs/heads/vcpi-sony" groups="device,softing"/>
   <project name="VCPI.android.vendor.sony.timekeep" path="vendor/oss/timekeep" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::oss,softing"/>
   <project name="VCPI.android.kernel.sony.techpack.audio" path="kernel/sony/msm-5.10/kernel/techpack/audio" remote="host" revision="refs/heads/vcpi-sony" groups="device,local::K.P.1.0.r1,softing"/>

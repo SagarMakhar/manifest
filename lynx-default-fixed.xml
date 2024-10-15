@@ -1062,7 +1062,6 @@
   <project name="platform/system/apex" path="system/apex" revision="21056d928eee3f91db5c019e47cc35850fa7a892" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/bpf" path="system/bpf" revision="52121cd0ee9eb6a5624665d3cf8922f7244ef1cd" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/bpfprogs" path="system/bpfprogs" revision="9f98f4c7cd2dca329bdb840f5d801756926b4bf9" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
-  <project name="platform/system/ca-certificates" path="system/ca-certificates" revision="b19b6762f99338fa515ff8a0fa7a395d5776b453" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/chre" path="system/chre" revision="0aa5a0b934e84d6ffd162a24bb3ce78b49b60437" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/connectivity/wificond" path="system/connectivity/wificond" revision="d9c99fa71ce203759eb0b293c8ef77589fd5f866" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
   <project name="platform/system/dmesgd" path="system/dmesgd" revision="45b6106898f6bca88d66639354b536d770d1c53c" upstream="refs/tags/android-13.0.0_r75" dest-branch="refs/tags/android-13.0.0_r75" groups="pdk"/>
