@@ -113,12 +113,19 @@ jobs:
               --lm-add-entry '<extend-project name="VCPI.BMW.VCPI-device" remote="softingorigin" revision="${{parameters.branchname_vcpi_bmw_vcpi_device}}"/>'
             echo ":: installed a local_manifest. Content:"
             cat ${{parameters.localmanifest}}
+            echo ":: Syncing the local manifest files"
+            ./softing-build.sh -c -- repo sync --no-repo-verify -v -j12 --force-sync --no-clone-bundle
           else
             [ -e "${{parameters.localmanifest}}" ] && rm "${{parameters.localmanifest}}"
             echo ":: use no manifest for building"
           fi
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
         displayName: Configure local manifest
+        env:
+          DOCKER_AUTH0: ${{parameters.tokengithub}}
+          DOCKER_AUTH1: ${{parameters.tokenl4b}}
+          DOCKER_AUTH2: ${{parameters.tokenazure}}
+          BUILDCONFIGURATIONFILE: $(Pipeline.Workspace)/android/${{parameters.phonename}}/buildconfig.env
 
       # Normaly this should not neeedd, but for development purposes I inserted
       # this step. It doesn't take to much time to run.

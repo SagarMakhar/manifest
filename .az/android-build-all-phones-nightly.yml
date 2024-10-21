@@ -2,7 +2,7 @@
 trigger: none
 
 schedules:
-- cron: '0 1 * * mon-fri'
+- cron: '0 20 * * mon-fri'
   displayName: Daily build at midnight (Monday-Friday)
   branches:
     include:
