@@ -46,11 +46,16 @@ variables:
     value: $(source_repo)/.az/ci-build.sh
 
   - name: manifestbranchname
-    value: main
+    value: main-a14
 
 parameters:
   - name: phonelynx
     displayName: Build for lynx
+    type: boolean
+    default: true
+
+  - name: phoneakita
+    displayName: Build for akita
     type: boolean
     default: true
 
@@ -122,6 +127,32 @@ stages:
           phoneconfigstring: -p lynx
           phonename: 'lynx'
           removefolders: ${PIPELINE_WORKSPACE}/android/lynx/aosp ${PIPELINE_WORKSPACE}/android/lynx/gki
+          # build depend parameters
+          branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
+          branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
+          buildidentifier: "${{parameters.buildidentifier}}"
+          cibuildsh: $(cibuildsh)
+          cleanbuild: ${{parameters.cleanbuild}}
+          deploymentfolder: $(deploymentfolder)
+          localmanifest: $(localmanifest)
+          manifestbranchname: $(manifestbranchname)
+          officialbuild: ${{parameters.officialbuild}}
+          otaimage: ${{parameters.otaimage}}
+          pool: ${{parameters.pool}}
+          resetbuildtree: ${{parameters.resetbuildtree}}
+          source_repo: $(source_repo)
+          tokenazure: $(tokenazure)
+          tokengithub: $(tokengithub)
+          tokenl4b: $(tokenl4b)
+
+    - ${{ if eq(parameters.phoneakita, True) }}:
+      - template: template-phone-build.yaml
+        parameters:
+          # phone depend parameters
+          demands: cap_runtime_android_build_for_akita_nightly
+          phoneconfigstring: -p akita
+          phonename: 'akita'
+          removefolders: ${PIPELINE_WORKSPACE}/android/akita/aosp ${PIPELINE_WORKSPACE}/android/akita/gki
           # build depend parameters
           branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
           branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
