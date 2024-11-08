@@ -41,22 +41,22 @@ variables:
     value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
 
 parameters:
-  - name: phonelynx-a13
+  - name: phonelynx_a13
     displayName: Build for lynx-a13
     type: boolean
     default: false
 
-  - name: phonelynx-a14
+  - name: phonelynx_a14
     displayName: Build for lynx-a14
     type: boolean
     default: true
 
-  - name: phoneakita-a14
+  - name: phoneakita_a14
     displayName: Build for akita-a14
     type: boolean
     default: true
 
-  - name: phonepdx223-a13
+  - name: phonepdx223_a13
     displayName: Build for pdx223-a13
     type: boolean
     default: false
@@ -116,7 +116,7 @@ stages:
 
   - stage: build_and_deploy
     jobs:
-      - ${{ if eq(parameters.phonelynx-a13, True) }}:
+      - ${{ if eq(parameters.phonelynx_a13, True) }}:
         - template: template-phone-build.yaml
           parameters:
              # phone depend parameters
@@ -142,7 +142,7 @@ stages:
             tokengithub: $(tokengithub)
             tokenl4b: $(tokenl4b)
 
-      - ${{ if eq(parameters.phonelynx-a14, True) }}:
+      - ${{ if eq(parameters.phonelynx_a14, True) }}:
         - template: template-phone-build.yaml
           parameters:
              # phone depend parameters
@@ -168,7 +168,7 @@ stages:
             tokengithub: $(tokengithub)
             tokenl4b: $(tokenl4b)
 
-      - ${{ if eq(parameters.phoneakita-a14, True) }}:
+      - ${{ if eq(parameters.phoneakita_a14, True) }}:
         - template: template-phone-build.yaml
           parameters:
              # phone depend parameters
@@ -194,7 +194,7 @@ stages:
             tokengithub: $(tokengithub)
             tokenl4b: $(tokenl4b)
 
-      - ${{ if eq(parameters.phonepdx223-a13, True) }}:
+      - ${{ if eq(parameters.phonepdx223_a13, True) }}:
         - template: template-phone-build.yaml
           parameters:
              # phone depend parameters
