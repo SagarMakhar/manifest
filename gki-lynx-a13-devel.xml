@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="aosp" fetch="https://android.googlesource.com/"/>
+  <remote name="host" fetch="."/>
+  
+  <default remote="aosp" revision="android-gs-lynx-5.10-android13-d4" sync-j="4"/>
+  
+  <include name="gki-default-fixed.xml" />
+
+  <project name="VCPI.android.gki.aosp" path="aosp" remote="host" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner"/>
+  <project name="VCPI.android.gki.kernel.build" path="build/kernel" remote="host" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner">
+    <linkfile src="kleaf/bazel.sh" dest="tools/bazel"/>
+    <linkfile src="kleaf/bazel.WORKSPACE" dest="WORKSPACE"/>
+    <linkfile src="build.sh" dest="build/build.sh"/>
+    <linkfile src="build_abi.sh" dest="build/build_abi.sh"/>
+    <linkfile src="build_test.sh" dest="build/build_test.sh"/>
+    <linkfile src="build_utils.sh" dest="build/build_utils.sh"/>
+    <linkfile src="BUILD.bazel" dest="build/BUILD.bazel"/>
+    <linkfile src="build-tools/path" dest="build/build-tools/path"/>
+    <linkfile src="config.sh" dest="build/config.sh"/>
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh"/>
+    <linkfile src="_setup_env.sh" dest="build/_setup_env.sh"/>
+    <linkfile src="multi-switcher.sh" dest="build/multi-switcher.sh"/>
+    <linkfile src="kleaf" dest="build/kleaf"/>
+    <linkfile src="abi" dest="build/abi"/>
+    <linkfile src="static_analysis" dest="build/static_analysis"/>
+  </project>
+  <project name="VCPI.android.gki.vcpi" path="vcpi" remote="host" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner"/>
+  <project name="VCPI.android.gki.private.gs" path="private/gs-google" remote="host" revision="refs/heads/vcpi-aosp-13-main" upstream="refs/heads/vcpi-aosp-13-main" dest-branch="refs/heads/vcpi-aosp-13-main" groups="softing,partner">
+    <linkfile src="build.config.slider" dest="build.config"/>
+    <linkfile src="build_slider.sh" dest="build_slider.sh"/>
+    <linkfile src="build_mixed.sh" dest="build_mixed.sh"/>
+    <linkfile src="build_cloudripper.sh" dest="build_cloudripper.sh"/>
+    <linkfile src="download_hlos_boot_images_and_repack_kernel_boot_images.sh" dest="download_hlos_boot_images_and_repack_kernel_boot_images.sh"/>
+    <linkfile src="repack_kernel_boot_images.sh" dest="repack_kernel_boot_images.sh"/>
+    <linkfile src="update_symbol_list.sh" dest="update_symbol_list.sh"/>
+    <linkfile src="update_symbol_list_cloudripper-aosp.sh" dest="update_symbol_list_cloudripper-aosp.sh"/>
+    <linkfile src="update_symbol_list_cloudripper-staging.sh" dest="update_symbol_list_cloudripper-staging.sh"/>
+    <linkfile src="update_symbol_list_slider-aosp.sh" dest="update_symbol_list_slider-aosp.sh"/>
+    <linkfile src="update_symbol_list_slider-staging.sh" dest="update_symbol_list_slider-staging.sh"/>
+    <linkfile src="." dest=".source_date_epoch_dir"/>
+  </project>
+
+</manifest>
