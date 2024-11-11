@@ -7,7 +7,7 @@
   <default remote="aosp" revision="refs/tags/android-13.0.0_r75" sync-j="4"/>
 
   <include name="softing-all.xml" />
-  <include name="lynx-default-fixed.xml" />
+  <include name="lynx-a13-default-fixed.xml" />
 
   <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi_l4b_r75" upstream="refs/heads/vcpi_l4b_r75" dest-branch="refs/heads/vcpi_l4b_r75" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>

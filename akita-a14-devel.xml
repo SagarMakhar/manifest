@@ -6,7 +6,7 @@
   
   <default remote="aosp" revision="refs/tags/android-14.0.0_r50" sync-j="4"/>
 
-  <include name="akita-default-fixed.xml" />
+  <include name="akita-a14-default-fixed.xml" />
   <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis"/>
   <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="refs/heads/main-aosp-14-rebased-for-akita" upstream="refs/heads/main-aosp-14-rebased-for-akita" dest-branch="refs/heads/main-aosp-14-rebased-for-akita" groups="softing,forallvcpis">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>

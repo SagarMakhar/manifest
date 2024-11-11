@@ -8,7 +8,7 @@
   <default remote="aosp" revision="refs/tags/android-13.0.0_r75" sync-j="4"/>
 
   <include name="softing-all.xml" />
-  <include name="pdx223-default-fixed.xml" />
+  <include name="pdx223-a13-default-fixed.xml" />
 
   <project name="VCPI.android.platform.bootable.recovery" path="bootable/recovery" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk"/>
   <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-sony" groups="softing,pdk">
