@@ -23,7 +23,7 @@ parameters:
   tokenl4b: ''
 
 jobs:
-  - job: phone_build_${{ parameters.phonename.replace('-', '_') }}
+  - job: phone_build_${{parameters.phonename}}
     pool:
       name: ${{parameters.pool}}
       demands: ${{parameters.demands}}
