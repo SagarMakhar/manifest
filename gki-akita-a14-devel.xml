@@ -5,7 +5,7 @@
 
   <default remote="aosp" revision="android-gs-akita-5.15-android14-qpr3" sync-j="4"/>
 
-  <include name="gki-akita-default-fixed.xml" />
+  <include name="gki-akita-a14-default-fixed.xml" />
 
   <project name="VCPI.android.gki.aosp" path="aosp" remote="host" revision="refs/heads/main-aosp-14-rebased-for-akita" upstream="refs/heads/main-aosp-14-rebased-for-akita" dest-branch="refs/heads/main-aosp-14-rebased-for-akita" groups="softing,partner" clone-depth="1"/>
 

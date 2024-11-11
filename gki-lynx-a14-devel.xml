@@ -5,7 +5,7 @@
 
   <default remote="aosp" revision="android-gs-lynx-5.10-android14-qpr3" sync-j="4"/>
 
-  <include name="gki-default-fixed.xml" />
+  <include name="gki-lynx-a14-default-fixed.xml" />
 
   <project name="VCPI.android.gki.aosp" path="aosp" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,partner" clone-depth="1"/>
   <project name="VCPI.android.gki.kernel.build" path="build/kernel" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,partner">
