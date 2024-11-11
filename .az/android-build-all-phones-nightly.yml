@@ -129,9 +129,9 @@ stages:
           parameters:
              # phone depend parameters
             demands: cap_runtime_android_build_for_lynx_nightly
-            phoneconfigstring: -p lynx-a13
-            phonename: 'lynx-a13'
-            removefolders: ${PIPELINE_WORKSPACE}/android/lynx-a13/aosp ${PIPELINE_WORKSPACE}/android/lynx-a13/gki
+            phoneconfigstring: -p lynx_a13
+            phonename: 'lynx_a13'
+            removefolders: ${PIPELINE_WORKSPACE}/android/lynx_a13/aosp ${PIPELINE_WORKSPACE}/android/lynx_a13/gki
              # build depend parameters
             branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
             branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
@@ -155,9 +155,9 @@ stages:
           parameters:
              # phone depend parameters
             demands: cap_runtime_android_build_for_lynx_nightly
-            phoneconfigstring: -p lynx-a14
-            phonename: 'lynx-a14'
-            removefolders: ${PIPELINE_WORKSPACE}/android/lynx-a14/aosp ${PIPELINE_WORKSPACE}/android/lynx-a14/gki
+            phoneconfigstring: -p lynx_a14
+            phonename: 'lynx_a14'
+            removefolders: ${PIPELINE_WORKSPACE}/android/lynx_a14/aosp ${PIPELINE_WORKSPACE}/android/lynx_a14/gki
              # build depend parameters
             branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
             branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
@@ -181,9 +181,9 @@ stages:
           parameters:
              # phone depend parameters
             demands: cap_runtime_android_build_for_akita_nightly
-            phoneconfigstring: -p akita-a14
-            phonename: 'akita-a14'
-            removefolders: ${PIPELINE_WORKSPACE}/android/akita-a14/aosp ${PIPELINE_WORKSPACE}/android/akita-a14/gki
+            phoneconfigstring: -p akita_a14
+            phonename: 'akita_a14'
+            removefolders: ${PIPELINE_WORKSPACE}/android/akita_a14/aosp ${PIPELINE_WORKSPACE}/android/akita_a14/gki
             # build depend parameters
             branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
             branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
@@ -207,9 +207,9 @@ stages:
           parameters:
              # phone depend parameters
             demands: cap_runtime_android_build_for_pdx223_nightly
-            phoneconfigstring: -p pdx223-a13
-            phonename: 'pdx223-a13'
-            removefolders: ${PIPELINE_WORKSPACE}/android/pdx223-a13/aosp
+            phoneconfigstring: -p pdx223_a13
+            phonename: 'pdx223_a13'
+            removefolders: ${PIPELINE_WORKSPACE}/android/pdx223_a13/aosp
              # build depend parameters
             branchname_default_vcpi_bmw_vcpi_device: $(vcpi_bmw_device_default_branchname)
             branchname_vcpi_bmw_vcpi_device: ${{parameters.branchname_vcpi_bmw_vcpi_device}}
