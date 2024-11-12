@@ -1232,7 +1232,6 @@
   <project name="platform/system/authgraph" path="system/authgraph" revision="56db71accc831c907a990a29df76a4f15eba8c55" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/bpf" path="system/bpf" revision="4dabf6c939598a2606b8a53d22a45ecf56643152" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/bpfprogs" path="system/bpfprogs" revision="cab45a3a030c8ffb4a619e4b6f83a69626b4b1a6" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
-  <project name="platform/system/ca-certificates" path="system/ca-certificates" revision="9f7645c732dcb980036ab9633c9c4cd7a8a04cad" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/chre" path="system/chre" revision="187e2d6f72e9ff1ac49b83326415a3de6b28f78d" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/connectivity/wificond" path="system/connectivity/wificond" revision="7c43e2c85e35fa4dfadbb8557fe275ae7c3ca085" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/dmesgd" path="system/dmesgd" revision="71bd08cc6680df301723d4bd4624caadde3d2f8f" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>

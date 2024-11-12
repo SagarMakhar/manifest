@@ -30,6 +30,7 @@
   <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="pdk,softing"/>
   <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="pdk,softing"/>
   <project name="VCPI.android.vendor.google.akita" path="vendor/google_devices/akita" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing"/>
+  <project name="VCPI.android.platform.system.ca-certificates" path="system/ca-certificates" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing"/>
   <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk,tradefed">
     <linkfile src="root.bp" dest="Android.bp"/>
     <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
