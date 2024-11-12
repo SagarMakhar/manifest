@@ -3,7 +3,7 @@
   <remote name="aosp" fetch="https://android.googlesource.com" review="https://android-review.googlesource.com/"/>
   <remote name="github" fetch="https://github.com"/>
   <remote name="host" fetch="."/>
-
+  
   <default remote="aosp" revision="refs/tags/android-14.0.0_r50" sync-j="4"/>
 
   <include name="softing-all.xml" />
@@ -17,10 +17,6 @@
     <linkfile src="target" dest="build/target"/>
     <linkfile src="tools" dest="build/tools"/>
   </project>
-  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk,tradefed">
-    <linkfile src="root.bp" dest="Android.bp"/>
-    <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
-  </project>
   <project name="VCPI.android.device.google.gs201" path="device/google/gs201" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,device,cloudripper"/>
   <project name="VCPI.android.device.google.lynx" path="device/google/lynx" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="device,lynx,softing"/>
   <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk"/>
@@ -31,7 +27,11 @@
   <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="pdk,softing"/>
   <project name="VCPI.android.platform.system.ca-certificates" path="system/ca-certificates" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing"/>
   <project name="VCPI.android.vendor.google.lynx" path="vendor/google_devices/lynx" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing"/>
-
+  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk,tradefed">
+    <linkfile src="root.bp" dest="Android.bp"/>
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
+  </project>
   <superproject name="platform/superproject" revision="android-14.0.0_r50"/>
   <contactinfo bugurl="go/repo-bug"/>
+
 </manifest>

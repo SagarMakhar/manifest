@@ -6,12 +6,9 @@
   
   <default remote="aosp" revision="refs/tags/android-14.0.0_r50" sync-j="4"/>
 
+  <include name="softing-all-akita-a14.xml" />
   <include name="akita-a14-default-fixed.xml" />
-  <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis"/>
-  <project name="VCPI.android.external.lxc" path="external/lxc-vcpi" remote="host" revision="refs/heads/softingmain-aosp-14-rebased-for-akita" groups="softing,pdk,device,forallvcpis"/>
-  <project name="VCPI.android.external.openssh" path="external/openssh" remote="host" revision="refs/heads/softingmain-aosp-14-rebased" upstream="refs/heads/softingmain-aosp-14-rebased" dest-branch="refs/heads/softingmain-aosp-14-rebased" groups="pdk,softing,forallvcpis"/>
-  <project name="VCPI.android.external.poco" path="external/poco" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,pdk,device,forallvcpis"/>
-  <project name="VCPI.android.packages.apps.Updater" path="packages/apps/Updater" remote="host" revision="refs/heads/softingmain" upstream="refs/heads/softingmain" dest-branch="refs/heads/softingmain" groups="softing,forallvcpis"/>
+
   <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
