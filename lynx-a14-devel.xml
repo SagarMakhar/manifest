@@ -6,7 +6,7 @@
   
   <default remote="aosp" revision="refs/tags/android-14.0.0_r50" sync-j="4"/>
 
-  <include name="softing-all.xml" />
+  <include name="softing-all-lynx-a14.xml" />
   <include name="lynx-a14-default-fixed.xml" />
 
   <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk">
