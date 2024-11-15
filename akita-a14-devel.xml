@@ -9,7 +9,7 @@
   <include name="softing-all-akita-a14.xml" />
   <include name="akita-a14-default-fixed.xml" />
 
-  <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk">
+  <project name="VCPI.android.build" path="build/make" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
     <linkfile src="core" dest="build/core"/>
@@ -17,18 +17,18 @@
     <linkfile src="target" dest="build/target"/>
     <linkfile src="tools" dest="build/tools"/>
   </project>
-  <project name="VCPI.android.device.google.gs201" path="device/google/gs201" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,device,cloudripper"/>
-  <project name="VCPI.android.device.google.zuma" path="device/google/zuma" remote="host" revision="refs/heads/android-14.0.0_r50_cherry_pick_from_gs201" upstream="refs/heads/android-14.0.0_r50_cherry_pick_from_gs201" dest-branch="refs/heads/android-14.0.0_r50_cherry_pick_from_gs201" groups="softing,device,cloudripper"/>
-  <project name="VCPI.android.device.google.akita" path="device/google/akita" remote="host" revision="refs/heads/android-14.0.0_r50-changes-from-lynx" upstream="refs/heads/android-14.0.0_r50-changes-from-lynx" dest-branch="refs/heads/android-14.0.0_r50-changes-from-lynx" groups="device,akita,softing"/>
-  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk"/>
-  <project name="VCPI.android.hardware.google.graphics.common" path="hardware/google/graphics/common" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk-lassen,pdk-gs-arm"/>
-  <project name="VCPI.android.platform.packages.modulesWifi" path="packages/modules/Wifi" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk-cw-fs,pdk-fs"/>
-  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="pdk-cw-fs,pdk-fs,softing"/>
-  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="pdk,softing"/>
-  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="pdk,softing"/>
-  <project name="VCPI.android.vendor.google.akita" path="vendor/google_devices/akita" remote="host" revision="refs/heads/vcpi-aosp-14-main" upstream="refs/heads/vcpi-aosp-14-main" dest-branch="refs/heads/vcpi-aosp-14-main" groups="softing"/>
+  <project name="VCPI.android.device.google.gs201" path="device/google/gs201" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,device,cloudripper"/>
+  <project name="VCPI.android.device.google.zuma" path="device/google/zuma" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,device,cloudripper"/>
+  <project name="VCPI.android.device.google.akita" path="device/google/akita" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="device,akita,softing"/>
+  <project name="VCPI.android.frameworks.native" path="frameworks/native" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk"/>
+  <project name="VCPI.android.hardware.google.graphics.common" path="hardware/google/graphics/common" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk-lassen,pdk-gs-arm"/>
+  <project name="VCPI.android.platform.packages.modulesWifi" path="packages/modules/Wifi" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk-cw-fs,pdk-fs"/>
+  <project name="VCPI.android.packages.modules.Connectivity" path="packages/modules/Connectivity" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="pdk-cw-fs,pdk-fs,softing"/>
+  <project name="VCPI.android.platform.system.core" path="system/core" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="pdk,softing"/>
+  <project name="VCPI.android.platform.system.netd" path="system/netd" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="pdk,softing"/>
+  <project name="VCPI.android.vendor.google.akita" path="vendor/google_devices/akita" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing"/>
   <project name="VCPI.android.platform.system.ca-certificates" path="system/ca-certificates" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing"/>
-  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-aosp-14-rebased" upstream="refs/heads/vcpi-aosp-14-rebased" dest-branch="refs/heads/vcpi-aosp-14-rebased" groups="softing,pdk,tradefed">
+  <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk,tradefed">
     <linkfile src="root.bp" dest="Android.bp"/>
     <linkfile src="bootstrap.bash" dest="bootstrap.bash"/>
   </project>
