@@ -27,7 +27,7 @@ jobs:
     pool:
       name: ${{parameters.pool}}
       demands: ${{parameters.demands}}
-    displayName: Phone Build Pipeline ${{parameters.phonename}}
+    displayName: ${{parameters.phonename}} Phone Build
     variables:
       - name: sorcesokay
         value: 'no'
