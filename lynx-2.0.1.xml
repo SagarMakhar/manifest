@@ -15,7 +15,7 @@
     <linkfile src="target" dest="build/target"/>
     <linkfile src="tools" dest="build/tools"/>
   </project>
-  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="fb8ff81b01acb8fb4c7b4a68b0e3944b19e3fb7b" upstream="refs/heads/main-a14" dest-branch="refs/heads/main-a14" groups="softing,forallvcpis">
+  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="619972c42552c6b9a961846ae93ba0179e280508" upstream="refs/heads/main-a14" dest-branch="refs/heads/main-a14" groups="softing,forallvcpis">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
   <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="3137e408fb9270f7c2356a34d5ba6bc24f96fb6e" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk,tradefed">
