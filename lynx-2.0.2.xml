@@ -6,7 +6,7 @@
   
   <default remote="aosp" revision="refs/tags/android-14.0.0_r50" sync-j="4"/>
   
-  <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="dbe206c25060d63411fc20fcb20b487e08f4cca1" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis"/>
+  <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="b5698b35393a386f470c4583c2a6d4a61e80788a" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis"/>
   <project name="VCPI.android.build" path="build/make" remote="host" revision="aac374f798afe931cfdb092d367ed4e9eef459be" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk"/>
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default"/>
@@ -15,7 +15,7 @@
     <linkfile src="target" dest="build/target"/>
     <linkfile src="tools" dest="build/tools"/>
   </project>
-  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="b0d81cd04afc10541ed6cf79d034b93b6d722969" upstream="refs/heads/main-a14" dest-branch="refs/heads/main-a14" groups="softing,forallvcpis">
+  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="619972c42552c6b9a961846ae93ba0179e280508" upstream="refs/heads/main-a14" dest-branch="refs/heads/main-a14" groups="softing,forallvcpis">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
   <project name="VCPI.android.build.soong" path="build/soong" remote="host" revision="3137e408fb9270f7c2356a34d5ba6bc24f96fb6e" upstream="refs/heads/vcpi-aosp-14-main-release" dest-branch="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk,tradefed">
