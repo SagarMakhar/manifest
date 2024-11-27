@@ -1280,7 +1280,6 @@
   <project name="platform/system/tools/sysprop" path="system/tools/sysprop" revision="52c294e3025d9c9ef5d37a639682d4de6df910d4" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/tools/xsdc" path="system/tools/xsdc" revision="55f0cfaba235c840724ad224a70783e67c51dfa9" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/unwinding" path="system/unwinding" revision="8e95104a4f5a56a023b460dc90cc702251bfa1f0" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
-  <project name="platform/system/update_engine" path="system/update_engine" revision="2d86d26065ac5e3bf0a09ad6cc8ab1d37093a51b" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/system/vold" path="system/vold" revision="ce1a504272319cab146bcdf8beeb9a3f11022a19" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/test/app_compat/csuite" path="test/app_compat/csuite" revision="fb062e49ef74e4d1110d52ccfcf431140ca4e258" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50" groups="pdk"/>
   <project name="platform/test/catbox" path="test/catbox" revision="6e225ccb298b30b345ad08a25835b60f6d71b526" upstream="refs/tags/android-14.0.0_r50" dest-branch="refs/tags/android-14.0.0_r50"/>
