@@ -105,7 +105,7 @@ resources:
       type: github
       endpoint: Githup-SoftingAE-VCPI
       name: SoftingAE-VCPI/VCPI.android.build.buildsupport
-      ref: main-a14
+      ref: main
 
 stages:
 

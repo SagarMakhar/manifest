@@ -46,7 +46,7 @@ variables:
     value: $(source_repo)/.az/ci-build.sh
 
   - name: manifestbranchname
-    value: main-a14
+    value: main
 
 parameters:
   - name: phonelynx_a13
@@ -113,7 +113,7 @@ resources:
       type: github
       endpoint: Githup-SoftingAE-VCPI
       name: SoftingAE-VCPI/VCPI.android.build.buildsupport
-      ref: main-a14
+      ref: main
 
 stages:
 

@@ -3,7 +3,7 @@
      Please ungroup "forallvcpis" when you move a repository outside of this xml file. -->
 <manifest>
   <project name="VCPI.BMW.VCPI-device" path="packages/apps/VCPI.BMW.VCPI-device" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis"/>
-  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="refs/heads/main-a14" upstream="refs/heads/main-a14" dest-branch="refs/heads/main-a14" groups="softing,forallvcpis">
+  <project name="VCPI.android.build.buildsupport" path="build/buildsupport" remote="host" revision="refs/heads/main" upstream="refs/heads/main" dest-branch="refs/heads/main" groups="softing,forallvcpis">
     <linkfile src="softing-build.sh" dest="softing-build.sh"/>
   </project>
  <project name="VCPI.android.external.lxc" path="external/lxc-vcpi" remote="host" revision="refs/heads/softingmain-aosp-14-rebased-for-akita" groups="softing,pdk,device,forallvcpis"/>
