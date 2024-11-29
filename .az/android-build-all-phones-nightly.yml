@@ -67,7 +67,7 @@ parameters:
   - name: phonepdx223_a13
     displayName: Build for pdx223-a13
     type: boolean
-    default: false
+    default: true
 
   - name: officialbuild
     displayName: Official Build (Don't use when you are not in a 'official' role.)
@@ -100,7 +100,7 @@ parameters:
   - name: cleanbuild
     displayName: Clean sources + out folder (Clean build)
     type: boolean
-    default: false
+    default: true
 
   - name: resetbuildtree
     displayName: Restart whole buildprocess with checkout (remove what is currently on drive before)
