@@ -175,7 +175,7 @@ stages:
             tokenazure: $(tokenazure)
             tokengithub: $(tokengithub)
             tokenl4b: $(tokenl4b)
-            testpiplineid: '774'
+            testpipelineid: '774'
 
       - ${{ if eq(parameters.phoneakita_a14, True) }}:
         - template: template-phone-build.yaml
@@ -202,6 +202,7 @@ stages:
             tokenazure: $(tokenazure)
             tokengithub: $(tokengithub)
             tokenl4b: $(tokenl4b)
+            testpipelineid:'794'
 
       - ${{ if eq(parameters.phonepdx223_a13, True) }}:
         - template: template-phone-build.yaml
@@ -228,4 +229,4 @@ stages:
             tokenazure: $(tokenazure)
             tokengithub: $(tokengithub)
             tokenl4b: $(tokenl4b)
-            testpiplineid: '732'
+            testpipelineid: '732'
