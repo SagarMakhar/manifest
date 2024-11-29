@@ -21,7 +21,7 @@ parameters:
   tokenazure: ''
   tokengithub: ''
   tokenl4b: ''
-  testpiplineid: ''
+  testpipelineid: ''
 
 jobs:
   - job: phone_build_${{parameters.phonename}}
@@ -281,12 +281,12 @@ jobs:
           fi
         displayName: Move output to ci folder
         workingDirectory: $(Pipeline.Workspace)/android/${{parameters.phonename}}/aosp
-        - ${{ if ne(parameters.testpiplineid, '') }}:
+        - ${{ if ne(parameters.testpipelineid, '') }}:
           # The test pipeline is triggered with the following endpoint, and it can inject paramters like the imageVersion.
           # If this step fails, we need to check if Azure DevOps supports this endpoint.
           - bash: |
               echo "Triggering testing pipeline for ${{parameters.phonename}}"
-              pipelineTriggerEndpoint=$(echo "https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_apis/pipelines/${{parameters.testpiplineid}}/runs?api-version=6.1-preview.1")
+              pipelineTriggerEndpoint=$(echo "https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_apis/pipelines/${{parameters.testpipelineid}}/runs?api-version=6.1-preview.1")
               echo "Trigger tests with endpoint: ${pipelineTriggerEndpoint}"
               curl -X POST \
                 -H "Authorization: Bearer $SYSTEM_ACCESSTOKEN" \
@@ -303,7 +303,7 @@ jobs:
                         "imageVersion": "lynx-1.2.3"
                       }
                     }' \
-                https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_apis/pipelines/${{parameters.testpiplineid}}/runs?api-version=6.1-preview.1
+                https://dev.azure.com/SoftingAutomotiveElectronics/Automotive/_apis/pipelines/${{parameters.testpipelineid}}/runs?api-version=6.1-preview.1
             displayName: Trigger Testing Pipeline
             env:
               SYSTEM_ACCESSTOKEN: $(System.AccessToken)
