@@ -52,12 +52,12 @@ parameters:
   - name: phonelynx_a13
     displayName: Build for lynx-a13
     type: boolean
-    default: false
+    default: true
 
   - name: phonelynx_a14
     displayName: Build for lynx-a14
     type: boolean
-    default: true
+    default: false
 
   - name: phoneakita_a14
     displayName: Build for akita-a14
