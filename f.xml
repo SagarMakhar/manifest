@@ -1,0 +1,24 @@
+
+
+  <project name="VCPI.android.platform.bootable.recovery" path="bootable/recovery" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="softing,pdk"/>
+  <project name="VCPI.android.device.sony.common" path="device/sony/common" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::devices,softing"/>
+  <project name="VCPI.android.device.sony.nagara" path="device/sony/nagara" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::devices,softing"/>
+  <project name="VCPI.android.device.sony.pdx223" path="device/sony/pdx223" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::devices,softing"/>
+  <project name="VCPI.android.kernel.sony.common-kernel" path="kernel/sony/msm-5.15/common-kernel" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing" clone-depth="1"/>
+  <project name="VCPI.android.kernel.sony.drivers.wlan-qc" path="kernel/sony/msm-5.15/kernel/drivers/staging/wlan-qc/qcacld-3.0" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.kernel" path="kernel/sony/msm-5.15/kernel" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.vendor.sony.pdx223.git" path="vendor/sony/pdx223" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,softing"/>
+  <project name="VCPI.android.vendor.sony.timekeep" path="vendor/oss/timekeep" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::oss,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.audio" path="kernel/sony/msm-5.15/kernel/techpack/audio" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.bt" path="kernel/sony/msm-5.15/kernel/techpack/bt" remote="sony" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.2.0.r1"/>
+  <project name="VCPI.android.kernel.sony.techpack.camera" path="kernel/sony/msm-5.15/kernel/techpack/camera" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.dataipa" path="kernel/sony/msm-5.15/kernel/techpack/dataipa" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.datarmnet" path="kernel/sony/msm-5.15/kernel/techpack/datarmnet" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.datarmnet-ext" path="kernel/sony/msm-5.15/kernel/techpack/datarmnet-ext" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.display" path="kernel/sony/msm-5.15/kernel/techpack/display" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.eva" path="kernel/sony/msm-5.15/kernel/techpack/eva" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.graphics" path="kernel/sony/msm-5.15/kernel/techpack/graphics" remote="sony" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.2.0.r1"/>
+  <project name="VCPI.android.kernel.sony.techpack.video" path="kernel/sony/msm-5.15/kernel/techpack/video" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.kernel.sony.techpack.wlan" path="kernel/sony/msm-5.15/kernel/techpack/wlan" remote="sony" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.2.0.r1"/>
+  <project name="VCPI.android.kernel.sony.common-headers" path="kernel/sony/msm-5.15/common-headers" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::K.P.1.0.r1,softing"/>
+  <project name="VCPI.android.vendor.qcom.opensource.healthd-ext" path="vendor/qcom/opensource/healthd-ext" remote="host" revision="refs/heads/vcpi-aosp-14-main-release" groups="device,local::oss,softing"/>
